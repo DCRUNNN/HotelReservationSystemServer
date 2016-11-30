@@ -20,13 +20,15 @@ public class MaintainHotelMessageServiceImpl implements MaintainHotelMessageServ
 	}
 	
 	@Override
-	public boolean changeHotelInfo(String hotelProvince,String hotelCity, String hotelCBD, String introduction, String facilities,
+	public boolean changeHotelInfo(String hotelProvince,String hotelCity, String hotelCBD,String hotelAddress,String hotelName, String introduction, String facilities,
 			int star, String roomTypeAndPrices) {
 		
 		HotelPO po = hotelDao.getHotelPO(hotelID);
 		po.setHotelProvince(hotelProvince);
 		po.setHotelCity(hotelCity);
 		po.setHotelCBD(hotelCBD);
+		po.setHotelAddress(hotelAddress);
+		po.setHotelName(hotelName);
 		po.setIntroduction(introduction);
 		po.setFacilities(facilities);
 		po.setHotelStar(star);

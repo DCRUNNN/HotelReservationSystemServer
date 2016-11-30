@@ -3,6 +3,7 @@ package service.Personnel.CreatePersonnelID;
 import java.util.List;
 
 import data.dao.PersonnelDAO;
+import data.dao.impl.PersonnelDaoImpl;
 import po.PersonnelPO;
 
 public class CreatePersonnelID {
@@ -16,7 +17,8 @@ public class CreatePersonnelID {
 	private PersonnelDAO personnelDao;
 	
 	public CreatePersonnelID(){
-		//personnelDaoµÄÊµÀý»¯
+	
+		personnelDao = PersonnelDaoImpl.getInstance();
 	}
 	
 	public String nextHotelWorkerId(String hotelID){
@@ -29,7 +31,13 @@ public class CreatePersonnelID {
 		synchronized(this){
 			
 			List<String> allids = personnelDao.getAllIds();
-			if(allids.size()==0){
+			if(allids.size()==0||allids==null){
+				
+				PersonnelPO po = new PersonnelPO();
+				po.setPersonnelID("200001");
+				if(!personnelDao.insert(po)){
+					return "";
+				}
 				return "200001";
 			}
 			

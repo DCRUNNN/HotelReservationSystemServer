@@ -13,7 +13,7 @@ import po.ClientPO;
 
 public class ClientDataSqlHelperImpl implements ClientDataHelper{
 	
-	private static final String DRIVER = "org.gjt.mm.mysql.Driver";//数据库连接驱动类
+	private static final String DRIVER = "com.mysql.jdbc.Driver";//数据库连接驱动类
 	private static final String URL = "jdbc:mysql://localhost:3306/bighomework";//url
 	private static final String USER = "root";
 	private static final String PASSWORD = "mysql";

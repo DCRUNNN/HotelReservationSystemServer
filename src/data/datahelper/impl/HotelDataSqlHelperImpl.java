@@ -130,11 +130,12 @@ public class HotelDataSqlHelperImpl implements HotelDataHelper {
 				String province=set.getString("province");
 				String city=set.getString("city");
 				String hotelCBD=set.getString("hotelcbd");
+				String address = set.getString("address");
 				String hotelName=set.getString("hotelname");
 				int hotelStar=set.getInt("hotelstar");
 				String intro=set.getString("introduction");
 				String facility=set.getString("facility");
-				String roomTypeAndPrice=set.getString("typeandprice");
+				String roomTypeAndPrice=set.getString("roomtypeandprice");
 				String comment=set.getString("comment");
 				double facilityPoint=set.getDouble("facilitypoint");
 				double servicePoint=set.getDouble("servicepoint");
@@ -147,6 +148,7 @@ public class HotelDataSqlHelperImpl implements HotelDataHelper {
 				po.setCommentPeople(commentPeople);
 				po.setFacilities(facility);
 				po.setHotelCBD(hotelCBD);
+				po.setHotelAddress(address);
 				po.setHotelCity(city);
 				po.setHotelID(hotelId);
 				po.setHotelName(hotelName);
@@ -180,6 +182,7 @@ public class HotelDataSqlHelperImpl implements HotelDataHelper {
 				String province=set.getString("province");
 				String city=set.getString("city");
 				String hotelcbd=set.getString("hotelcbd");
+				String address = set.getString("address");
 				String hotelName=set.getString("hotelname");
 				int hotelStar=set.getInt("hotelstar");
 				String intro=set.getString("introduction");
@@ -197,6 +200,7 @@ public class HotelDataSqlHelperImpl implements HotelDataHelper {
 				po.setCommentPeople(commentPeople);
 				po.setFacilities(facility);
 				po.setHotelCBD(hotelcbd);
+				po.setHotelAddress(address);
 				po.setHotelCity(city);
 				po.setHotelID(hotelId);
 				po.setHotelName(hotelName);
@@ -226,6 +230,7 @@ public class HotelDataSqlHelperImpl implements HotelDataHelper {
 		String province=po.getHotelProvince();
 		String city=po.getHotelCity();
 		String hotelCBD=po.getHotelCBD();
+		String address = po.getHotelAddress();
 		String hotelName=po.getHotelName();
 		int hotelStar=po.getHotelStar();
 		String intro=po.getIntroduction();
@@ -239,7 +244,7 @@ public class HotelDataSqlHelperImpl implements HotelDataHelper {
 		
 		
 		//create sql statement
-		String sql="UPDATE t_hotel SET province='"+province+"',city='"+city+"',hotelcbd='"+hotelCBD+"',hotelname='"+hotelName
+		String sql="UPDATE t_hotel SET province='"+province+"',city='"+city+"',hotelcbd='"+hotelCBD+"',address='"+address+"',hotelname='"+hotelName
 				+"',hotelstar='"+hotelStar+"',introduction='"+intro+"',facility='"+facility+"',roomtypeandprice='"+roomTypeAndPrice
 				+"',facilitypoint='"+facilityPoint+"',servicepoint='"+servicePoint+"',surroundingpoint='"+surroundingPoint
 				+"',comment='"+comment+"',commentpeople='"+commentPeople+"' WHERE hotelid='"+hotelId+"';";
@@ -259,6 +264,7 @@ public class HotelDataSqlHelperImpl implements HotelDataHelper {
 		String province=po.getHotelProvince();
 		String city=po.getHotelCity();
 		String hotelCBD=po.getHotelCBD();
+		String address = po.getHotelAddress();
 		String hotelName=po.getHotelName();
 		int hotelStar=po.getHotelStar();
 		String intro=po.getIntroduction();
@@ -271,9 +277,9 @@ public class HotelDataSqlHelperImpl implements HotelDataHelper {
 		int commentPeople=po.getCommentPeople();
 		
 		//create sql statement
-		String sql="INSERT INTO t_hotel(hotelid,hotelname,province,city,hotelcbd,hotelstar,introduction"
+		String sql="INSERT INTO t_hotel(hotelid,hotelname,province,city,hotelcbd,address,hotelstar,introduction"
 					+",facility,roomtypeandprice,facilitypoint,servicepoint,surroundingpoint,comment,commentpeople) VALUES ('"
-					+hotelId+"','"+hotelName+"','"+province+"','"+city+"','"+hotelCBD+"','"+hotelStar+"','"+intro+"','"+facility
+					+hotelId+"','"+hotelName+"','"+province+"','"+city+"','"+hotelCBD+"','"+address+"','"+hotelStar+"','"+intro+"','"+facility
 					+"','"+roomTypeAndPrice+"','"+facilityPoint+"','"+servicePoint+"','"+surroundingPoint+"','"+comment+"','"+
 					commentPeople+"');";
 		
@@ -344,19 +350,4 @@ public class HotelDataSqlHelperImpl implements HotelDataHelper {
 		}
 	}
 
-	public static void main(String args[]){
-		
-		HotelDataSqlHelperImpl hoteldata = new HotelDataSqlHelperImpl();
-		//HotelPO po = new HotelPO();
-		//po.setHotelID("0000002");
-		//hoteldata.insert(po);
-		//po.setHotelProvince("广东");
-		//hoteldata.change(po);
-		//po.setHotelProvince("江苏");
-		//po.setHotelCity("南京");
-		//hoteldata.insert(po);
-		
-		System.out.println(hoteldata.getProvinces());
-		
-	}
 }

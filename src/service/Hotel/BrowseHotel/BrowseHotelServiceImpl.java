@@ -71,10 +71,8 @@ public class BrowseHotelServiceImpl implements BrowseHotelService{
 		
 		List<OrderVO> volist = new ArrayList<OrderVO>();
 		HotelPO hotelPO = hotelDao.getHotelPO(hotelID);
-		String hotelInfo = hotelPO.getHotelID()+"/"+hotelPO.getHotelProvince()+"/"+hotelPO.getHotelCity()+"/"+hotelPO.getHotelCBD()+"/"
-		+hotelPO.getHotelName();
 		for(OrderPO orderpo:polist){
-			OrderVO ordervo = new OrderVO(orderpo,hotelInfo);
+			OrderVO ordervo = new OrderVO(orderpo,hotelPO.getHotelProvince(),hotelPO.getHotelCity(),hotelPO.getHotelCBD(),hotelPO.getHotelAddress(),hotelPO.getHotelName());
 			volist.add(ordervo);
 		}
 		return volist;

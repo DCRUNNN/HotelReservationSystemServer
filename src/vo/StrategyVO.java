@@ -9,7 +9,8 @@ import po.StrategyPO;
  * beginTime             开始时间
  * endTime               结束时间
  * userType              对应的用户的类型(普通用户，vip_1,vip_2,vip_3,vip_4,vip_5,企业会员)
- * hotelAddress          指定的酒店地址（省份+"/"+市）
+ * hotelProvince         酒店所在的省份
+ * hotelCity             酒店所在的城市
  * hotelCBD              指定的酒店商圈
  * isToBirthday          是否是针对会员的生日
  * strategyType          策略类型（网站营销策略，酒店营销策略）
@@ -26,7 +27,8 @@ public class StrategyVO {
 	private String beginTime;
 	private String endTime;
 	private String userType;
-	private String hotelAddress;
+	private String hotelProvince;
+	private String hotelCity;
 	private String hotelCBD;
 	private boolean isToBirthday;
 	private double strategy_discount;
@@ -42,7 +44,8 @@ public class StrategyVO {
 		this.beginTime = po.getBeginTime();
 		this.endTime = po.getEndTime();
 		this.userType = po.getUserType();
-		this.hotelAddress = po.getHotelAddress();
+		this.hotelProvince = po.getHotelProvince();
+		this.hotelCity = po.getHotelCity();
 		this.hotelCBD = po.getHotelCBD();
 		this.isToBirthday = po.isToBirthday();
 		this.strategy_discount = po.getDiscount();
@@ -52,7 +55,7 @@ public class StrategyVO {
 	}
 	
 	public StrategyVO(String strategyID,String name, String introduction, String beginTime, String endTime, String userType,
-			String hotelAddress, String hotelCBD, boolean isToBirthday, String strategyType,String hotelID,int roomTotal,double strategy_discount 
+			String hotelProvince,String hotelCity, String hotelCBD, boolean isToBirthday, String strategyType,String hotelID,int roomTotal,double strategy_discount 
 			) {
 		this.strategyID = strategyID;
 		this.name = name;
@@ -60,7 +63,8 @@ public class StrategyVO {
 		this.beginTime = beginTime;
 		this.endTime = endTime;
 		this.userType = userType;
-		this.hotelAddress = hotelAddress;
+		this.hotelProvince = hotelProvince;
+		this.hotelCity = hotelCity;
 		this.hotelCBD = hotelCBD;
 		this.isToBirthday = isToBirthday;
 		this.strategy_discount = strategy_discount;
@@ -93,10 +97,14 @@ public class StrategyVO {
 		return userType;
 	}
 
-	public String getHotelAddress() {
-		return hotelAddress;
+	public String getHotelProvince() {
+		return hotelProvince;
 	}
 
+	public String getHotelCity(){
+		return hotelCity;
+	}
+	
 	public String getHotelCBD() {
 		return hotelCBD;
 	}
@@ -145,10 +153,14 @@ public class StrategyVO {
 		this.userType = userType;
 	}
 
-	public void setHotelAddress(String hotelAddress) {
-		this.hotelAddress = hotelAddress;
+	public void setHotelProvince(String hotelProvince){
+		this.hotelProvince = hotelProvince;
 	}
 
+	public void setHotelCity(String hotelCity){
+		this.hotelCity = hotelCity;
+	}
+	
 	public void setHotelCBD(String hotelCBD) {
 		this.hotelCBD = hotelCBD;
 	}

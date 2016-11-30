@@ -80,6 +80,9 @@ public class AccountDataSqlHelperImpl implements AccountDataHelper{
 	@Override
 	public boolean insert(String ID, String pass) {
 		
+		if(isExist(ID)){
+			return changePassword(ID,pass);
+		}
 		String sql = "insert into account (id,password) values ('"+ID+"','"+pass+"')";
 		
 		int i =AccountDataSqlHelperImpl.executeUpdate(sql);
@@ -90,6 +93,34 @@ public class AccountDataSqlHelperImpl implements AccountDataHelper{
 		return true;
 	}
 
+	private boolean changePassword(String ID, String pass) {
+		
+		String sql = "update account set password='"+pass+"' where id='"+ID+"';";
+		int i = AccountDataSqlHelperImpl.executeUpdate(sql);
+		AccountDataSqlHelperImpl.close();
+		if(i==-1){
+			return false;
+		}
+		return true;
+		
+	}
+	
+	private boolean isExist(String ID) {
+		
+		String sql = "select *from account where id='"+ID+"';";
+		ResultSet set = AccountDataSqlHelperImpl.executeQuery(sql);
+		try {
+			if(set.next()){
+				if(set.getString("id").equals(ID)){
+					return true;
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+	
 	@Override
 	public boolean check(String id, String password) {
 		
@@ -108,15 +139,15 @@ public class AccountDataSqlHelperImpl implements AccountDataHelper{
 		return false;
 	}
 
-	public static void main(String args[]){
+	/*public static void main(String args[]){
 		
 		AccountDataSqlHelperImpl account = new AccountDataSqlHelperImpl();
 		/*account.insert("0001", "zxhzxh");
 		account.insert("0002", "chenyuanzhi");
 		account.insert("0003", "dengcong");
-		account.insert("0004", "caiqimin");*/
+		account.insert("0004", "caiqimin");
 		account.insert("0005", "13");
 	   System.out.println(account.check("0001", "zxhzxh"));
 		
-	}
+	}*/
 }

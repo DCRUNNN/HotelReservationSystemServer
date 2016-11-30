@@ -46,6 +46,7 @@ public class AddHotelServiceImpl implements AddHotelService{
 	    po.setHotelID(hotelID);
 		po.setHotelName(vo.getHotelName());
 		po.setHotelProvince(vo.getHotelProvince());
+		po.setHotelAddress(vo.getHotelAddress());
 		po.setHotelStar(vo.getHotelStar());
 		po.setIntroduction(vo.getIntroduction());
 		po.setRoomTypeAndPrice(vo.getRoomTypeAndPrice());

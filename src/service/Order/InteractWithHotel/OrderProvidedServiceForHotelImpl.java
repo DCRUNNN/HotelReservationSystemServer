@@ -17,19 +17,19 @@ public class OrderProvidedServiceForHotelImpl implements OrderProvidedServiceFor
 	}
 	
 	@Override
-	public String getAllClientOrderInfo(String clientID) {
+	public List<String> getAllClientOrderInfo(String clientID) {
 		
+		List<String> result = new ArrayList<String>();
 		List<OrderPO> polist = orderDao.getOrderPOList(clientID);//得到客户的所有相关订单
-		if(polist==null){
+		if(polist==null||polist.size()==0){
 			//返回的是空的话
-			return "";
+			return result;
 		}
-		StringBuilder sb = new StringBuilder();
+		
 		for(OrderPO po:polist){
 			String orderInfo = po.getOrderCreatedDate()+"/"+po.getOrderStatus()+"/"+po.getOrderID()+"/"+po.getPrice()+"/"+po.getHotelID();
-			sb.append(orderInfo+"%");
+			result.add(orderInfo);
 		}
-		String result = sb.toString().substring(0, sb.length()-1);
 		return result;
 	}
 

@@ -8,9 +8,9 @@ public interface OrderProvidedServiceForHotel {
 
 	/**
 	 * @param clientID
-	 * @return 没有的话就是返回"",否则返回一个String，内容是与客户相关的所有订单的部分信息（orderInfo+"%"+orderInfo）orderInfo = orderCreatedDate+"/"+orderStatus+"/"+orderID+"/"+price+"/"+hotelID 
+	 * @return 没有的话就是返回""，否则返回一个list，内容是与客户相关的所有订单的部分信息 orderInfo = orderCreatedDate+"/"+orderStatus+"/"+orderID+"/"+price+"/"+hotelID 
 	 * */
-	public String getAllClientOrderInfo(String clientID);
+	public List<String> getAllClientOrderInfo(String clientID);
 	
 
 

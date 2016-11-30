@@ -29,4 +29,5 @@ public interface CreateOrderService {
 	 * @return 判断客户信用点是否大于0，大于等于0返回true，小于0返回false
 	 * */
 	public boolean checkCreditPoint();
+	
 }

@@ -159,7 +159,7 @@ public class PersonnelDataSqlHelperImpl implements PersonnelDataHelper{
 		String sex = po.getSex();
 		String type = po.getType();
 		
-		String sql ="insert into t_personnel(personnelid,hotelid,identity,name,phonenumber,sex,type) values"
+		String sql ="insert into t_personnel(personnelid,hotelid,name,phonenumber,sex,type) values"
 				+ "('"+personnelid+"','"+hotelid+"','"+name+"','"+phonenumber+"','"+sex+"','"+type+"')";
 		
 		int i =PersonnelDataSqlHelperImpl.executeUpdate(sql);
@@ -170,6 +170,15 @@ public class PersonnelDataSqlHelperImpl implements PersonnelDataHelper{
 		return true;
 	}
 
+	public static void main(String args[]){
+		
+		/*PersonnelPO po = new PersonnelPO();
+		po.setPersonnelID("100001");
+		new PersonnelDataSqlHelperImpl().insert(po);
+		PersonnelPO newPO = new PersonnelDataSqlHelperImpl().getPersonnelPO("100001");
+		newPO.setName("ÔøÎýºÀ");
+		System.out.println(new PersonnelDataSqlHelperImpl().change(newPO));*/
+	}
 	@Override
 	public boolean isExist(String hotelID) {
 		
@@ -198,10 +207,10 @@ public class PersonnelDataSqlHelperImpl implements PersonnelDataHelper{
 		String type = po.getType();
 		
 		String sql = "update t_personnel set hotelid='"+hotelid+"',name='"+name
-				+"',phonenumber='"+phonenumber+"',sex='"+sex+"',type="+type+"' where personnelid="+personnelid;
+				+"',phonenumber='"+phonenumber+"',sex='"+sex+"',type='"+type+"' where personnelid="+personnelid;
 		
 		int i = PersonnelDataSqlHelperImpl.executeUpdate(sql);
-		OrderDataSqlHelperImpl.close();
+		PersonnelDataSqlHelperImpl.close();
 		if(i==-1){
 			return false;
 		}

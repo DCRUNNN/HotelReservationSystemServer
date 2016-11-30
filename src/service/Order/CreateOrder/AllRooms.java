@@ -55,10 +55,14 @@ public class AllRooms {
     }   
     
     /**
-     * @param 客户编号，酒店相关信息(hotelID+"/"+hotelProvince+"/"+hotelCity+"/"+hotelCBD+"/"+hotelName)，所有的房间号码(号码1+"/"+号码2)
+     * @param clientID 客户编号
+     * @param hotelID 酒店编号
+     * @param hotelCBD 酒店商圈
+     * @param hotelCity 酒店所在城市
+     * @param hotelProvince 酒店所在省份
      * @return 返回在最优策略下的总价
      * */
-    public double getPriceByStrategy(String clientID,String hotelInfo,String roomNumber){
+    public double getPriceByStrategy(String clientID,String hotelID,String roomNumber, String hotelProvince, String hotelCity, String hotelCBD){
     	
     	double total1 = 0;
         String numbers[] = roomNumber.split("/");
@@ -71,7 +75,7 @@ public class AllRooms {
        	 }
         }
         
-        double discount = new AboutStrategy().getPriceByStrategy(clientID, hotelInfo,numbers.length);
+        double discount = new AboutStrategy().getPriceByStrategy(clientID, hotelID,numbers.length,hotelProvince,hotelCity,hotelCBD);
         return total1*discount/10;
     }
     

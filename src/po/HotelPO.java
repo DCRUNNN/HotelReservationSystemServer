@@ -5,6 +5,7 @@ package po;
  * hotelProvince        酒店所在省份
  * hotelCity            酒店所在的市
  * hotelCBD             酒店商圈
+ * hotelAddress         酒店详细地址
  * hotelName            酒店名称
  * hotelStar            酒店星级
  * introduction         酒店简介
@@ -27,6 +28,8 @@ public class HotelPO {
 	
 	private String hotelCBD;
 	
+	private String hotelAddress;
+	
 	private String hotelName;
 	
 	private int hotelStar;
@@ -46,8 +49,15 @@ public class HotelPO {
 	private String commentList;
 	
 	private int commentPeople;
-
 	
+	public String getHotelAddress() {
+		return hotelAddress;
+	}
+
+	public void setHotelAddress(String hotelAddress) {
+		this.hotelAddress = hotelAddress;
+	}
+
 	public String getHotelProvince() {
 		return hotelProvince;
 	}

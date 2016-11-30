@@ -24,7 +24,7 @@ public class CreateHotelVO {
 	public HotelVO create(String clientID,HotelPO hotelPO) {
 		
 		List<OrderPO> polist = orderservice.getAllOrdersOfClientInaHotel(clientID, hotelPO.getHotelID());
-		if(polist==null){
+		if(polist==null||polist.size()==0){
 			return new HotelVO("//// ",hotelPO);
 		}
 		

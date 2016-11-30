@@ -1,12 +1,6 @@
 package service.Order.InteractWithHotel;
 
 public interface HotelProvidedServiceForOrder {
-
-	/**
-	 * @param hotelID
-	 * @return 返回一个hotelInfo hotelInfo = hotelID+hotelProvince+hotelCity+hotelCBD+hotelName 分隔符是"/"
-	 * */
-	public String getHotelInfo(String hotelID);
 	
 	/**
 	 * @param hotelID,clientID,评论的内容，对酒店设施的评分，对酒店服务的评分，对酒店周边环境的评分
@@ -27,4 +21,35 @@ public interface HotelProvidedServiceForOrder {
 	 * @return 返回一个酒店所有类型和价格的字符串（类型+"|"+价格+"/"）
 	 * */
 	public String getRoomTypeAndPrice(String hotelID);
+	
+	/**
+	 * @param hotelID 酒店编号
+	 * @return 得到酒店的省份
+	 * */
+	public String getHotelProvince(String hotelID);
+	
+	/**
+	 * @param hotelID 酒店编号
+	 * @return 得到酒店所在的市
+	 * */
+	public String getHotelCity(String hotelID);
+	
+	/**
+	 * @param hotelID 酒店编号
+	 * @return 得到酒店所在的商圈
+	 * */
+	public String getHotelCBD(String hotelID);
+	
+	/**
+	 * @param hotelID 酒店编号
+	 * @return 得到酒店的详细地址
+	 * */
+	public String getHotelAddress(String hotelID);
+	
+	/**
+	 * @param hotelID 酒店编号
+	 * @return 得到酒店的名称
+	 * */
+	public String getHotelName(String hotelID);
+	
 }

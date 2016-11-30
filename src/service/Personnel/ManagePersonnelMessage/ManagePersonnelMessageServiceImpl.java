@@ -15,7 +15,6 @@ import vo.PersonnelVO;
 public class ManagePersonnelMessageServiceImpl implements ManagePersonnelMessageService{
 
 	private PersonnelDAO personnelDao;
-	private List<PersonnelVO> allPersonnels;
 	private HotelProvidedService hotelService;
 	private AccountProvidedService accountService;
 	
@@ -24,29 +23,17 @@ public class ManagePersonnelMessageServiceImpl implements ManagePersonnelMessage
 		personnelDao = PersonnelDaoImpl.getInstance();
 		accountService = new AccountProvidedServiceImpl();
 		hotelService = new HotelProvidedServiceImpl();
-		initAllPersonnels();
 	}
 	
-	/**
-	 * 私有方法，初始化allPersonnels
-	 * */
-	private void initAllPersonnels() {
-		
-		List<PersonnelPO> polist = personnelDao.getAllPersonnelPOList();
-		allPersonnels = new ArrayList<PersonnelVO>();
-		for(PersonnelPO po:polist){
-			PersonnelVO vo = new PersonnelVO(po);
-			allPersonnels.add(vo);
-		}
-	}
 	
 	@Override
 	public List<PersonnelVO> getAllHotelWorkers() {
 		
 		List<PersonnelVO> volist = new ArrayList<PersonnelVO>();
-		for(PersonnelVO vo:allPersonnels){
-			if("酒店工作人员".equals(vo.getType())){
-				volist.add(vo);
+		List<PersonnelPO> polist = personnelDao.getAllPersonnelPOList();
+		for(PersonnelPO po:polist){
+			if("酒店工作人员".equals(po.getType())){
+				volist.add(new PersonnelVO(po));
 			}
 		}
 		return volist;
@@ -54,11 +41,12 @@ public class ManagePersonnelMessageServiceImpl implements ManagePersonnelMessage
 
 	@Override
 	public List<PersonnelVO> getAllWebSalers() {
-
+		
 		List<PersonnelVO> volist = new ArrayList<PersonnelVO>();
-		for(PersonnelVO vo:allPersonnels){
-			if("网站营销人员".equals(vo.getType())){
-				volist.add(vo);
+		List<PersonnelPO> polist = personnelDao.getAllPersonnelPOList();
+		for(PersonnelPO po:polist){
+			if("网站营销人员".equals(po.getType())){
+				volist.add(new PersonnelVO(po));
 			}
 		}
 		return volist;
@@ -68,12 +56,12 @@ public class ManagePersonnelMessageServiceImpl implements ManagePersonnelMessage
 	public List<PersonnelVO> getHotelWorkersByHotelName(String hotelName) {
 		
 		List<PersonnelVO> volist = new ArrayList<PersonnelVO>();
-		
-		for(PersonnelVO vo:allPersonnels){
-			if("酒店工作人员".equals(vo.getType())){
-				String hname = hotelService.getHotelName(vo.gethotelID());
+		List<PersonnelPO> polist = personnelDao.getAllPersonnelPOList();
+		for(PersonnelPO po:polist){
+			if("酒店工作人员".equals(po.getType())){
+				String hname = hotelService.getHotelName(po.getHotelID());
 				if(hotelName.equals(hname)){
-					volist.add(vo);
+					volist.add(new PersonnelVO(po));
 				}
 			}
 		}
@@ -83,9 +71,10 @@ public class ManagePersonnelMessageServiceImpl implements ManagePersonnelMessage
 	@Override
 	public PersonnelVO getHotelWorkerByHotelID(String hotelID) {
 		
-		for(PersonnelVO vo:allPersonnels){
-			if(hotelID.equals(vo.gethotelID())){
-				return vo;
+		List<PersonnelPO> polist = personnelDao.getAllPersonnelPOList();
+		for(PersonnelPO po:polist){
+			if(hotelID.equals(po.getHotelID())){
+				return new PersonnelVO(po);
 			}
 		}
 		return null;
@@ -94,9 +83,10 @@ public class ManagePersonnelMessageServiceImpl implements ManagePersonnelMessage
 	@Override
 	public PersonnelVO getPersonnelVO(String personnelID) {
 		
-		for(PersonnelVO vo:allPersonnels){
-			if(personnelID.equals(vo.getpersonnelID())){
-				return vo;
+		List<PersonnelPO> polist = personnelDao.getAllPersonnelPOList();
+		for(PersonnelPO po:polist){
+			if(personnelID.equals(po.getPersonnelID())){
+				return new PersonnelVO(po);
 			}
 		}
 		return null;
@@ -106,9 +96,11 @@ public class ManagePersonnelMessageServiceImpl implements ManagePersonnelMessage
 	public List<PersonnelVO> getPersonnelVOByPersonnelName(String personnelName) {
 		
 		List<PersonnelVO> volist = new ArrayList<PersonnelVO>();
-		for(PersonnelVO vo:allPersonnels){
-			if(personnelName.equals(vo.getname())){
-				volist.add(vo);
+		List<PersonnelPO> polist = personnelDao.getAllPersonnelPOList();
+		
+		for(PersonnelPO po:polist){
+			if(personnelName.equals(po.getName())){
+				volist.add(new PersonnelVO(po));
 			}
 		}
 		return volist;

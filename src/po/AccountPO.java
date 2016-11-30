@@ -1,5 +1,10 @@
 package po;
 
+/**
+ * id         ËùÓĞµÄ±àºÅ
+ * password   ÃÜÂë
+ * */
+
 public class AccountPO {
 
 	private String id;

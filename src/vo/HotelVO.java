@@ -11,6 +11,7 @@ import po.HotelPO;
  * hotelProvince                 酒店省份
  * hotelCity                     酒店市
  * hotelCBD                      酒店商圈
+ * hotelAddress                  酒店详细地址
  * hotelName                     酒店名称
  * hotelStar                     酒店星级
  * introduction                  酒店简介
@@ -40,6 +41,8 @@ public class HotelVO {
 	private String hotelCity;
 	
 	private String hotelCBD;
+	
+	private String hotelAddress;
 	
 	private String hotelName;
 	
@@ -77,6 +80,7 @@ public class HotelVO {
 	    this.hotelProvince = po.getHotelProvince();
 	    this.hotelCity = po.getHotelCity();
 	    this.hotelCBD = po.getHotelCBD();
+	    this.hotelAddress = po.getHotelAddress();
 	    this.hotelName = po.getHotelName();
 	    this.hotelStar = po.getHotelStar();
 	    this.introduction = po.getIntroduction();
@@ -87,6 +91,23 @@ public class HotelVO {
 	    this.point_surroundings = po.getPoint_surroundings();
 	    this.commentList = po.getCommentList();
 	    this.commentPeople = po.getCommentPeople();
+	}
+
+	/**
+	 * 传递酒店省份，酒店城市，酒店商圈，酒店详细地址，酒店名字，酒店星级，酒店介绍，酒店设施，酒店的房间类型和价格作为构造函数的参数
+	 * */
+	public HotelVO(String hotelProvince, String hotelCity, String hotelCBD,String hotelAddress, String hotelName, int hotelStar,
+			String introduction, String facilities, String roomTypeAndPrice) {
+		
+		this.hotelProvince = hotelProvince;
+		this.hotelCity = hotelCity;
+		this.hotelCBD = hotelCBD;
+		this.hotelAddress = hotelAddress;
+		this.hotelName = hotelName;
+		this.hotelStar = hotelStar;
+		this.introduction = introduction;
+		this.facilities = facilities;
+		this.roomTypeAndPrice = roomTypeAndPrice;
 	}
 
 	public String getOrderCreateDate() {
@@ -113,12 +134,16 @@ public class HotelVO {
 		return hotelProvince;
 	}
 
-	public String getHotelCity(){
+	public String getHotelCity() {
 		return hotelCity;
 	}
-	
+
 	public String getHotelCBD() {
 		return hotelCBD;
+	}
+
+	public String getHotelAddress() {
+		return hotelAddress;
 	}
 
 	public String getHotelName() {
@@ -161,77 +186,7 @@ public class HotelVO {
 		return commentPeople;
 	}
 
-	public void setOrderCreateDate(String orderCreateDate) {
-		this.orderCreateDate = orderCreateDate;
-	}
 
-	public void setOrderStatus(String orderStatus) {
-		this.orderStatus = orderStatus;
-	}
-
-	public void setOrderID(String orderID) {
-		this.orderID = orderID;
-	}
-
-	public void setPrice(double price) {
-		this.price = price;
-	}
-
-	public void setHotelID(String hotelID) {
-		this.hotelID = hotelID;
-	}
-
-	public void setHotelProvince(String hotelProvince) {
-		this.hotelProvince = hotelProvince;
-	}
-
-	public void setHotelCity(String hotelCity) {
-		this.hotelCity = hotelCity;
-	}
-
-	public void setHotelCBD(String hotelCBD) {
-		this.hotelCBD = hotelCBD;
-	}
-
-	public void setHotelName(String hotelName) {
-		this.hotelName = hotelName;
-	}
-
-	public void setHotelStar(int hotelStar) {
-		this.hotelStar = hotelStar;
-	}
-
-	public void setIntroduction(String introduction) {
-		this.introduction = introduction;
-	}
-
-	public void setFacilities(String facilities) {
-		this.facilities = facilities;
-	}
-
-	public void setRoomTypeAndPrice(String roomTypeAndPrice) {
-		this.roomTypeAndPrice = roomTypeAndPrice;
-	}
-
-	public void setPoint_facilities(double point_facilities) {
-		this.point_facilities = point_facilities;
-	}
-
-	public void setPoint_service(double point_service) {
-		this.point_service = point_service;
-	}
-
-	public void setPoint_surroundings(double point_surroundings) {
-		this.point_surroundings = point_surroundings;
-	}
-
-	public void setCommentList(String commentList) {
-		this.commentList = commentList;
-	}
-
-	public void setCommentPeople(int commentPeople) {
-		this.commentPeople = commentPeople;
-	}
 	
 	
 }

@@ -22,27 +22,38 @@ public class AboutStrategy {
 	
 	/**
 	 * @param clientID 客户编号
-	 * @param hotelInfo 酒店相关信息(hotelID+"/"+hotelProvince+"/"+hotelCity+"/"+hotelCBD+"/"+hotelName)
+	 * @param hotelID 酒店编号
 	 * @param roomTotal 房间总数
+	 * @param hotelCBD 酒店所在的商圈
+	 * @param hotelCity 酒店所在的城市
+	 * @param hotelProvince 酒店所在的省份
 	 * @return 得到客户在该酒店的综合的最优惠的策略
 	 * */
-	public double getPriceByStrategy(String clientID,String hotelInfo,int roomTotal){
+	public double getPriceByStrategy(String clientID,String hotelID,int roomTotal, String hotelProvince, String hotelCity, String hotelCBD){
 		
 		 double discount = 0;
 		 String userType = clientservice.getUserType(clientID);
 		 //对客户类型的简单判断逻辑放在这边
 		 if("普通客户".equals(userType)){
 			 //是普通客户的话，对应的折扣只能是在特定期间内预订或者是预订数目超过特定数字
-			 discount = strategyservice.getBestStrategyForNormalUser(hotelInfo,roomTotal);
+			 discount = strategyservice.getBestStrategyForNormalUser(hotelID,roomTotal);
 		 }else if("普通会员".equals(userType)){
 			 //普通会员的话，对应的折扣包括：特定期间预订，预订数目超出，生日特惠，在特定商圈预订有折扣
 			 String birthday = clientservice.getVipBirthday(clientID);
 			 int vipGrade = clientservice.getVipGrade(clientID);
-			 discount = strategyservice.getBestStrategyForNormalVip(hotelInfo,roomTotal,birthday,vipGrade);
-		 }else{
+			 discount = strategyservice.getBestStrategyForNormalVip(hotelID,roomTotal,birthday,vipGrade,hotelProvince,hotelCity,hotelCBD);
+		 }else if("企业会员".equals(userType)){
 			 //企业会员的话，对应的折扣包括：特定期间预订，预订数目超出，在特定的酒店有优惠
-			 
-			 discount = strategyservice.getBestStrategyForCompanyVip(hotelInfo,roomTotal);
+
+			 discount = strategyservice.getBestStrategyForCompanyVip(hotelID,roomTotal);
+		 }else{
+			 //三者都不是的话 那么就是普通会员和企业会员共存了
+			 String birthday = clientservice.getVipBirthday(clientID);
+			 int vipGrade = clientservice.getVipGrade(clientID);
+			 double discount1 = strategyservice.getBestStrategyForNormalVip(hotelID,roomTotal,birthday,vipGrade,hotelProvince,hotelCity,hotelCBD);
+
+			 double discount2 = strategyservice.getBestStrategyForCompanyVip(hotelID,roomTotal);
+		     discount = Double.min(discount1, discount2);//找到两者的较小值
 		 }
          
          return discount;

@@ -3,6 +3,7 @@ package service.Hotel.CreateHotelID;
 import java.util.List;
 
 import data.dao.HotelDao;
+import data.dao.impl.HotelDaoImpl;
 import po.HotelPO;
 
 public class CreateHotelID {
@@ -14,7 +15,8 @@ public class CreateHotelID {
 	private HotelDao hotelDao;
 	
 	public CreateHotelID(){
-		//hotelDao的实例化
+		
+		hotelDao = HotelDaoImpl.getInstance();
 	}
 	
 	public String nextId(){
@@ -30,6 +32,7 @@ public class CreateHotelID {
 				}
 				return "00001";//数据库里面还没有酒店的话，直接返回00001
 			}
+			
 			int maxId =0;
 			for(String str:allIds){
 				if(Integer.valueOf(str)>=maxId){

@@ -40,9 +40,8 @@ public class AllClientHotel {
 		
 		List<HotelPO> hotelPOList = new ArrayList<HotelPO>();
 		hotelVOList = new ArrayList<HotelVO>();
-		String allOrderInfo = orderservice.getAllClientOrderInfo(clientID);
-		String orderinfoArray[] = allOrderInfo.split("%");//对所有的orderinfo进行解析，可能为"",但是有返回的话，信息都是准确的
-		for(String orderinfo:orderinfoArray){
+		List<String> allOrderInfo = orderservice.getAllClientOrderInfo(clientID);
+		for(String orderinfo:allOrderInfo){
 			String array[] = orderinfo.split("/");
 			hotelPOList.add(hotelDao.getHotelPO(array[4]));//array[4]是hotelID
 		}

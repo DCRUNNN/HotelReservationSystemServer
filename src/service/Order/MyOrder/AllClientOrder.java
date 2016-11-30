@@ -38,8 +38,14 @@ public class AllClientOrder {
 		orderVOList = new ArrayList<OrderVO>();
 		
 		for(OrderPO po:polist){
+			
 			String hotelID = po.getHotelID();
-			OrderVO vo = new OrderVO(po,hotelservice.getHotelInfo(hotelID));
+			String hotelProvince = hotelservice.getHotelProvince(hotelID);
+			String hotelCity = hotelservice.getHotelCity(hotelID);
+			String hotelCBD = hotelservice.getHotelCBD(hotelID);
+			String hotelAddress = hotelservice.getHotelAddress(hotelID);
+			String hotelName = hotelservice.getHotelName(hotelID);
+			OrderVO vo = new OrderVO(po,hotelProvince,hotelCity,hotelCBD,hotelAddress,hotelName);//完成了po向vo的转化
 			orderVOList.add(vo);
 		}
 	}

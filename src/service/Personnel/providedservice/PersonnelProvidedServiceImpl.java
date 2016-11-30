@@ -26,7 +26,7 @@ public class PersonnelProvidedServiceImpl implements PersonnelProvidedService{
 		po.setType("酒店工作人员");
 		String hotelID = vo.gethotelID();
 		po.setPersonnelID(new CreatePersonnelID().nextHotelWorkerId(hotelID));
-		return personnelDao.change(po);
+		return personnelDao.insert(po);
 	
 	}
 

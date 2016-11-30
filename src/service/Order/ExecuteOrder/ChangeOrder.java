@@ -49,7 +49,12 @@ public class ChangeOrder {
 			if("未执行".equals(po.getOrderStatus())){
 				//把所有的未执行订单加入到result
 				String hotelID = po.getHotelID();
-				OrderVO vo = new OrderVO(po,hotelService.getHotelInfo(hotelID));//完成了po向vo的转化
+				String hotelProvince = hotelService.getHotelProvince(hotelID);
+				String hotelCity = hotelService.getHotelCity(hotelID);
+				String hotelCBD = hotelService.getHotelCBD(hotelID);
+				String hotelAddress = hotelService.getHotelAddress(hotelID);
+				String hotelName = hotelService.getHotelName(hotelID);
+				OrderVO vo = new OrderVO(po,hotelProvince,hotelCity,hotelCBD,hotelAddress,hotelName);//完成了po向vo的转化
 				result.add(vo);
 			}
 		}
@@ -67,7 +72,12 @@ public class ChangeOrder {
 			if("异常".equals(po.getOrderStatus())){
 				//把所有的异常订单加到result
 				String hotelID = po.getHotelID();
-				OrderVO vo = new OrderVO(po,hotelService.getHotelInfo(hotelID));//完成了po向vo的转化
+				String hotelProvince = hotelService.getHotelProvince(hotelID);
+				String hotelCity = hotelService.getHotelCity(hotelID);
+				String hotelCBD = hotelService.getHotelCBD(hotelID);
+				String hotelAddress = hotelService.getHotelAddress(hotelID);
+				String hotelName = hotelService.getHotelName(hotelID);
+				OrderVO vo = new OrderVO(po,hotelProvince,hotelCity,hotelCBD,hotelAddress,hotelName);//完成了po向vo的转化
 				result.add(vo);
 			}
 		}

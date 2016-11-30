@@ -13,22 +13,6 @@ public class HotelProvidedServiceForOrderImpl implements HotelProvidedServiceFor
 		
 		hotelDao = HotelDaoImpl.getInstance();
 	}
-	
-	@Override
-	public String getHotelInfo(String hotelID) {
-		
-		HotelPO po = hotelDao.getHotelPO(hotelID);
-		if(po==null){
-			return "//// ";
-		}else{
-			String hotelProvince = po.getHotelProvince();
-			String hotelCity = po.getHotelCity();
-			String hotelCBD = po.getHotelCBD();
-			String hotelName = po.getHotelName();
-			return hotelID+"/"+hotelProvince+"/"+hotelCity+"/"+hotelCBD+"/"+hotelName;
-		}
-		
-	}
 
 	@Override
 	public boolean addComment(String hotelID, String clientID, String comment, int point_facilities, int point_service,
@@ -86,8 +70,66 @@ public class HotelProvidedServiceForOrderImpl implements HotelProvidedServiceFor
 	public String getRoomTypeAndPrice(String hotelID) {
 		
 		HotelPO po = hotelDao.getHotelPO(hotelID);
+		if(po==null){
+			return "";
+		}
 		String roomTypeAndPrice = po.getRoomTypeAndPrice();
 		return roomTypeAndPrice;
+	}
+
+	@Override
+	public String getHotelProvince(String hotelID) {
+		
+		HotelPO po = hotelDao.getHotelPO(hotelID);
+		if(po==null){
+			return "";
+		}
+		String hotelProvince = po.getHotelProvince();
+		return hotelProvince;
+	}
+
+	@Override
+	public String getHotelCity(String hotelID) {
+		
+		HotelPO po = hotelDao.getHotelPO(hotelID);
+		if(po==null){
+			return "";
+		}
+		String hotelCity = po.getHotelCity();
+		return hotelCity;
+	}
+
+	@Override
+	public String getHotelCBD(String hotelID) {
+		
+		HotelPO po = hotelDao.getHotelPO(hotelID);
+		if(po==null){
+			return "";
+		}
+		String hotelCBD = po.getHotelCBD();
+		return hotelCBD;
+	}
+
+	@Override
+	public String getHotelAddress(String hotelID) {
+		
+		HotelPO po = hotelDao.getHotelPO(hotelID);
+		if(po==null){
+			return "";
+		}
+		String hotelAddress = po.getHotelAddress();
+		return hotelAddress;
+	}
+
+	@Override
+	public String getHotelName(String hotelID) {
+		
+		HotelPO po = hotelDao.getHotelPO(hotelID);
+		if(po==null){
+			return "";
+		}
+		String hotelName = po.getHotelName();
+		return hotelName;
 	}
 
 }

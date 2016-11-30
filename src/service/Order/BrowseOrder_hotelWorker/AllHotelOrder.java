@@ -27,8 +27,13 @@ public class AllHotelOrder {
 		List<OrderPO> polist = orderDao.getHotelOrderPOList(hotelID);
 		orderVOList = new ArrayList<OrderVO>();
 		for(OrderPO po:polist){
-			String hotelInfo = hotelservice.getHotelInfo(hotelID);
-			OrderVO vo = new OrderVO(po,hotelInfo);
+			
+			String hotelProvince = hotelservice.getHotelProvince(hotelID);
+			String hotelCity = hotelservice.getHotelCity(hotelID);
+			String hotelCBD = hotelservice.getHotelCBD(hotelID);
+			String hotelAddress = hotelservice.getHotelAddress(hotelID);
+			String hotelName = hotelservice.getHotelName(hotelID);
+			OrderVO vo = new OrderVO(po,hotelProvince,hotelCity,hotelCBD,hotelAddress,hotelName);
 			orderVOList.add(vo);
 		}
 	}

@@ -50,7 +50,8 @@ public class ManageHotelStrategyServiceImpl implements ManageHotelStrategyServic
 		po.setBeginTime(strategyVO.getBeginTime());
 		po.setEndTime(strategyVO.getEndTime());
 		po.setUserType(strategyVO.getUserType());
-		po.setHotelAddress(strategyVO.getHotelAddress());
+		po.setHotelProvince(strategyVO.getHotelProvince());
+		po.setHotelCity(strategyVO.getHotelCity());
 		po.setHotelCBD(strategyVO.getHotelCBD());
 		po.setToBirthday(strategyVO.isToBirthday());
 		po.setStrategyType(strategyVO.getStrategyType());
@@ -70,7 +71,8 @@ public class ManageHotelStrategyServiceImpl implements ManageHotelStrategyServic
 		po.setBeginTime(strategyVO.getBeginTime());
 		po.setEndTime(strategyVO.getEndTime());
 		po.setUserType(strategyVO.getUserType());
-		po.setHotelAddress(strategyVO.getHotelAddress());
+		po.setHotelProvince(strategyVO.getHotelProvince());
+		po.setHotelCity(strategyVO.getHotelCity());
 		po.setHotelCBD(strategyVO.getHotelCBD());
 		po.setToBirthday(strategyVO.isToBirthday());
 		po.setStrategyType(strategyVO.getStrategyType());

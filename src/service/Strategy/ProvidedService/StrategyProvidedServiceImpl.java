@@ -20,10 +20,9 @@ public class StrategyProvidedServiceImpl implements StrategyProvidedService{
 	}
 	
 	@Override
-	public double getBestStrategyForNormalUser(String hotelInfo, int roomTotal) {
+	public double getBestStrategyForNormalUser(String hotelID, int roomTotal) {
 		
 		List<Double> discounts = new ArrayList<Double>();//客户满足条件的所有折扣
-		String hotelID = hotelInfo.split("/")[0];
 		List<StrategyPO> hotelStrategy = strategyDao.getAllHotelStrategies(hotelID);//酒店的所有营销策略
 		List<StrategyPO> websiteStrategy = strategyDao.getAllWebsiteStrategies();//网站的所有营销策略
 		
@@ -53,10 +52,9 @@ public class StrategyProvidedServiceImpl implements StrategyProvidedService{
 	}
 
 	@Override
-	public double getBestStrategyForNormalVip(String hotelInfo, int roomTotal, String birthday, int vipGrade) {
+	public double getBestStrategyForNormalVip(String hotelID, int roomTotal, String birthday, int vipGrade,String hotelProvince,String hotelCity,String hotelCBD) {
 		
 		List<Double> discounts = new ArrayList<Double>();//客户满足条件的所有折扣
-		String hotelID = hotelInfo.split("/")[0];
 		List<StrategyPO> hotelStrategy = strategyDao.getAllHotelStrategies(hotelID);//酒店的所有营销策略
 		List<StrategyPO> websiteStrategy = strategyDao.getAllWebsiteStrategies();//网站的所有营销策略
 		
@@ -85,12 +83,9 @@ public class StrategyProvidedServiceImpl implements StrategyProvidedService{
 			if(("普通会员_"+vipGrade).equals(po.getUserType())){
 				//遍历网站营销策略，找到适合当前等级的普通会员的策略
 				//根据级别有折扣，在级别对应的商圈内预订也有折扣
-				if(!"".equals(po.getHotelAddress())&&po.getHotelAddress()!=null){
+				if(!"".equals(po.getHotelProvince())&&po.getHotelProvince()!=null){
 					//策略对应的酒店地址不为空的时候
-					String infos[] = hotelInfo.split("/");
-					String hotelAddress = infos[1]+"/"+infos[2];
-					String hotelCBD = infos[3];
-					if(hotelAddress.equals(po.getHotelAddress())&&hotelCBD.equals(po.getHotelCBD())){
+					if(hotelProvince.equals(po.getHotelProvince())&&hotelCBD.equals(po.getHotelCBD())&&hotelCity.equals(po.getHotelCity())){
 						//会员预订的酒店在特价商圈之内的话
 						if(checkTime(po.getBeginTime(),po.getEndTime())){
 							//判断日期和房间数目是否满足条件
@@ -114,10 +109,9 @@ public class StrategyProvidedServiceImpl implements StrategyProvidedService{
 	}
 
 	@Override
-	public double getBestStrategyForCompanyVip(String hotelInfo, int roomTotal) {
+	public double getBestStrategyForCompanyVip(String hotelID, int roomTotal) {
 		
 		List<Double> discounts = new ArrayList<Double>();//客户满足条件的所有折扣
-		String hotelID = hotelInfo.split("/")[0];
 		List<StrategyPO> hotelStrategy = strategyDao.getAllHotelStrategies(hotelID);//酒店的所有营销策略
 		List<StrategyPO> websiteStrategy = strategyDao.getAllWebsiteStrategies();//网站的所有营销策略
 		

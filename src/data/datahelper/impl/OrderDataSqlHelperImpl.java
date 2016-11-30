@@ -40,7 +40,7 @@ public class OrderDataSqlHelperImpl implements OrderDataHelper{
 		Statement statement = null;
 		try{
 			if(conn==null){
-				new OrderDataSqlHelperImpl();
+				new PersonnelDataSqlHelperImpl();
 			}
 			statement = conn.createStatement();
 			return statement.executeQuery(sql);
@@ -59,7 +59,7 @@ public class OrderDataSqlHelperImpl implements OrderDataHelper{
 		Statement statement =null;
 		try{
 			if(conn==null){
-				new OrderDataSqlHelperImpl();
+				new PersonnelDataSqlHelperImpl();
 			}
 			statement = conn.createStatement();
 			return statement.executeUpdate(sql);

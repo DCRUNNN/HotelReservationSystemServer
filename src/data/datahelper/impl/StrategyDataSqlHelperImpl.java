@@ -100,7 +100,8 @@ public class StrategyDataSqlHelperImpl implements StrategyDataHelper {
 				String beginTime=set.getString("begintime");
 				String endTime=set.getString("endtime");
 				String userType=set.getString("usertype");
-				String hotelAdd=set.getString("hoteladdress");
+				String province=set.getString("hotelprovince");
+				String city = set.getString("hotelcity");
 				String hotelCBD=set.getString("hotelcbd");
 				boolean isToBDay=set.getBoolean("istobirthday");
 				String strategyType=set.getString("strategytype");
@@ -112,7 +113,8 @@ public class StrategyDataSqlHelperImpl implements StrategyDataHelper {
 				po.setBeginTime(beginTime);
 				po.setDiscount(discount);
 				po.setEndTime(endTime);
-				po.setHotelAddress(hotelAdd);
+				po.setHotelProvince(province);
+				po.setHotelCity(city);
 				po.setHotelCBD(hotelCBD);
 				po.setHotelID(hotelID);
 				po.setIntroductuion(intro);
@@ -144,7 +146,9 @@ public class StrategyDataSqlHelperImpl implements StrategyDataHelper {
 		String beginTime=po.getBeginTime();
 		String endTime=po.getEndTime();
 		String userType=po.getUserType();
-		String hotelAdd=po.getHotelID();
+		//String hotelAdd=po.getHotelID();
+		String hotelProvince = po.getHotelProvince();
+		String hotelCity = po.getHotelCity();
 		String hotelCBD=po.getHotelCBD();
 		boolean isToBDay=po.isToBirthday();
 		String strategyType=po.getStrategyType();
@@ -152,7 +156,7 @@ public class StrategyDataSqlHelperImpl implements StrategyDataHelper {
 		double discount=po.getDiscount();
 		
 		//create sql statement
-		String sql="UPDATE t_strategy SET hotelid='"+hotelID+"',hoteladdress='"+hotelAdd+"',hotelcbd='"+hotelCBD+"',strategyid='"
+		String sql="UPDATE t_strategy SET hotelid='"+hotelID+"',hotelprovince='"+hotelProvince+"',hotelcity='"+hotelCity+"',hotelcbd='"+hotelCBD+"',strategyid='"
 					+strategyId+"',strategyname='"+strategyName+"',strategytype='"+strategyType+"',begintime='"+beginTime+"',endtime='"
 					+endTime+"',introduction='"+intro+"',usertype='"+userType+"',istobirthday='"+convert(isToBDay)+"',roomtotal='"+roomTotal+"',discount='"+
 					discount+"' WHERE strategyid='"+strategyId+"';";
@@ -175,7 +179,9 @@ public class StrategyDataSqlHelperImpl implements StrategyDataHelper {
 		String beginTime=po.getBeginTime();
 		String endTime=po.getEndTime();
 		String userType=po.getUserType();
-		String hotelAdd=po.getHotelID();
+		//String hotelAdd=po.getHotelID();
+		String hotelprovince = po.getHotelProvince();
+		String hotelcity = po.getHotelCity();
 		String hotelCBD=po.getHotelCBD();
 		boolean isToBDay=po.isToBirthday();
 		String strategyType=po.getStrategyType();
@@ -183,9 +189,9 @@ public class StrategyDataSqlHelperImpl implements StrategyDataHelper {
 		double discount=po.getDiscount();
 		
 		//create sql statement
-		String sql="INSERT INTO t_strategy(hotelid,hoteladdress,hotelcbd,strategyid,strategyname,strategytype,"+
+		String sql="INSERT INTO t_strategy(hotelid,hotelprovince,hotelcity,hotelcbd,strategyid,strategyname,strategytype,"+
 				"begintime,endtime,introduction,usertype,istobirthday,roomtotal,discount) VALUES "+
-				"('"+hotelID+"','"+hotelAdd+"','"+hotelCBD+"','"+strategyId+"','"+strategyName+"','"+strategyType
+				"('"+hotelID+"','"+hotelprovince+"','"+hotelcity+"','"+hotelCBD+"','"+strategyId+"','"+strategyName+"','"+strategyType
 				+"','"+beginTime+"','"+endTime+"','"+intro+"','"+userType+"','"+convert(isToBDay)+"','"+roomTotal
 				+"',"+discount+");";
 		
@@ -215,7 +221,9 @@ public class StrategyDataSqlHelperImpl implements StrategyDataHelper {
 				String beginTime=set.getString("begintime");
 				String endTime=set.getString("endtime");
 				String userType=set.getString("usertype");
-				String hotelAdd=set.getString("hoteladdress");
+				//String hotelAdd=set.getString("hoteladdress");
+				String hotelProvince = set.getString("hotelprovince");
+				String hotelCity = set.getString("hotelcity");
 				String hotelCBD=set.getString("hotelcbd");
 				boolean isToBDay=set.getBoolean("istobirthday");
 				String strategyType=set.getString("strategytype");
@@ -227,7 +235,9 @@ public class StrategyDataSqlHelperImpl implements StrategyDataHelper {
 				po.setBeginTime(beginTime);
 				po.setDiscount(discount);
 				po.setEndTime(endTime);
-				po.setHotelAddress(hotelAdd);
+				//po.setHotelAddress(hotelAdd);
+				po.setHotelProvince(hotelProvince);
+				po.setHotelCity(hotelCity);
 				po.setHotelCBD(hotelCBD);
 				po.setHotelID(hotelID);
 				po.setIntroductuion(intro);

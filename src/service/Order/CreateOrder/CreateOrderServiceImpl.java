@@ -72,7 +72,10 @@ public class CreateOrderServiceImpl implements CreateOrderService{
 		String orderBeginDate = "";//订单入住时间为空
 		String orderEndDate = "";//订单退房时间为空
 		
-		double price = allrooms.getPriceByStrategy(clientID,hotelID,roomNumber);
+		String hotelProvince = hotelservice.getHotelProvince(hotelID);
+		String hotelCity = hotelservice.getHotelCity(hotelID);
+		String hotelCBD = hotelservice.getHotelCBD(hotelID);
+		double price = allrooms.getPriceByStrategy(clientID,hotelID,roomNumber,hotelProvince,hotelCity,hotelCBD);
 		String peopleNumber = "";//入住人数为空
 	    String hasChild ="";//有无儿童为空
 	    String orderStatus = "未执行";
@@ -113,8 +116,10 @@ public class CreateOrderServiceImpl implements CreateOrderService{
 	@Override
 	public double getPriceByStrategy(String roomNumber) {
 		
-		String hotelInfo = hotelservice.getHotelInfo(hotelID);
-		return allrooms.getPriceByStrategy(clientID,hotelInfo,roomNumber);
+		String hotelProvince = hotelservice.getHotelProvince(hotelID);
+		String hotelCity = hotelservice.getHotelCity(hotelID);
+		String hotelCBD = hotelservice.getHotelCBD(hotelID);
+		return allrooms.getPriceByStrategy(clientID,hotelID,roomNumber,hotelProvince,hotelCity,hotelCBD);
 	}
 	@Override
 	public boolean checkCreditPoint() {
