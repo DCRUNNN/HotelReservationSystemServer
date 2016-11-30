@@ -1,0 +1,116 @@
+package po;
+
+/**
+ * strategyID            策略编号
+ * name                  策略名字
+ * introduction          策略简介
+ * beginTime             开始时间
+ * endTime               结束时间
+ * userType              对应的用户的类型(普通用户，vip_1,vip_2,vip_3,vip_4,vip_5,企业会员)
+ * hotelAddress          指定的酒店地址（省份+"/"+市）
+ * hotelCBD              指定的酒店商圈
+ * isToBirthday          是否是针对会员的生日
+ * strategyType          策略类型（网站营销策略，酒店营销策略）
+ * hotelID               酒店ID
+ * roomTotal             触发策略的房间数目
+ * discount              策略的折扣           
+ * */
+public class StrategyPO {
+
+	private String strategyID;
+	private String name;
+	private String introductuion;
+	private String beginTime;
+	private String endTime;
+	private String userType;
+	private String hotelAddress;
+	private String hotelCBD;
+	private boolean isToBirthday;
+	private String strategyType;
+	private String hotelID;
+	private int roomTotal;
+	private double discount;
+	
+	
+	public String getStrategyID() {
+		return strategyID;
+	}
+	public void setStrategyID(String strategyID) {
+		this.strategyID = strategyID;
+	}
+	public String getName() {
+		return name;
+	}
+	public String getIntroductuion() {
+		return introductuion;
+	}
+	public String getBeginTime() {
+		return beginTime;
+	}
+	public String getEndTime() {
+		return endTime;
+	}
+	public String getUserType() {
+		return userType;
+	}
+	public String getHotelAddress() {
+		return hotelAddress;
+	}
+	public String getHotelCBD() {
+		return hotelCBD;
+	}
+	public String getStrategyType() {
+		return strategyType;
+	}
+	public String getHotelID() {
+		return hotelID;
+	}
+	public int getRoomTotal() {
+		return roomTotal;
+	}
+	public double getDiscount() {
+		return discount;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public void setIntroductuion(String introductuion) {
+		this.introductuion = introductuion;
+	}
+	public void setBeginTime(String beginTime) {
+		this.beginTime = beginTime;
+	}
+	public void setEndTime(String endTime) {
+		this.endTime = endTime;
+	}
+	public void setUserType(String userType) {
+		this.userType = userType;
+	}
+	public void setHotelAddress(String hotelAddress) {
+		this.hotelAddress = hotelAddress;
+	}
+	public void setHotelCBD(String hotelCBD) {
+		this.hotelCBD = hotelCBD;
+	}
+	public void setStrategyType(String strategyType) {
+		this.strategyType = strategyType;
+	}
+	public void setHotelID(String hotelID) {
+		this.hotelID = hotelID;
+	}
+	public void setRoomTotal(int roomTotal) {
+		this.roomTotal = roomTotal;
+	}
+	public void setDiscount(double discount) {
+		this.discount = discount;
+	}
+	public boolean isToBirthday() {
+		return isToBirthday;
+	}
+	public void setToBirthday(boolean isToBirthday) {
+		this.isToBirthday = isToBirthday;
+	}
+
+	
+	
+}
