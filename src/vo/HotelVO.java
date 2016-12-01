@@ -75,7 +75,7 @@ public class HotelVO {
 		this.orderCreateDate = array[0];
 		this.orderStatus = array[1];
 		this.orderID = array[2];
-		this.price = Double.valueOf(array[3]);	
+		this.price = Double.valueOf("".equals(array[3])?"0":array[3]);	
 	    this.hotelID = po.getHotelID();
 	    this.hotelProvince = po.getHotelProvince();
 	    this.hotelCity = po.getHotelCity();

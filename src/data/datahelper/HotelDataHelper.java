@@ -25,4 +25,7 @@ public interface HotelDataHelper {
 	
 	public List<String> getAllIds();
 
+	public boolean isExist(String hotelProvince, String hotelCity, String hotelCBD, String hotelAddress,
+			String hotelName);
+
 }

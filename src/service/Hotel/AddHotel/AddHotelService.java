@@ -18,5 +18,16 @@ public interface AddHotelService {
 	 * */
 	public boolean addHotelWorker(PersonnelVO vo);
 	
+	/**
+	 * @param personnelID 工作人员编号
+	 * @param password 密码
+	 * @return 返回保存密码是否成功
+	 * */
 	public boolean savePassword(String personnelID,String password);
+	
+	/**
+	 * @param vo 酒店信息
+	 * @return 根据酒店省份，酒店所在市，酒店所在商圈，酒店详细地址和酒店名称来判断酒店是否已经存在
+	 * */
+	public boolean isExist(HotelVO vo);
 }

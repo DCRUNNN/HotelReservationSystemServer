@@ -21,7 +21,7 @@ public class ApplyForVipDriver {
 			System.out.println("会员类别："+vo.getClientType());
 		}
 		
-		if(service.applyNormalVip(clientID, "2016-10-20")){
+		if(service.applyNormalVip(clientID, "10-20")){
 			System.out.println("Apply for normal vip successfully!");
 		}
 		

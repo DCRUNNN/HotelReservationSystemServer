@@ -74,4 +74,15 @@ public class AddHotelServiceImpl implements AddHotelService{
 		return accountService.insert(personnelID, password);
 	}
 
+	@Override
+	public boolean isExist(HotelVO vo) {
+		
+		String hotelProvince = vo.getHotelProvince();
+		String hotelCity = vo.getHotelCity();
+		String hotelCBD = vo.getHotelCBD();
+		String hotelAddress =  vo.getHotelAddress();
+		String hotelName = vo.getHotelName();
+		return hoteldao.isExist(hotelProvince,hotelCity,hotelCBD,hotelAddress,hotelName);
+	}
+
 }

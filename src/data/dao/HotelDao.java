@@ -54,4 +54,15 @@ public interface HotelDao {
 	 * */
 	public List<String> getAllIds();
 
+	/**
+	 * @param hotelProvince 酒店省份
+	 * @param hotelCity 酒店所在市
+	 * @param hotelCBD 酒店商圈
+	 * @param hotelAddress 酒店详细地址
+	 * @param hotelName 酒店名称
+	 * @return 酒店已经存在的话，返回true，否则false
+	 * */
+	public boolean isExist(String hotelProvince, String hotelCity, String hotelCBD, String hotelAddress,
+			String hotelName);
+
 }

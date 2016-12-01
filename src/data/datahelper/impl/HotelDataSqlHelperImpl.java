@@ -350,4 +350,22 @@ public class HotelDataSqlHelperImpl implements HotelDataHelper {
 		}
 	}
 
+	@Override
+	public boolean isExist(String hotelProvince, String hotelCity, String hotelCBD, String hotelAddress,
+			String hotelName) {
+	
+		
+		String sql = "select *from t_hotel where province='"+hotelProvince+"' and city='"+hotelCity+"' and hotelcbd='"
+				+hotelCBD+"' and address='"+hotelAddress+"' and hotelname='"+hotelName+"';";
+		ResultSet set = HotelDataSqlHelperImpl.executeQuery(sql);
+		try {
+			if(set.next()){
+				return true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+
 }

@@ -11,5 +11,10 @@ public interface CreateRoomInfoService {
 	 */
 	public boolean CreateRoom(RoomVO roomVO);
 	
-
+	/**
+	 * @param hotelID 酒店编号
+	 * @return 返回房间类型(类型1+"/"+类型2)
+	 * */
+	public String getAllRoomTypeAndPrice(String hotelID);
+	
 }

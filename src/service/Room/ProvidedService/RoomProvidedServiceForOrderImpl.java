@@ -32,7 +32,7 @@ public class RoomProvidedServiceForOrderImpl implements RoomProvidedServiceForOr
 	@Override
 	public boolean changeRoomState(String hotelID, String roomNumber, String state) {
 		
-		return roomDao.changeRoomState(roomNumber, state, hotelID);
+		return roomDao.changeRoomState(hotelID, roomNumber, state);
 	}
 
 	@Override

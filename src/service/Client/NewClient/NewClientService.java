@@ -17,4 +17,10 @@ public interface NewClientService {
 	 * */
 	public boolean savePassword(String clientID,String pass);
 	
+	/**
+	 * @param phoneNumber 手机号码
+	 * @return 手机号码已经存在的话返回true，否则false
+	 * */
+	public boolean isExistPhoneNumber(String phoneNumber);
+	
 }

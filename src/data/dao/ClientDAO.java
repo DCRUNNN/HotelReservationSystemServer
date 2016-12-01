@@ -68,4 +68,10 @@ public interface ClientDAO {
 	 * @return 新添客户信息
 	 * */
 	public boolean insert(ClientPO po);
+
+    /**
+     * @param phoneNumber 手机号码
+     * @return 存在返回true，不存在返回false
+     * */
+	public boolean isExistPhoneNumber(String phoneNumber);
 }

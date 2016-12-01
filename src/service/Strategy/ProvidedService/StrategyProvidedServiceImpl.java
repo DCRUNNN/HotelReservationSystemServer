@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.TimeZone;
 
 import data.dao.StrategyDao;
 import data.dao.impl.StrategyDaoImpl;
@@ -63,7 +64,7 @@ public class StrategyProvidedServiceImpl implements StrategyProvidedService{
 				//遍历酒店策略，找到适合当前等级的普通会员的策略
 				if(po.isToBirthday()){
 					//会员生日的折扣
-					SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+					SimpleDateFormat sdf = new SimpleDateFormat("MM-dd");
 					String today = sdf.format(new Date());
 					if(today.equals(birthday)){//比较当前日期和生日,相同的话就是满足
 						discounts.add(po.getDiscount());
@@ -81,9 +82,10 @@ public class StrategyProvidedServiceImpl implements StrategyProvidedService{
 		
 		for(StrategyPO po:websiteStrategy){
 			if(("普通会员_"+vipGrade).equals(po.getUserType())){
+					
 				//遍历网站营销策略，找到适合当前等级的普通会员的策略
 				//根据级别有折扣，在级别对应的商圈内预订也有折扣
-				if(!"".equals(po.getHotelProvince())&&po.getHotelProvince()!=null){
+				if(!"".equals(po.getHotelProvince())&&po.getHotelProvince()!=null&&!"null".equals(po.getHotelProvince())){
 					//策略对应的酒店地址不为空的时候
 					if(hotelProvince.equals(po.getHotelProvince())&&hotelCBD.equals(po.getHotelCBD())&&hotelCity.equals(po.getHotelCity())){
 						//会员预订的酒店在特价商圈之内的话
@@ -145,8 +147,10 @@ public class StrategyProvidedServiceImpl implements StrategyProvidedService{
 	 * */
 	private double findMin(List<Double> discounts) {
 	
+		
 		double min = 10;
 		for(Double d:discounts){
+			System.out.println(d);//把所有的折扣输出
 			if(d<min){
 				min=d;
 			}
@@ -159,20 +163,23 @@ public class StrategyProvidedServiceImpl implements StrategyProvidedService{
 	 * */
 	private boolean checkTime(String beginTime, String endTime) {
 		
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:MM:ss");
+		//new Date()得到的市jvm上的时间 不一定和系统时间一致
+		//TimeZone tz = TimeZone.getTimeZone("ETC/GMT-8");
+		//TimeZone.setDefault(tz);
+		//System.out.println(new Date());
 		long current = new Date().getTime();
 		long begin = 0;
-		if(!"".equals(beginTime)&&beginTime!=null){
+		if(!"".equals(beginTime)&&beginTime!=null&&!"null".equals(beginTime)){
 			//开始时间非空的话
 			try {
 				//得到开始时间的毫秒数
-				begin = sdf.parse(beginTime).getTime();
+				begin = ThreadLocalDateUtil.parse(beginTime).getTime();
 			} catch (ParseException e) {
 				e.printStackTrace();
 			}
 		}
 		
-		if("".equals(endTime)||endTime==null){
+		if("".equals(endTime)||endTime==null||"null".equals(endTime)){
 			//没有结束时间
 			if(current>=begin){
 				return true;
@@ -180,7 +187,8 @@ public class StrategyProvidedServiceImpl implements StrategyProvidedService{
 		}else{
 			//存在结束时间
 			try {
-				long end = sdf.parse(endTime).getTime();
+				//SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:MM:ss");
+				long end = ThreadLocalDateUtil.parse(endTime).getTime();
 				if(begin<=current&&current<=end){
 					return true;
 				}

@@ -6,6 +6,7 @@ import vo.ClientVO;
 
 public class NewClientDriver {
 
+	//用手机号码作为唯一标识，只能用一个手机号码来注册一个账户
 	static NewClientService service = new NewClientServiceImpl();
 	
 	public static void main(String args[]){
@@ -29,6 +30,14 @@ public class NewClientDriver {
 		
 		String pass2 = "123";
 		service.savePassword(id2, pass2);
+		
+		String phoneNumber = "13927501";
+		ClientVO c3 = new ClientVO(null,"黄泽鹏","男","123456789",phoneNumber,0,null,null,0,null,null);
+		if(service.isExistPhoneNumber(phoneNumber)){
+			System.out.println("The phoneNumber has existed!");
+		}else{
+			System.out.println(!"".equals(service.insert(c3))?"成功插入c3！":"注册失败！");
+		}
 		
 		
 	}

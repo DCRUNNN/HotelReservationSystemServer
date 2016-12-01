@@ -14,8 +14,13 @@ public class AddHotelDriver {
 				"设施不是一般的齐全","单人房|20/双人房|50");
 		HotelVO vo3 = new HotelVO("福建省","厦门市","厦大商圈","厦门大学旁","旻少酒店",5,"说酒店不好那是骗人的",
 				"神马都可以满足你","单人房|5/双人房|20");
-		
+
 		AddHotelService service = new AddHotelServiceImpl();
+		if(service.isExist(vo1)){
+			System.out.println("酒店1已经存在！");
+			System.exit(0);
+		}
+		
 		String hotelid1 = service.addHotel(vo1);
 		if("".equals(hotelid1)){
 			System.out.println("An error occured!");
@@ -51,6 +56,7 @@ public class AddHotelDriver {
 			System.out.println(service.savePassword(hotelworkerid3, pass3)?"成功添加账户密码！":"添加账户失败！");
 		    System.out.println("-------------");
 		}
+		
 		
 	}
 }

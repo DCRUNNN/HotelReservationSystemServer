@@ -39,7 +39,6 @@ public class MaintainHotelMessageServiceImpl implements MaintainHotelMessageServ
 	@Override
 	public HotelVO getHotelVO() {
 		
-		
 		HotelPO po = hotelDao.getHotelPO(hotelID);//可能为空的
 		if(po==null){
 			return null;
@@ -48,6 +47,22 @@ public class MaintainHotelMessageServiceImpl implements MaintainHotelMessageServ
 			HotelVO vo = new HotelVO("//// ",po);
 			return vo;
 		}
+	}
+
+	@Override
+	public boolean changeHotelInfo(HotelVO vo) {
+		
+		HotelPO po = hotelDao.getHotelPO(hotelID);
+		po.setHotelProvince(vo.getHotelProvince());
+		po.setHotelCity(vo.getHotelCity());
+		po.setHotelCBD(vo.getHotelCBD());
+		po.setHotelAddress(vo.getHotelAddress());
+		po.setHotelName(vo.getHotelName());
+		po.setHotelStar(vo.getHotelStar());
+		po.setFacilities(vo.getFacilities());
+		po.setIntroduction(vo.getIntroduction());
+		po.setRoomTypeAndPrice(vo.getRoomTypeAndPrice());
+		return hotelDao.change(po);
 	}
 
 }

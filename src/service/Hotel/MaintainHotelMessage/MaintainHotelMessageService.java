@@ -19,7 +19,15 @@ public interface MaintainHotelMessageService {
 	public boolean changeHotelInfo(String hotelProvince,String hotelCity,String hotelCBD,String hotelAddress,String hotelName,String introduction,String facilities,int star,String roomTypeAndPrices);
 	
 	/**
+	 * @param vo 修改后的酒店信息
+	 * @return 返回是否修改成功
+	 * */
+	public boolean changeHotelInfo(HotelVO vo);
+	
+	/**
 	 * @return 得到修改前的酒店信息,返回的HotelVO可能为空
 	 * */
 	public HotelVO getHotelVO();
+	
+	
 }

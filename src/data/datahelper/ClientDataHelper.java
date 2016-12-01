@@ -26,4 +26,6 @@ public interface ClientDataHelper {
 
 	public boolean insert(ClientPO po);
 
+	public boolean isExistPhoneNumber(String phoneNumber);
+
 }

@@ -128,7 +128,7 @@ public class ClientDataSqlHelperImpl implements ClientDataHelper{
 		ResultSet set=ClientDataSqlHelperImpl.executeQuery(sql);
 		try{
 			while(set.next()){
-			   clientcreditpoint=set.getDouble("credit");
+			   clientcreditpoint=set.getDouble("credit_point");
 			}
 		}catch(SQLException e){
 			e.printStackTrace();
@@ -304,6 +304,23 @@ public class ClientDataSqlHelperImpl implements ClientDataHelper{
 		}
 		ClientDataSqlHelperImpl.close();
 		return true;
+	}
+
+	@Override
+	public boolean isExistPhoneNumber(String phoneNumber) {
+		
+		String sql = "select *from t_client where phoneNumber="+phoneNumber;
+		ResultSet set = ClientDataSqlHelperImpl.executeQuery(sql);
+		try {
+			if(set.next()){
+				if(phoneNumber.equals(set.getString("phonenumber"))){
+					return true;
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return false;
 	}
 
 }

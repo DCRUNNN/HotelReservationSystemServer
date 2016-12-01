@@ -21,23 +21,28 @@ public class CheckOutRoomServiceImpl implements CheckOutRoomService{
 	}
 	
 	@Override
-	public boolean checkOutRoom(String clientID,String hotelID) {
+	public String checkOutRoom(String clientID,String hotelID) {
 		
-		String roomNumbers[] = orderService.getRoomNumber(clientID, hotelID).split("/");
+		String allrooms = orderService.getRoomNumber(clientID, hotelID);
+		String roomNumbers[] = allrooms.split("/");
 		if(roomNumbers.length==0){
 			//客户在酒店没有合适的房间号码
-			return false;
+			return "";
 		}
 		for(String str:roomNumbers){
 			//遍历房间，改变房间状态为空闲
 			if(!roomDao.changeBookDate(hotelID, str, "空闲")){
-				return false;
+				return "";
 			}
 		}
 		
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:MM:ss");
 		String outTime = sdf.format(new Date());
-		return orderService.setEndTime(clientID,hotelID,outTime);//设置订单的退房时间
+		if(!orderService.setEndTime(clientID, hotelID, outTime)){
+			return "";
+		}
+		return allrooms;//设置订单的退房时间
 	}
 
+	
 }

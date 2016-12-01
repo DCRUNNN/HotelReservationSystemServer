@@ -78,4 +78,11 @@ public class HotelDaoImpl implements HotelDao {
 		return hotelDataHelper.getAllIds();
 	}
 
+	@Override
+	public boolean isExist(String hotelProvince, String hotelCity, String hotelCBD, String hotelAddress,
+			String hotelName) {
+		
+		return hotelDataHelper.isExist(hotelProvince,hotelCity,hotelCBD,hotelAddress,hotelName);
+	}
+
 }

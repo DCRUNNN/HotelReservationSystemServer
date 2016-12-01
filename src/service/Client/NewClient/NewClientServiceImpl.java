@@ -46,4 +46,10 @@ public class NewClientServiceImpl implements NewClientService{
 		return accountService.insert(clientID,pass);
 	}
 
+	@Override
+	public boolean isExistPhoneNumber(String phoneNumber) {
+
+		return clientDao.isExistPhoneNumber(phoneNumber);
+	}
+
 }

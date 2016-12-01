@@ -88,4 +88,10 @@ private ClientDataHelper clientDataHelper;
 		return clientDataHelper.insert(po);
 	}
 
+	@Override
+	public boolean isExistPhoneNumber(String phoneNumber) {
+		
+		return clientDataHelper.isExistPhoneNumber(phoneNumber);
+	}
+
 }
