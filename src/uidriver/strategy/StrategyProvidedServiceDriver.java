@@ -23,6 +23,7 @@ public class StrategyProvidedServiceDriver {
 		//测试普通用户的话，只是存在两种可能，一是特定时间预订，预订数目超出
 		System.out.println(service.getBestStrategyForNormalUser(hotelID, roomTotal));
 		
-		//System.out.println(x);
+		
+		System.out.println();
 	}
 }
