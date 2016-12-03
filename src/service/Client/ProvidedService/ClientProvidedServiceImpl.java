@@ -95,15 +95,64 @@ public class ClientProvidedServiceImpl implements ClientProvidedService{
 		}
 		return po.getCompanyAddress();
 	}
-	
 	@Override
-	public String getCompanyName(String clientID) {
+	public String getHotelIDs(String clientID) {
 		
 		ClientPO po = clientDao.getClientPO(clientID);
 		if(po==null){
 			return "";
 		}
-		return po.getCompanyName();
+		return po.getHotelIDs();
 	}
-
+	@Override
+	public boolean isCorrectCompanyVip(String clientID, String hotelID) {
+		
+		ClientPO po = clientDao.getClientPO(clientID);
+		if(po==null){
+			return false;
+		}
+		String hotelIDs = po.getHotelIDs();
+		if(hotelIDs.contains(hotelID)){
+			return true;
+		}else{
+			return false;
+		}
+	}
+	@Override
+	public String getClientName(String clientID) {
+		
+		ClientPO po = clientDao.getClientPO(clientID);
+		if(po==null){
+			return "";
+		}
+		return po.getName();
+	}
+	@Override
+	public String getSex(String clientID) {
+		
+		ClientPO po = clientDao.getClientPO(clientID);
+		if(po==null){
+			return "";
+		}
+		return po.getSex();
+	}
+	@Override
+	public String getIdentityID(String clientID) {
+		
+		ClientPO po = clientDao.getClientPO(clientID);
+		if(po==null){
+			return "";
+		}
+		return po.getIdentityID();
+	}
+	@Override
+	public String getPhoneNumber(String clientID) {
+		
+		ClientPO po = clientDao.getClientPO(clientID);
+		if(po==null){
+			return "";
+		}
+		return po.getPhoneNumber();
+	}
+	
 }

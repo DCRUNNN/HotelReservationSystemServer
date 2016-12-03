@@ -59,7 +59,9 @@ public class ChangeRoomInfoServiceImpl implements ChangeRoomInfoService {
 	
 		List<RoomVO> list=new ArrayList<RoomVO>();
 		for(RoomVO roomVO:hotelRoomList){
-			list.add(roomVO);
+			if(state.equals(roomVO.getRoomState())){
+				list.add(roomVO);
+			}
 		}
 		return list;
 	}

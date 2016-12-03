@@ -26,9 +26,10 @@ public interface StrategyProvidedService {
 	/**
 	 * @param hotelID 酒店编号
 	 * @param roomTotal 房间数目
+	 * @param companyAddress 企业的详细地址
 	 * 企业会员对应的折扣包括：特定期间预订，预订数目超出，在酒店有优惠
 	 * @return 返回最低折扣
 	 * */
-	public double getBestStrategyForCompanyVip(String hotelID, int roomTotal);
+	public double getBestStrategyForCompanyVip(String hotelID, int roomTotal,String companyAddress);
 	
 }

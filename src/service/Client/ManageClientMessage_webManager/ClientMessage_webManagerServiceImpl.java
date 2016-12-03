@@ -6,6 +6,7 @@ import java.util.List;
 import data.dao.ClientDAO;
 import data.dao.impl.ClientDaoImpl;
 import po.ClientPO;
+import service.Client.help.CreateClientVO;
 import vo.ClientVO;
 
 public class ClientMessage_webManagerServiceImpl implements ClientMessage_webManagerService{
@@ -28,8 +29,9 @@ public class ClientMessage_webManagerServiceImpl implements ClientMessage_webMan
 		}
 		
 		allclients = new ArrayList<ClientVO>();
+		CreateClientVO help = new CreateClientVO();
 		for(ClientPO po:polist){
-			ClientVO vo = new ClientVO(po);
+			ClientVO vo = help.createClientVO(po);
 			allclients.add(vo);
 		}
 		
@@ -69,13 +71,21 @@ public class ClientMessage_webManagerServiceImpl implements ClientMessage_webMan
 	@Override
 	public boolean modifyClientMessage(ClientVO vo) {	
 		
+		//首先对allclients进行修改
+		for(int i=0;i<allclients.size();i++){
+			if(allclients.get(i).getId().equals(vo.getId())){
+				allclients.set(i, vo);
+				break;
+			}
+		}
+		
 		ClientPO po = new ClientPO();
 		//vo转化为po
 		po.setId(vo.getId());
 		po.setBirthday(vo.getBirthday());
 		po.setClientType(vo.getClientType());
 		po.setCompanyAddress(vo.getCompanyAddress());
-		po.setCompanyName(vo.getCompanyName());
+		po.setHotelIDs(vo.getHotelIDS());
 		po.setCredit_point(vo.getCredit_point());
 		po.setIdentityID(vo.getIdentityID());
 		po.setName(vo.getName());
@@ -83,7 +93,9 @@ public class ClientMessage_webManagerServiceImpl implements ClientMessage_webMan
 		po.setSex(vo.getSex());
 		po.setVipGrade(vo.getVipGrade());
 		
-		return clientDao.change(po);}
+		return clientDao.change(po);
+		
+	}
 
 	@Override
 	public ClientVO getClientMessage(String clientID) {

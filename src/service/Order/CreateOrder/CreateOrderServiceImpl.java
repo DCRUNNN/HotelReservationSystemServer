@@ -28,6 +28,11 @@ public class CreateOrderServiceImpl implements CreateOrderService{
 	private OrderDao orderDao;
 	private AllRooms allrooms;
 	
+	/**
+	 * @param clientID 客户编号
+	 * @param hotelID 酒店编号
+	 * @return 传递clientID，hotelID作为构造函数的参数
+	 * */
 	public CreateOrderServiceImpl(String clientID,String hotelID){
 		
 		this.clientID = clientID;
@@ -47,7 +52,7 @@ public class CreateOrderServiceImpl implements CreateOrderService{
 	}
 
 	@Override
-	public boolean createOrder(int roomTotal, String roomType, String roomNumber) {
+	public boolean createOrder( String roomType, String roomNumber) {
 		
 		OrderPO po = new OrderPO();
 		
@@ -91,7 +96,7 @@ public class CreateOrderServiceImpl implements CreateOrderService{
 	    po.setOrderEndDate(orderEndDate);
 	    po.setOrderLastDate(orderLastDate);
 	    po.setPrice(price);
-	    po.setRoomTotal(roomTotal);
+	    po.setRoomTotal(roomNumber.split("/").length);
 	    po.setRoomType(roomType);
 	    po.setRoomNumber(roomNumber);
 	    po.setPeopleNumber(peopleNumber);
@@ -105,7 +110,7 @@ public class CreateOrderServiceImpl implements CreateOrderService{
 	    	if(!allrooms.changeRoomState(numbers[i],"已预订")){
 		    	return false;
 		    }
-	    	if(!allrooms.setBookDate(roomNumber, orderCreatedDate)){
+	    	if(!allrooms.setBookDate(numbers[i], orderCreatedDate)){
 	    		return false;
 	    	}
 	    }//改变房间状态,设置预订时间

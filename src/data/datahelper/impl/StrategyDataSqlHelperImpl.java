@@ -106,6 +106,7 @@ public class StrategyDataSqlHelperImpl implements StrategyDataHelper {
 				boolean isToBDay=set.getBoolean("istobirthday");
 				String strategyType=set.getString("strategytype");
 				int roomTotal=set.getInt("roomtotal");
+				String companyAddress = set.getString("companyaddress");
 				double discount=set.getDouble("discount");
 				
 				//create a po object to transmit
@@ -123,6 +124,7 @@ public class StrategyDataSqlHelperImpl implements StrategyDataHelper {
 				po.setStrategyID(strategyId);
 				po.setStrategyType(strategyType);
 				po.setToBirthday(isToBDay);
+				po.setCompanyAddress(companyAddress);
 				po.setUserType(userType);
 			
 				list.add(po);
@@ -146,7 +148,6 @@ public class StrategyDataSqlHelperImpl implements StrategyDataHelper {
 		String beginTime=po.getBeginTime();
 		String endTime=po.getEndTime();
 		String userType=po.getUserType();
-		//String hotelAdd=po.getHotelID();
 		String hotelProvince = po.getHotelProvince();
 		String hotelCity = po.getHotelCity();
 		String hotelCBD=po.getHotelCBD();
@@ -154,11 +155,12 @@ public class StrategyDataSqlHelperImpl implements StrategyDataHelper {
 		String strategyType=po.getStrategyType();
 		int roomTotal=po.getRoomTotal();
 		double discount=po.getDiscount();
+		String companyaddress = po.getCompanyAddress();
 		
 		//create sql statement
 		String sql="UPDATE t_strategy SET hotelid='"+hotelID+"',hotelprovince='"+hotelProvince+"',hotelcity='"+hotelCity+"',hotelcbd='"+hotelCBD+"',strategyid='"
 					+strategyId+"',strategyname='"+strategyName+"',strategytype='"+strategyType+"',begintime='"+beginTime+"',endtime='"
-					+endTime+"',introduction='"+intro+"',usertype='"+userType+"',istobirthday='"+convert(isToBDay)+"',roomtotal='"+roomTotal+"',discount='"+
+					+endTime+"',introduction='"+intro+"',usertype='"+userType+"',istobirthday='"+convert(isToBDay)+"',roomtotal='"+roomTotal+"',companyaddress='"+companyaddress+"',discount='"+
 					discount+"' WHERE strategyid='"+strategyId+"';";
 		
 		int i=StrategyDataSqlHelperImpl.executeUpdate(sql);
@@ -186,14 +188,15 @@ public class StrategyDataSqlHelperImpl implements StrategyDataHelper {
 		boolean isToBDay=po.isToBirthday();
 		String strategyType=po.getStrategyType();
 		int roomTotal=po.getRoomTotal();
+		String companyAddress = po.getCompanyAddress();
 		double discount=po.getDiscount();
 		
 		//create sql statement
 		String sql="INSERT INTO t_strategy(hotelid,hotelprovince,hotelcity,hotelcbd,strategyid,strategyname,strategytype,"+
-				"begintime,endtime,introduction,usertype,istobirthday,roomtotal,discount) VALUES "+
+				"begintime,endtime,introduction,usertype,istobirthday,roomtotal,companyaddress,discount) VALUES "+
 				"('"+hotelID+"','"+hotelprovince+"','"+hotelcity+"','"+hotelCBD+"','"+strategyId+"','"+strategyName+"','"+strategyType
 				+"','"+beginTime+"','"+endTime+"','"+intro+"','"+userType+"','"+convert(isToBDay)+"','"+roomTotal
-				+"',"+discount+");";
+				+"','"+companyAddress+"',"+discount+");";
 		
 		int i=StrategyDataSqlHelperImpl.executeUpdate(sql);
 		StrategyDataSqlHelperImpl.close();
@@ -229,6 +232,7 @@ public class StrategyDataSqlHelperImpl implements StrategyDataHelper {
 				String strategyType=set.getString("strategytype");
 				int roomTotal=set.getInt("roomtotal");
 				double discount=set.getDouble("discount");
+				String companyAddress = set.getString("companyaddress");
 				
 				//create a po object to transmit
 				StrategyPO po=new StrategyPO();
@@ -247,7 +251,8 @@ public class StrategyDataSqlHelperImpl implements StrategyDataHelper {
 				po.setStrategyType(strategyType);
 				po.setToBirthday(isToBDay);
 				po.setUserType(userType);
-			
+			    po.setCompanyAddress(companyAddress);
+			    
 				list.add(po);
 			}
 			StrategyDataSqlHelperImpl.close();

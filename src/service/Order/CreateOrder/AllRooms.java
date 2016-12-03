@@ -15,20 +15,19 @@ public class AllRooms {
 	
 	private String hotelID;
     private RoomProvidedServiceForOrder roomservice;
-    private List<RoomVO> allrooms;
-    
+  
     public AllRooms(String hotelID){
     	
     	this.hotelID = hotelID;
     	roomservice = new RoomProvidedServiceForOrderImpl();
-    	allrooms=roomservice.getAllRooms(hotelID);
+
     }
     
     /**
      * @return 得到一个酒店的所有房间
      * */
     public List<RoomVO> getAllRooms(){
-    	return allrooms;
+    	return roomservice.getAllRooms(hotelID);
     }
     
     /**
@@ -37,6 +36,7 @@ public class AllRooms {
      * */
     public String getAllRoomNumber(String roomType){
     	
+    	List<RoomVO> allrooms = roomservice.getAllRooms(hotelID);
     	StringBuilder sb = new StringBuilder();
     	for(RoomVO vo:allrooms){
     		if("空闲".equals(vo.getRoomState())){
@@ -66,6 +66,7 @@ public class AllRooms {
     	
     	double total1 = 0;
         String numbers[] = roomNumber.split("/");
+        List<RoomVO> allrooms = roomservice.getAllRooms(hotelID);
         
         for(int i=0;i<numbers.length;i++){
        	 for(RoomVO vo:allrooms){

@@ -56,6 +56,7 @@ public class ManageWebsiteStrategyServiceImpl implements ManageWebsiteStrategySe
 		po.setStrategyType(strategyVO.getStrategyType());
 		po.setHotelID(strategyVO.getHotelID());
 		po.setRoomTotal(strategyVO.getRoomTotal());
+		po.setCompanyAddress(strategyVO.getCompanyAddress());
 		po.setDiscount(strategyVO.getStrategy_discount());
 		
 		return strategyDao.changeStrategy(po);
@@ -78,6 +79,7 @@ public class ManageWebsiteStrategyServiceImpl implements ManageWebsiteStrategySe
 		po.setStrategyType(strategyVO.getStrategyType());
 		po.setHotelID(strategyVO.getHotelID());
 		po.setRoomTotal(strategyVO.getRoomTotal());
+		po.setCompanyAddress(strategyVO.getCompanyAddress());
 		po.setDiscount(strategyVO.getStrategy_discount());
 		
 		return strategyDao.changeStrategy(po);

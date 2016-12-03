@@ -129,12 +129,10 @@ public class Search {
 			        	if("已预订".equals(roomvo.getRoomState())){
 			        		
 			        		String beginDate = roomvo.getBookDate();//预订时间
-			        		String beginDate_day = beginDate.split(" ")[0];//预订时间日期
-			        		String beginDate_time = beginDate.split(" ")[1];//预订时间
-			        		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+			        		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 			        		Date lastDay = null;
 			        		try {
-								lastDay = sdf.parse(beginDate_day);
+								lastDay = sdf.parse(beginDate);
 							} catch (ParseException e) {
 								e.printStackTrace();
 							}
@@ -154,19 +152,8 @@ public class Search {
 			        		if(c2.after(c1)){
 			        			//最晚执行日期在当前时间之前
 			        			countBook++;
-			        		}else if(c1.after(c2)){
-			        			continue;//下一个房间
 			        		}else{
-			        			String currentTime = new Date().toLocaleString().split(" ")[1];
-				            	String hms [] = currentTime.split(":");
-				            	int currentTimesecond = Integer.valueOf(hms[0])*3600+Integer.valueOf(hms[1])*60+Integer.valueOf(hms[2])*60;
-				            	String hms2[] = beginDate_time.split(":");
-				            	int lastDate_Time_second = Integer.valueOf(hms2[0])*3600+Integer.valueOf(hms2[1])*60+Integer.valueOf(hms2[2])*60;
-			        		    if(lastDate_Time_second>=currentTimesecond){
-			        		    	continue;//下一个房间
-			        		    }else{
-			        		    	countBook++;
-			        		    }
+			        			continue;
 			        		}
 			        	}
 			        }
@@ -192,14 +179,12 @@ public class Search {
 		    			if("空闲".equals(roomvo.getRoomState())){
 		    				countFree++;
 		    			}else if("已预订".equals(roomvo.getRoomState())){
-	
+			        		
 			        		String beginDate = roomvo.getBookDate();//预订时间
-			        		String beginDate_day = beginDate.split(" ")[0];//预订时间日期
-			        		String beginDate_time = beginDate.split(" ")[1];//预订时间
-			        		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+			        		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 			        		Date lastDay = null;
 			        		try {
-								lastDay = sdf.parse(beginDate_day);
+								lastDay = sdf.parse(beginDate);
 							} catch (ParseException e) {
 								e.printStackTrace();
 							}
@@ -219,22 +204,10 @@ public class Search {
 			        		if(c2.after(c1)){
 			        			//最晚执行日期在当前时间之前
 			        			countBook++;
-			        		}else if(c1.after(c2)){
-			        			continue;//下一个房间
 			        		}else{
-			        			String currentTime = new Date().toLocaleString().split(" ")[1];
-				            	String hms [] = currentTime.split(":");
-				            	int currentTimesecond = Integer.valueOf(hms[0])*3600+Integer.valueOf(hms[1])*60+Integer.valueOf(hms[2])*60;
-				            	String hms2[] = beginDate_time.split(":");
-				            	int lastDate_Time_second = Integer.valueOf(hms2[0])*3600+Integer.valueOf(hms2[1])*60+Integer.valueOf(hms2[2])*60;
-			        		    if(lastDate_Time_second>=currentTimesecond){
-			        		    	continue;//下一个房间
-			        		    }else{
-			        		    	countBook++;
-			        		    }
+			        			continue;
 			        		}
-			        	
-		    			}
+			        	}
 		    		}//完成了对allrooms的遍历
 		    		if(countFree+countBook>=roomTotal){
 		    			result.add(hotelvo);

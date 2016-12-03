@@ -14,6 +14,7 @@ package po;
  * strategyType          策略类型（网站营销策略，酒店营销策略）
  * hotelID               酒店ID
  * roomTotal             触发策略的房间数目
+ * companyAddress        公司的详细地址(包括了公司名称例如 广东省茂名市化州商圈化州中学旁星河公司)
  * discount              策略的折扣           
  * */
 public class StrategyPO {
@@ -31,8 +32,16 @@ public class StrategyPO {
 	private String strategyType;
 	private String hotelID;
 	private int roomTotal;
+	private String companyAddress;
 	private double discount;
 	
+	public String getCompanyAddress(){
+		return companyAddress;
+	}
+	
+	public void setCompanyAddress(String companyAddress){
+		this.companyAddress = companyAddress;
+	}
 	
 	public String getStrategyID() {
 		return strategyID;

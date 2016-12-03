@@ -97,7 +97,7 @@ public class ClientDataSqlHelperImpl implements ClientDataHelper{
 				String clientType=set.getString("clienttype");
 				String birthday=set.getString("birthday");
 				int vipGrade=set.getInt("vipgrade");
-				String companyName=set.getString("companyname");
+				String hotelIDs = set.getString("hotelids");
 				String companyAddress=set.getString("companyaddress");
 				//create a po object to transmit
 				po.setId(id);
@@ -108,7 +108,7 @@ public class ClientDataSqlHelperImpl implements ClientDataHelper{
 				po.setPhoneNumber(phoneNumber);
 				po.setClientType(clientType);
 				po.setCompanyAddress(companyAddress);
-				po.setCompanyName(companyName);
+				po.setHotelIDs(hotelIDs);
 				po.setBirthday(birthday);
 				po.setVipGrade(vipGrade);
 
@@ -183,11 +183,11 @@ public class ClientDataSqlHelperImpl implements ClientDataHelper{
 		String clientType=po.getClientType();
 		String birthday=po.getBirthday();
 		int vipGrade=po.getVipGrade();
-		String companyName=po.getCompanyName();
+		String hotelids =po.getHotelIDs();
 		String companyAddress=po.getCompanyAddress();
 		
 		String sql = "update t_client set clientid='"+id+"',name='"+name+"',sex='"+sex+"',identityid='"+identityid+"',credit_point="+credit_point
-				+",phonenumber='"+phoneNumber+"',clienttype='"+clientType+"',birthday='"+birthday+"',vipgrade="+vipGrade+",companyname='"+companyName+"',companyaddress='"+companyAddress
+				+",phonenumber='"+phoneNumber+"',clienttype='"+clientType+"',birthday='"+birthday+"',vipgrade="+vipGrade+",hotelids='"+hotelids+"',companyaddress='"+companyAddress
 				+"' where clientid="+id;
 		
 		int i = ClientDataSqlHelperImpl.executeUpdate(sql);
@@ -233,7 +233,7 @@ public class ClientDataSqlHelperImpl implements ClientDataHelper{
 				String clientType=set.getString("clienttype");
 				String birthday=set.getString("birthday");
 				int vipGrade=set.getInt("vipgrade");
-				String companyName=set.getString("companyname");
+				String hotelids=set.getString("hotelids");
 				String companyAddress=set.getString("companyaddress");
 				//create a po object to transmit
 				ClientPO po=new ClientPO();
@@ -245,7 +245,7 @@ public class ClientDataSqlHelperImpl implements ClientDataHelper{
 				po.setPhoneNumber(phoneNumber);
 				po.setClientType(clientType);
 				po.setCompanyAddress(companyAddress);
-				po.setCompanyName(companyName);
+				po.setHotelIDs(hotelids);
 				po.setBirthday(birthday);
 				po.setVipGrade(vipGrade);
 				clientList.add(po);
@@ -290,12 +290,12 @@ public class ClientDataSqlHelperImpl implements ClientDataHelper{
 		String clientType=po.getClientType();
 		String birthday=po.getBirthday();
 		int vipGrade=po.getVipGrade();
-		String companyName=po.getCompanyName();
+		String hotelids=po.getHotelIDs();
 		String companyAddress=po.getCompanyAddress();
 		
-		String sql ="insert into t_client(clientid,name,sex,identityid,credit_point,phonenumber,clienttype,birthday,vipgrade,companyname,companyaddress)  "
+		String sql ="insert into t_client(clientid,name,sex,identityid,credit_point,phonenumber,clienttype,birthday,vipgrade,companyaddress,hotelids)  "
 				+"values('"+id+"','"+name+"','"+sex+"','"+identityid+"',"+credit_point+",'"+phoneNumber+"','"+clientType+"','"+birthday+"',"+vipGrade+",'"
-				+companyName+"','"+companyAddress+"');";
+				+companyAddress+"','"+hotelids+"');";
 		
 		int i = ClientDataSqlHelperImpl.executeUpdate(sql);
 		if(i==-1){

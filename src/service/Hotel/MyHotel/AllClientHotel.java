@@ -11,6 +11,7 @@ import vo.HotelVO;
 
 /**
  * AllClientHotel 是一个容器类，包含客户的所有酒店信息，并且完成了返回酒店的相关信息
+ * 减少对数据库的访问
  * @see HotelDao
  * @see OrderProvidedServiceForHotel
  * @see CreateHotelVO
@@ -61,7 +62,7 @@ public class AllClientHotel {
 		List<HotelVO> list = new ArrayList<HotelVO>();
 		for(HotelVO vo:hotelVOList){
 			//基本的实现就是orderStatus的内容为"已执行"，"未执行"，"异常"或者"已撤销"
-			if("已执行".equals(vo.getOrderStatus())){
+			if(vo.getOrderStatus().contains("已执行")){
 				list.add(vo);
 			}
 		}
@@ -75,7 +76,7 @@ public class AllClientHotel {
 		
 		List<HotelVO> list = new ArrayList<HotelVO>();
 		for(HotelVO vo:hotelVOList){
-			if("未执行".equals(vo.getOrderStatus())){
+			if(vo.getOrderStatus().contains("未执行")){
 				list.add(vo);
 			}
 		}
@@ -89,7 +90,7 @@ public class AllClientHotel {
 		
 		List<HotelVO> list = new ArrayList<HotelVO>();
 		for(HotelVO vo:hotelVOList){
-			if("已撤销".equals(vo.getOrderStatus())){
+			if(vo.getOrderStatus().contains("已撤销")){
 				list.add(vo);
 			}
 		}
@@ -103,7 +104,7 @@ public class AllClientHotel {
 		
 		List<HotelVO> list = new ArrayList<HotelVO>();
 		for(HotelVO vo:hotelVOList){
-			if("异常".equals(vo.getOrderStatus())){
+			if(vo.getOrderStatus().contains("异常")){
 				list.add(vo);
 			}
 		}

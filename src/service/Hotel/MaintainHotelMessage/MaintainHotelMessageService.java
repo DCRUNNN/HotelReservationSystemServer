@@ -29,5 +29,15 @@ public interface MaintainHotelMessageService {
 	 * */
 	public HotelVO getHotelVO();
 	
+	/**
+	 * @param companyAddress 合作企业的详细地址
+	 * @return 返回是否添加成功
+	 * */
+	public boolean addCompany(String companyAddress);
 	
+	/**
+	 * @param companyAddress 合作企业的详细地址
+	 * @return 返回是否删除成功
+	 * */
+	public boolean deleteCompany(String companyAddress);
 }

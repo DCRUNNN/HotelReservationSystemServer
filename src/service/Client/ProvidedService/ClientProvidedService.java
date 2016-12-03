@@ -46,13 +46,41 @@ public interface ClientProvidedService {
 
 	/**
 	 * @param clientID 客户编号
-	 * @return 得到企业会员对应的企业地址
+	 * @return 得到企业会员对应的企业详细地址 如果clientID错误的话返回""
 	 * */
 	public String getCompanyAddress(String clientID);
 	
 	/**
 	 * @param clientID 客户编号
-	 * @return 得到企业会员对应的企业名称
+	 * @return 得到企业会员所有的合作酒店的编号 如果clientID错误的话返回""
 	 * */
-	public String getCompanyName(String clientID);
+	public String getHotelIDs(String clientID);
+
+	/**
+	 * @param clientID 客户编号
+	 * @param hotelID 酒店编号
+	 * @return 企业会员的对应酒店包括hotelID的话，返回true，否则就是false
+	 * */
+	public boolean isCorrectCompanyVip(String clientID, String hotelID);
+
+	/**
+	 * @param clientID 客户编号
+	 * @return 返回客户的姓名
+	 * */
+	public String getClientName(String clientID);
+	
+	/**
+	 * @return 返回客户的性别
+	 * */
+	public String getSex(String clientID);
+	
+	/**
+	 * @return 返回客户的身份证号
+	 * */
+	public String getIdentityID(String clientID);
+	
+	/**
+	 * @return 返回客户的手机号码
+	 * */
+	public String getPhoneNumber(String clientID);
 }

@@ -7,6 +7,7 @@ import data.dao.HotelDao;
 import data.dao.impl.HotelDaoImpl;
 import po.HotelPO;
 import po.OrderPO;
+import service.Client.InteractWithHotel.ClientProvidedServiceForHotel;
 import service.Hotel.BrowseHotel.AllHotels;
 import service.Order.InteractWithHotel.OrderProvidedServiceForHotel;
 import service.Order.InteractWithHotel.OrderProvidedServiceForHotelImpl;
@@ -25,6 +26,7 @@ public class SearchHotelServiceImpl implements SearchHotelService{
 	private AllHotels allhotel;
 	private Search searchHotel;//Search类的实例化放在getAllHotels方法内 调用search方法一定要在getAllHotels方法后
 	private OrderProvidedServiceForHotel orderService;
+	private ClientProvidedServiceForHotel clientservice;
 	private HotelDao hotelDao;
 	
 	public SearchHotelServiceImpl(String clientID){
@@ -63,14 +65,20 @@ public class SearchHotelServiceImpl implements SearchHotelService{
 	public List<OrderVO> getAllOrders(String hotelID) {
 		
 		List<OrderPO> polist =  orderService.getAllOrdersOfClientInaHotel(clientID,hotelID);
+		List<OrderVO> volist = new ArrayList<OrderVO>();
+		
 		if(polist==null){
-			return null;
+			return volist;
 		}
 		
-		List<OrderVO> volist = new ArrayList<OrderVO>();
 		HotelPO hotelPO = hotelDao.getHotelPO(hotelID);
 		for(OrderPO orderpo:polist){
-			OrderVO ordervo = new OrderVO(orderpo,hotelPO.getHotelProvince(), hotelPO.getHotelCity(), hotelPO.getHotelCBD(), hotelPO.getHotelAddress(), hotelPO.getHotelName());
+			
+			String clientName = clientservice.getClientName(clientID);
+			String sex = clientservice.getSex(clientID);
+			String identityID = clientservice.getIdentityID(clientID);
+			String phoneNumebr = clientservice.getPhoneNumber(clientID);
+			OrderVO ordervo = new OrderVO(orderpo,hotelPO.getHotelProvince(),hotelPO.getHotelCity(),hotelPO.getHotelCBD(),hotelPO.getHotelAddress(),hotelPO.getHotelName(),clientName,sex,identityID,phoneNumebr);
 			volist.add(ordervo);
 		}
 		return volist;

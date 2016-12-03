@@ -1,7 +1,12 @@
 package service.Order.BrowseOrder_webWorker;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import data.dao.OrderDao;
+import data.dao.impl.OrderDaoImpl;
+import po.OrderPO;
+import service.Order.help.CreateOrderVO;
 import vo.OrderVO;
 
 /**
@@ -11,21 +16,40 @@ import vo.OrderVO;
  * */
 public class BrowseOrder_webWorkerServiceImpl implements BrowseOrder_webWorkerService{
 
-    private AllOrders allorders;
+    private OrderDao orderDao;
     
     public BrowseOrder_webWorkerServiceImpl(){
-    	allorders = new AllOrders();
+    	
+          orderDao = OrderDaoImpl.getInstance();
     }
 	@Override
 	public List<OrderVO> getAllUnexecutedOrders() {
 		
-		return allorders.getAllUnexecutedOrders();
+		List<OrderPO> allHotelOrders = orderDao.getAllOrders();
+		List<OrderVO> volist = new ArrayList<OrderVO>();
+		CreateOrderVO help = new CreateOrderVO();
+		
+		for(OrderPO po:allHotelOrders){
+			if(po.getOrderStatus().equals("未执行")){
+				volist.add(help.createOrderVO(po));
+			}
+		}
+		return volist;
 	}
 
 	@Override
 	public List<OrderVO> getAllAbnormalOrders() {
-	
-		return allorders.getAllAbnormalOrders();
+		
+		List<OrderPO> allHotelOrders = orderDao.getAllOrders();
+		List<OrderVO> volist = new ArrayList<OrderVO>();
+		CreateOrderVO help = new CreateOrderVO();
+		
+		for(OrderPO po:allHotelOrders){
+			if(po.getOrderStatus().equals("异常")){
+				volist.add(help.createOrderVO(po));
+			}
+		}
+		return volist;
 	}
 
 	@Override
@@ -37,13 +61,28 @@ public class BrowseOrder_webWorkerServiceImpl implements BrowseOrder_webWorkerSe
 	@Override
 	public OrderVO getOrderVO(String orderID) {
 
-		return allorders.getOrderVO(orderID);
+		OrderPO po = orderDao.getOrderPO(orderID);
+		if(po==null){
+			return null;
+		}
+		CreateOrderVO help = new CreateOrderVO();
+		return help.createOrderVO(po);
 	}
 
 	@Override
 	public List<OrderVO> getClientAbnormalOrders(String clientID) {
 		
-		return allorders.getClientAbnormalOrders(clientID);
+		List<OrderPO> allHotelOrders = orderDao.getOrderPOList(clientID);//得到客户的所有订单
+		List<OrderVO> volist = new ArrayList<OrderVO>();
+		CreateOrderVO help = new CreateOrderVO();
+		
+		for(OrderPO po:allHotelOrders){
+			if(po.getOrderStatus().equals("异常")){
+				volist.add(help.createOrderVO(po));
+			}
+		}
+		return volist;
+	
 	}
 
 }

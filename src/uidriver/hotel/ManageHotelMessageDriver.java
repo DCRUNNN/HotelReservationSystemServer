@@ -34,16 +34,6 @@ public class ManageHotelMessageDriver {
 			String [] type = str.split("[|]");
 			System.out.println(type[0]+":"+type[1]);
 		}
-		//System.out.println(types.length);
 		
-		/*System.out.println(types[0]);
-		String [] a = types[0].split("[|]");
-		for(String str:a){
-			System.out.println(str);
-		}*/
-		/*String roomTypeAndPrice [] = vo.getRoomTypeAndPrice().split("/");
-		for(String str:roomTypeAndPrice){
-			System.out.println(str.split("|")[0]+": "+str.split("|")[1]);
-		}*/
 	}
 }

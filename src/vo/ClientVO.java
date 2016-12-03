@@ -12,8 +12,11 @@ import po.ClientPO;
  * clientType       客户类型(普通客户，普通vip，企业vip)
  * birthday         客户对应的是普通vip的话会有生日
  * vipGrade         vip等级（0，1，2，3，4，5）
- * companyName      公司名称
  * companyAddress   公司地址(省+"/"+市+"/"+详细地址)
+ * hotelIDs         与客户所在企业有合作的所有酒店编号(hotelid1+"/"+hotelid2)
+ * hotelInfos       对应的有合作的所有酒店的简略信息(hotelInfo1+"/"+hotelInfo2)
+ * 
+ * hotelInfo = hotelProvince+hotelCity+hotelCBD+hotelAddress+hotelName
  * */
 
 public class ClientVO {
@@ -27,10 +30,11 @@ public class ClientVO {
 	private String clientType;
 	private String birthday;
 	private int vipGrade;
-	private String companyName;
 	private String companyAddress;
+	private String hotelIDs;
+	private String hotelInfos;
 	
-	public ClientVO(ClientPO po){
+	public ClientVO(ClientPO po,String hotelInfos){
 		
 		this.id = po.getId();
 		this.name = po.getName();
@@ -42,10 +46,11 @@ public class ClientVO {
 		this.birthday = po.getBirthday();
 		this.vipGrade = po.getVipGrade();
 		this.companyAddress = po.getCompanyAddress();
-		this.companyName = po.getCompanyName();
+		this.hotelIDs = po.getHotelIDs();
+		this.hotelInfos = hotelInfos;
 	}
 	
-	public ClientVO(String id,String name,String sex,String identityID,String phoneNumber,double credit_point,String clientType,String birthday,int vipGrade,String companyName,String companyAddress){
+	public ClientVO(String id,String name,String sex,String identityID,String phoneNumber,double credit_point,String clientType,String birthday,int vipGrade,String companyAddress,String hotelIDs){
 		
 		this.id = id;
 		this.name = name;
@@ -56,8 +61,8 @@ public class ClientVO {
 		this.clientType = clientType;
 		this.birthday = birthday;
 		this.vipGrade = vipGrade;
-		this.companyName = companyName;
 		this.companyAddress = companyAddress;
+		this.hotelIDs = hotelIDs;
 		
 	}
 
@@ -87,10 +92,6 @@ public class ClientVO {
 
 	public String getClientType() {
 		return clientType;
-	}
-
-	public String getCompanyName() {
-		return companyName;
 	}
 
 	public String getCompanyAddress() {
@@ -141,13 +142,20 @@ public class ClientVO {
 		this.vipGrade = vipGrade;
 	}
 
-	public void setCompanyName(String companyName) {
-		this.companyName = companyName;
-	}
-
 	public void setCompanyAddress(String companyAddress) {
 		this.companyAddress = companyAddress;
 	}
 	
+	public void serHotelIDS(String hotelIDs){
+		this.hotelIDs = hotelIDs;
+	}
+	
+	public String getHotelIDS(){
+		return hotelIDs;
+	}
+	
+	public String getHotelInfos(){
+		return hotelInfos;
+	}
 	
 }

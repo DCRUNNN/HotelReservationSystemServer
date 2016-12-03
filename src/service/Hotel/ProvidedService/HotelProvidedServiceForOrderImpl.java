@@ -15,7 +15,7 @@ public class HotelProvidedServiceForOrderImpl implements HotelProvidedServiceFor
 	}
 
 	@Override
-	public boolean addComment(String hotelID, String clientID, String comment, int point_facilities, int point_service,
+	public boolean addComment(String hotelID, String clientID, String orderID,String comment, int point_facilities, int point_service,
 			int point_surroundings) {
 		
 		HotelPO po = hotelDao.getHotelPO(hotelID);
@@ -30,21 +30,26 @@ public class HotelProvidedServiceForOrderImpl implements HotelProvidedServiceFor
 		
 	    commentNumber++;//评论人数加一
 	    
-	    String clientComment = clientID+":"+comment;//形成客户的评论
+	    String clientComment = orderID+":"+clientID+":"+comment;//形成客户的评论
 	    String old_comment = po.getCommentList();//得到酒店的原来的评论
-	    String new_comment = old_comment+"%"+clientComment;//形成新的评论
+	    String newComment = "";
+	    if("".equals(old_comment)||old_comment==null||"null".equals(old_comment)){
+	    	newComment = clientComment;
+	    }else{
+	    	newComment = old_comment+"%"+clientComment;//形成新的评论
+	    }
 	    
 	    po.setCommentPeople(commentNumber);
 	    po.setPoint_facilities(newPfac);
 	    po.setPoint_service(newPser);
 	    po.setPoint_surroundings(newPsur);
-	    po.setCommentList(new_comment);
+	    po.setCommentList(newComment);
 	    
 		return hotelDao.change(po);
 	}
 
 	@Override
-	public boolean addComment(String hotelID, String clientID, String comment) {
+	public boolean addComment(String hotelID, String orderID, String comment) {
 		
 		HotelPO po = hotelDao.getHotelPO(hotelID);
 		String commentList = po.getCommentList();
@@ -53,10 +58,9 @@ public class HotelProvidedServiceForOrderImpl implements HotelProvidedServiceFor
 		StringBuilder sb = new StringBuilder();//插入追加之后的新的评论
 		for(String str:commentArray){
 			//遍历已有评论
-			String comments[] = str.split(":");
-			if(clientID.equals(comments[0])){
-				str=str+"|"+comment;
-				//往已有评论后面加上追加的评论
+			if(str.contains(orderID)){
+				//找到订单号为orderID的评论
+				str = str+"|"+comment;
 			}
 			sb.append(str+"%");
 		}

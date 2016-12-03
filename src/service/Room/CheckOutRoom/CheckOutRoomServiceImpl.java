@@ -31,9 +31,10 @@ public class CheckOutRoomServiceImpl implements CheckOutRoomService{
 		}
 		for(String str:roomNumbers){
 			//遍历房间，改变房间状态为空闲
-			if(!roomDao.changeBookDate(hotelID, str, "空闲")){
+			if(!roomDao.changeRoomState(hotelID, str, "空闲")){
 				return "";
-			}
+			
+		}
 		}
 		
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:MM:ss");
@@ -42,7 +43,7 @@ public class CheckOutRoomServiceImpl implements CheckOutRoomService{
 			return "";
 		}
 		return allrooms;//设置订单的退房时间
-	}
-
 	
+
+	}
 }

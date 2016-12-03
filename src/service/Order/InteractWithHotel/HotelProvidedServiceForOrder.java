@@ -3,18 +3,27 @@ package service.Order.InteractWithHotel;
 public interface HotelProvidedServiceForOrder {
 	
 	/**
-	 * @param hotelID,clientID,评论的内容，对酒店设施的评分，对酒店服务的评分，对酒店周边环境的评分
+	 * 
+	 * @param hotelID 酒店编号
+	 * @param clientID 客户编号
+	 * @param orderID 订单编号
+	 * @param comment 评论
+	 * @param point_facilities 对设施的评分
+	 * @param point_service 对服务的评分
+	 * @param point_surroundings 对周边环境的评分
 	 * 实现的时候记住评论人数加一
 	 * @return 返回是否评论成功
 	 * */
-	public boolean addComment(String hotelID,String clientID,String comment,int point_facilities,int point_service,int point_surroundings);
+	public boolean addComment(String hotelID,String clientID,String orderID,String comment, int point_facilities,int point_service,int point_surroundings);
 	
 	/**
-	 * @param hotelID,clientID,追加的评论内容
+	 * @param hotelID 酒店编号
+	 * @param clientID 客户编号
+	 * @param comment 追加的评论
 	 * 传来的参数是原来的评论+"|"+追加的评论
 	 * @return 返回是否追加成功
 	 * */
-	public boolean addComment(String hotelID,String clientID,String comment);
+	public boolean addComment(String hotelID,String orderID,String comment);
 	
 	/**
 	 * @param 酒店编号

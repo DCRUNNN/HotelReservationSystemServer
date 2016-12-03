@@ -7,10 +7,10 @@ package po;
  * phoneNumber      客户手机号码
  * credit_point     客户剩余信用点
  * clientType       客户类型（普通客户，普通会员，企业会员）
- * birthday         客户是普通vip的话会有客户生日(格式是"yyyy-MM-dd")
+ * birthday         客户是普通vip的话会有客户生日(格式是"MM-dd")
  * vipGrade         vip等级(1,2,3,4,5)
- * companyName      公司名称
- * companyAddress   公司地址(省份+"/"+市+"/"+详细地址)
+ * companyAddress   公司地址(公司名称例如 广东省茂名市化州商圈化州中学旁星河公司)
+ * hotelID          表示的是	客户与客户所在企业有合作的所有的酒店的id(hotelid1+"/"+hotelid2)
  * */
 public class ClientPO {
 
@@ -23,8 +23,8 @@ public class ClientPO {
 	private String clientType;
 	private String birthday;
 	private int vipGrade;
-	private String companyName;
 	private String companyAddress;
+	private String hotelIDs;
 
 	public void setVipGrade(int vipGrade) {
 		this.vipGrade = vipGrade;
@@ -88,16 +88,18 @@ public class ClientPO {
 	public void setClientType(String clientType) {
 		this.clientType = clientType;
 	}
-	public String getCompanyName() {
-		return companyName;
-	}
-	public void setCompanyName(String companyName) {
-		this.companyName = companyName;
-	}
 	public String getCompanyAddress() {
 		return companyAddress;
 	}
 	public void setCompanyAddress(String companyAddress) {
 		this.companyAddress = companyAddress;
+	}
+	
+	public String getHotelIDs(){
+		return hotelIDs;
+	}
+	
+	public void setHotelIDs(String hotelIDs){
+		this.hotelIDs = hotelIDs;
 	}
 }

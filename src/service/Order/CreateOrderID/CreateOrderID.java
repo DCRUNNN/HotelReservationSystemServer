@@ -15,8 +15,10 @@ public class CreateOrderID {
 	 * 给订单编号：编号规则： 时间戳+四位的序列号（从0开始）
 	 * */
 	private OrderDao orderDao;
+	private final static int LENGTHOFTAIL = 4;//限制尾数只能为4位
 	
 	public CreateOrderID(){
+		
 		orderDao = OrderDaoImpl.getInstance();//完成了dao的实例化
 	}
 	
@@ -28,7 +30,7 @@ public class CreateOrderID {
 			
 			List<String> allIds = orderDao.getAllIDs();
 			String today = new SimpleDateFormat("yyyyMMdd").format(new Date());//今天的缩写
-			if(allIds.size()==0){
+			if(allIds.size()==0||allIds==null){
 				//还没有编号的话
 				po.setOrderID(today+"0001");
 				if(!orderDao.insertNewOrder(po)){
@@ -66,11 +68,17 @@ public class CreateOrderID {
 				return "";//订单号达到上限了
 			}else{
 				int value = max+1;
-				po.setOrderID(today+value);
+				String newId = String.valueOf(value);
+				int length = newId.length();
+				String zero = "";
+				for(int i=0;i<LENGTHOFTAIL-length;i++){
+					zero+="0";
+				}
+				po.setOrderID(today+zero+value);
 				if(!orderDao.insertNewOrder(po)){
 					return "";
 				}
-				return today+value;
+				return today+zero+value;
 			}
 		}
 	}

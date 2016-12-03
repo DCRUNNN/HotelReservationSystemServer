@@ -53,7 +53,7 @@ public class ManageClientMessage_webDriver {
 		System.out.println("clientType:"+vo.getClientType());
 		System.out.println("birthday:"+vo.getBirthday());
 		System.out.println("vipGrade:"+vo.getVipGrade());
-		System.out.println("companyName:"+vo.getCompanyName());
+		//System.out.println("companyName:"+vo.getCompanyName());
 		System.out.println("companyAddress:"+vo.getCompanyAddress());
 		System.out.println("-----------------------");
 	}

@@ -15,16 +15,18 @@ public interface ApplyForVipService {
 
 	/**
 	 * @param clientID 客户编号
-	 * @param birthday 客户生日 输入格式为(yyyy-MM-dd)
+	 * @param birthday 客户生日 输入格式为(MM-dd)
 	 * @return 申请普通会员
 	 * */
 	public boolean applyNormalVip(String clientID,String birthday);
 	
 	/**
-	 * @param clientID 客户编号,companyAddress 企业地址(省份+“/”+市+“/”+详细地址),companyName 企业名称
+	 * @param clientID 客户编号
+	 * @param companyAddress 企业详细地址包括酒店的名称
+	 * @param hotelID 申请的酒店编号
 	 * @return 申请企业会员
 	 * */
-    public boolean applyBusinessVip(String clientID,String companyAddress,String companyName);
+    public boolean applyBusinessVip(String clientID,String companyAddress,String hotelID);
     
     /**
      * @param clientID 客户编号

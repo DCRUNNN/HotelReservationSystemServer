@@ -5,8 +5,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.TimeZone;
-
 import data.dao.StrategyDao;
 import data.dao.impl.StrategyDaoImpl;
 import po.StrategyPO;
@@ -111,7 +109,7 @@ public class StrategyProvidedServiceImpl implements StrategyProvidedService{
 	}
 
 	@Override
-	public double getBestStrategyForCompanyVip(String hotelID, int roomTotal) {
+	public double getBestStrategyForCompanyVip(String hotelID, int roomTotal,String companyAddress) {
 		
 		List<Double> discounts = new ArrayList<Double>();//客户满足条件的所有折扣
 		List<StrategyPO> hotelStrategy = strategyDao.getAllHotelStrategies(hotelID);//酒店的所有营销策略
@@ -120,9 +118,12 @@ public class StrategyProvidedServiceImpl implements StrategyProvidedService{
 		for(StrategyPO po :hotelStrategy){
 			if("企业会员".equals(po.getUserType())){
 				//遍历酒店营销策略,找到适合企业会员的策略
-				if(checkTime(po.getBeginTime(),po.getEndTime())){
-					if(roomTotal>=po.getRoomTotal()){
-						discounts.add(po.getDiscount());
+				if(companyAddress.equals(po.getCompanyAddress())){
+					//酒店提供对应企业的优惠
+					if(checkTime(po.getBeginTime(),po.getEndTime())){
+						if(roomTotal>=po.getRoomTotal()){
+							discounts.add(po.getDiscount());
+						}
 					}
 				}
 			}
@@ -150,7 +151,7 @@ public class StrategyProvidedServiceImpl implements StrategyProvidedService{
 		
 		double min = 10;
 		for(Double d:discounts){
-			System.out.println(d);//把所有的折扣输出
+			//System.out.println(d);//把所有的折扣输出
 			if(d<min){
 				min=d;
 			}
@@ -163,7 +164,7 @@ public class StrategyProvidedServiceImpl implements StrategyProvidedService{
 	 * */
 	private boolean checkTime(String beginTime, String endTime) {
 		
-		//new Date()得到的市jvm上的时间 不一定和系统时间一致
+		//new Date()得到的是jvm上的时间 不一定和系统时间一致
 		//TimeZone tz = TimeZone.getTimeZone("ETC/GMT-8");
 		//TimeZone.setDefault(tz);
 		//System.out.println(new Date());

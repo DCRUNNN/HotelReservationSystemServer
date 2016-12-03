@@ -93,7 +93,7 @@ public class CreditDataSqlHelperImpl implements CreditDataHelper{
 				String clientid = set.getString("clientid");
 				String time = set.getString("time");
 				String cause = set.getString("cause");
-				String change = set.getString("change");
+				String change = set.getString("creditchange");
 				
 				//将数据形成一个PO传输
 				CreditPO po = new CreditPO();
@@ -122,11 +122,11 @@ public class CreditDataSqlHelperImpl implements CreditDataHelper{
 		String cause = po.getCause();
 		String change = po.getChange();
 		
-		String sql ="insert into t_credit(orderid,clientid,time,cause,change) values"
-				+ "('"+orderid+"','"+clientid+"','"+time+"','"+cause+"','"+change+"')";
+		String sql ="insert into t_credit (orderid,clientid,time,cause,creditchange) values "
+				+ "('"+orderid+"','"+clientid+"','"+time+"','"+cause+"','"+change+"');";
 		
 		int i =CreditDataSqlHelperImpl.executeUpdate(sql);
-		PersonnelDataSqlHelperImpl.close();
+		CreditDataSqlHelperImpl.close();
 		if(i==-1){
 			return false;
 		}

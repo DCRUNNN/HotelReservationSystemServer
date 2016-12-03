@@ -28,11 +28,14 @@ public class EvaluateOrderServiceImpl implements EvaluateOrderService{
 	public boolean addComment(String comment, int point_facilities, int point_service, int surroundings) {
 		
 		OrderPO po = orderDao.getOrderPO(orderID);
+		if(po==null){
+			return false;
+		}
 		po.setComment(comment);//修改订单的comment
 		
 		String hotelID = po.getHotelID();
 		String clientID = po.getClientID();
-		if(!hotelservice.addComment(hotelID, clientID, comment, point_facilities, point_service, surroundings)){
+		if(!hotelservice.addComment(hotelID, clientID, orderID,comment, point_facilities, point_service, surroundings)){
 			return false;
 		}//往酒店里面增加评论内容
 		
@@ -54,8 +57,7 @@ public class EvaluateOrderServiceImpl implements EvaluateOrderService{
 		}//改变订单内容
 		
 		String hotelID = po.getHotelID();
-		String clientID = po.getClientID();
-		if(!hotelservice.addComment(hotelID, clientID, comment1)){
+		if(!hotelservice.addComment(hotelID, orderID, comment)){
 			return false;
 		}//增加酒店的评论信息
 		return true;

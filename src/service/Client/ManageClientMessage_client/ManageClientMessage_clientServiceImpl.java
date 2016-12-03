@@ -3,6 +3,7 @@ package service.Client.ManageClientMessage_client;
 import data.dao.ClientDAO;
 import data.dao.impl.ClientDaoImpl;
 import po.ClientPO;
+import service.Client.help.CreateClientVO;
 import vo.ClientVO;
 
 public class ManageClientMessage_clientServiceImpl implements ManageClientMessage_clientService{
@@ -22,7 +23,7 @@ public class ManageClientMessage_clientServiceImpl implements ManageClientMessag
 			//poÎª¿ÕµÄ»°
 			return null;
 		}
-		ClientVO vo = new ClientVO(po);
+		ClientVO vo = new CreateClientVO().createClientVO(po);
 		return vo;
 	}
 
@@ -35,7 +36,7 @@ public class ManageClientMessage_clientServiceImpl implements ManageClientMessag
 		po.setBirthday(vo.getBirthday());
 		po.setClientType(vo.getClientType());
 		po.setCompanyAddress(vo.getCompanyAddress());
-		po.setCompanyName(vo.getCompanyName());
+		po.setHotelIDs(vo.getHotelIDS());
 		po.setCredit_point(vo.getCredit_point());
 		po.setIdentityID(vo.getIdentityID());
 		po.setName(vo.getName());

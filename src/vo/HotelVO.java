@@ -22,6 +22,7 @@ import po.HotelPO;
  * point_surroundings            酒店的周围环境综合评分
  * commentList                   酒店的评价列表(clientID+":"+comment+extraComment"/"+clientID+":"+comment+extraComment)
  * commentPeople                 对酒店进行评价的人数
+ * company                       酒店的所有合作企业(company1+"/"+company2)
  * @author Xihao Zeng
  * */
 public class HotelVO {
@@ -32,7 +33,7 @@ public class HotelVO {
 	
 	private String orderID;
 	
-	private double price;
+	private String price;
 	
 	private String hotelID;
 	
@@ -64,6 +65,8 @@ public class HotelVO {
 	
 	private int commentPeople;
 	
+	private String company;
+	
 	/**
 	 * orderInfo 一定要保证有四个"/" 
 	 * 每个orderinfo包含多个订单信息的话 多个信息之间用"|"隔开 但是hotelID是唯一的
@@ -75,7 +78,7 @@ public class HotelVO {
 		this.orderCreateDate = array[0];
 		this.orderStatus = array[1];
 		this.orderID = array[2];
-		this.price = Double.valueOf("".equals(array[3])?"0":array[3]);	
+		this.price = array[3];	
 	    this.hotelID = po.getHotelID();
 	    this.hotelProvince = po.getHotelProvince();
 	    this.hotelCity = po.getHotelCity();
@@ -91,6 +94,7 @@ public class HotelVO {
 	    this.point_surroundings = po.getPoint_surroundings();
 	    this.commentList = po.getCommentList();
 	    this.commentPeople = po.getCommentPeople();
+	    this.company = po.getCompany();
 	}
 
 	/**
@@ -122,7 +126,7 @@ public class HotelVO {
 		return orderID;
 	}
 
-	public double getPrice() {
+	public String getPrice() {
 		return price;
 	}
 
@@ -186,7 +190,8 @@ public class HotelVO {
 		return commentPeople;
 	}
 
-
-	
+    public String getCompany(){
+    	return company;
+    }
 	
 }

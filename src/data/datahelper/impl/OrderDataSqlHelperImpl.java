@@ -40,7 +40,7 @@ public class OrderDataSqlHelperImpl implements OrderDataHelper{
 		Statement statement = null;
 		try{
 			if(conn==null){
-				new PersonnelDataSqlHelperImpl();
+				new OrderDataSqlHelperImpl();
 			}
 			statement = conn.createStatement();
 			return statement.executeQuery(sql);
@@ -59,7 +59,7 @@ public class OrderDataSqlHelperImpl implements OrderDataHelper{
 		Statement statement =null;
 		try{
 			if(conn==null){
-				new PersonnelDataSqlHelperImpl();
+				new OrderDataSqlHelperImpl();
 			}
 			statement = conn.createStatement();
 			return statement.executeUpdate(sql);
@@ -80,17 +80,6 @@ public class OrderDataSqlHelperImpl implements OrderDataHelper{
 		}
 	}
 	
-	//public static void main(String args[]){
-		/*OrderPO po = new OrderPO();
-		po.setOrderID("201610240002");
-		new OrderDataSqlHelperImpl().insertNewOrder(po);
-		System.out.println(po.getComment());*/
-		
-		/*List<String> allids = new OrderDataSqlHelperImpl().getAllIDs();
-		for(String str:allids){
-			System.out.println(str);
-		}*/
-	//}
 	@Override
 	public boolean change(OrderPO po) {
 		

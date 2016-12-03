@@ -2,8 +2,6 @@ package service.Order.MyOrder;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
-
 import data.dao.OrderDao;
 import data.dao.impl.OrderDaoImpl;
 import po.CreditPO;
@@ -13,6 +11,7 @@ import service.Client.ProvidedService.ClientProvidedServiceImpl;
 import service.Credit.ProvidedService.CreditProvidedService;
 import service.Credit.ProvidedService.CreditProvidedServiceImpl;
 import service.Order.InteractWithRoom.RoomProvidedServiceForOrder;
+import service.Room.ProvidedService.RoomProvidedServiceForOrderImpl;
 
 /**
  * 负责与数据层交互，与客户，信用，房间模块进行交互
@@ -35,10 +34,10 @@ public class Withdraw {
 		orderDao = OrderDaoImpl.getInstance();
 		clientservice = new ClientProvidedServiceImpl();
 		creditservice = new CreditProvidedServiceImpl();
-	
+	    roomservice = new RoomProvidedServiceForOrderImpl();
 	}
 	
-	public boolean withdraw(String orderID,String withdrawTime){
+	public boolean withdraw(String orderID){
 		
 		OrderPO po = orderDao.getOrderPO(orderID);
 		
@@ -49,6 +48,8 @@ public class Withdraw {
 			return false;
 		}
 		
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		String withdrawTime = sdf.format(new Date());
 		String hotelID = po.getHotelID();
 		String roomNumber[] = po.getRoomNumber().split("/");
 		po.setWithdrawTime(withdrawTime);
@@ -59,7 +60,6 @@ public class Withdraw {
 		
 		//撤销时间距离最晚执行时间不足六个小时的话，就需要扣除信用点
 		String orderLastDate = po.getOrderLastDate();
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:MM:ss");
 		boolean isOutTime  = false;
 		Date date1 = null;
 		Date date2 = null;
@@ -93,20 +93,18 @@ public class Withdraw {
 			}//生成信用记录
 		}
 		
-		
 		for(int i=0;i<roomNumber.length;i++){
-			if(!roomservice.changeRoomState(hotelID, roomNumber[i], "空闲")){
-				return false;
-			}
-			if(!roomservice.setBookDate(hotelID, roomNumber[i], "")){
-				return false;
+			if(!roomNumber[i].equals("")&&roomNumber[i]!=null){
+				//取到不为空的房间号
+				if(!roomservice.changeRoomState(hotelID, roomNumber[i], "空闲")){
+					return false;
+				}
+				if(!roomservice.setBookDate(hotelID, roomNumber[i], "")){
+					return false;
+				}
 			}
 		}//改变房间状态,设置预订时间为“”
 		
 		return true;
-	}
-
-	public List<OrderPO> getOrderPOList() {
-		return orderDao.getOrderPOList(clientID);
 	}
 }

@@ -57,6 +57,7 @@ public class ManageHotelStrategyServiceImpl implements ManageHotelStrategyServic
 		po.setStrategyType(strategyVO.getStrategyType());
 		po.setHotelID(strategyVO.getHotelID());
 		po.setRoomTotal(strategyVO.getRoomTotal());
+		po.setCompanyAddress(strategyVO.getCompanyAddress());
 		po.setDiscount(strategyVO.getStrategy_discount());
 		return dao.changeStrategy(po);
 	}
@@ -78,6 +79,7 @@ public class ManageHotelStrategyServiceImpl implements ManageHotelStrategyServic
 		po.setStrategyType(strategyVO.getStrategyType());
 		po.setHotelID(strategyVO.getHotelID());
 		po.setRoomTotal(strategyVO.getRoomTotal());
+		po.setCompanyAddress(strategyVO.getCompanyAddress());
 		po.setDiscount(strategyVO.getStrategy_discount());
 		return dao.changeStrategy(po);
 	}

@@ -16,6 +16,7 @@ import po.StrategyPO;
  * strategyType          策略类型（网站营销策略，酒店营销策略）
  * hotelID               酒店ID
  * roomTotal             触发策略的房间数目
+ * companyAddress        策略对应的企业详细地址
  * discount              策略的折扣           
  * */
 
@@ -34,6 +35,7 @@ public class StrategyVO {
 	private double strategy_discount;
 	private String hotelID;
 	private int roomTotal;
+	private String companyAddress;
 	private String strategyType;
 	
 	public StrategyVO(StrategyPO po){
@@ -51,12 +53,14 @@ public class StrategyVO {
 		this.strategy_discount = po.getDiscount();
 		this.hotelID = po.getHotelID();
 		this.roomTotal = po.getRoomTotal();
+		this.companyAddress = po.getCompanyAddress();
 		this.strategyType = po.getStrategyType();
 	}
 	
 	public StrategyVO(String strategyID,String name, String introduction, String beginTime, String endTime, String userType,
-			String hotelProvince,String hotelCity, String hotelCBD, boolean isToBirthday, String strategyType,String hotelID,int roomTotal,double strategy_discount 
+			String hotelProvince,String hotelCity, String hotelCBD, boolean isToBirthday, String strategyType,String hotelID,int roomTotal,String companyAddress,double strategy_discount 
 			) {
+		
 		this.strategyID = strategyID;
 		this.name = name;
 		this.introduction = introduction;
@@ -70,6 +74,7 @@ public class StrategyVO {
 		this.strategy_discount = strategy_discount;
 		this.hotelID = hotelID;
 		this.roomTotal = roomTotal;
+		this.companyAddress = companyAddress;
 		this.strategyType = strategyType;
 	}
 	
@@ -184,5 +189,12 @@ public class StrategyVO {
 	public void setStrategyType(String strategyType) {
 		this.strategyType = strategyType;
 	}
-    	
+    
+	public void setCompanyAddress(String companyAddress){
+		this.companyAddress = companyAddress;
+	}
+	
+	public String getCompanyAddress(){
+		return companyAddress;
+	}
 }

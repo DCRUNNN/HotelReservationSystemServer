@@ -44,15 +44,19 @@ public class AboutStrategy {
 			 discount = strategyservice.getBestStrategyForNormalVip(hotelID,roomTotal,birthday,vipGrade,hotelProvince,hotelCity,hotelCBD);
 		 }else if("企业会员".equals(userType)){
 			 //企业会员的话，对应的折扣包括：特定期间预订，预订数目超出，在特定的酒店有优惠
-
-			 discount = strategyservice.getBestStrategyForCompanyVip(hotelID,roomTotal);
+			 if(clientservice.isCorrectCompanyVip(clientID,hotelID)){
+				 //客户是在企业合作酒店入住 还需要判断酒店有没有提供这个企业的优惠策略
+				 String companyAddress = clientservice.getCompanyAddress(clientID);
+				 discount = strategyservice.getBestStrategyForCompanyVip(hotelID,roomTotal,companyAddress);
+			 }
 		 }else{
 			 //三者都不是的话 那么就是普通会员和企业会员共存了
 			 String birthday = clientservice.getVipBirthday(clientID);
 			 int vipGrade = clientservice.getVipGrade(clientID);
+			 String companyAddress = clientservice.getCompanyAddress(clientID);
 			 double discount1 = strategyservice.getBestStrategyForNormalVip(hotelID,roomTotal,birthday,vipGrade,hotelProvince,hotelCity,hotelCBD);
 
-			 double discount2 = strategyservice.getBestStrategyForCompanyVip(hotelID,roomTotal);
+			 double discount2 = strategyservice.getBestStrategyForCompanyVip(hotelID,roomTotal,companyAddress);
 		     discount = Double.min(discount1, discount2);//找到两者的较小值
 		 }
          

@@ -1,8 +1,5 @@
 package vo;
 
-import java.util.Vector;
-
-import po.HotelPO;
 import po.OrderPO;
 
 /**
@@ -26,10 +23,14 @@ import po.OrderPO;
  * hotelCBD           酒店商圈
  * hotelAddress       酒店详细地址
  * hotelName          酒店名称
+ * clientName         客户姓名
+ * sex                客户性别
+ * identityID         客户身份证号
+ * phoneNumber        客户手机号
  * comment            客户对订单的评价
  * */	
 	
-public class OrderVO extends Vector<String>{
+public class OrderVO{
 
 	private String orderID;
 	private String clientID;
@@ -52,11 +53,16 @@ public class OrderVO extends Vector<String>{
 	private String hotelCBD;
 	private String hotelAddress;
 	private String hotelName;
+	private String clientName;
+	private String sex;
+	private String identityID;
+	private String phoneNumber;
 	
 	/**
-	 * 传递OrderPO，酒店省份，酒店市，酒店商圈，酒店详细地址，酒店名称，作为构造函数的参数
+	 * 传递OrderPO，酒店省份，酒店市，酒店商圈，酒店详细地址，酒店名称，
+	 * 姓名，性别，身份证号，手机号码
 	 * */
-	public OrderVO(OrderPO po,String hotelProvince,String hotelCity,String hotelCBD,String hotelAddress,String hotelName){
+	public OrderVO(OrderPO po,String hotelProvince,String hotelCity,String hotelCBD,String hotelAddress,String hotelName,String clientName,String sex,String identityID,String phoneNummber){
 		
 		this.orderID = po.getOrderID();
 		this.clientID = po.getClientID();
@@ -79,6 +85,11 @@ public class OrderVO extends Vector<String>{
 		this.hotelCBD = hotelCBD;
 		this.hotelAddress = hotelAddress;
 		this.hotelName = hotelName;
+		
+		this.clientName = clientName;
+		this.sex = sex;
+		this.identityID = identityID;
+		this.peopleNumber = phoneNumber;
 	}
 	
 	
@@ -153,4 +164,26 @@ public class OrderVO extends Vector<String>{
 	public void setWithdrawTime(String time){
 		this.withdrawTime = time;
 	}
+
+
+	public String getClientName() {
+		return clientName;
+	}
+
+
+	public String getSex() {
+		return sex;
+	}
+
+
+	public String getIdentityID() {
+		return identityID;
+	}
+
+
+	public String getPhoneNumber() {
+		return phoneNumber;
+	}
+	
+	
 }

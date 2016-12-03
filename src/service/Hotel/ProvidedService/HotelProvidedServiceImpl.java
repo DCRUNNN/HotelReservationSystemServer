@@ -55,4 +55,6 @@ public class HotelProvidedServiceImpl implements HotelProvidedService{
 		return hotelDao.change(po);
 	}
 
+	
+
 }

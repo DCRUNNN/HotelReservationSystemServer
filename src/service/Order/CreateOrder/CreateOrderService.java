@@ -14,10 +14,10 @@ public interface CreateOrderService {
 	public String getAllRoomNumber(String roomType);
 	
 	/**
-	 * @param 房间数目,房间类型(多个房间roomType+"/"+roomType),房间号码(多个房间roomNumebr+"/"+roomNumber)
+	 * @param 房间类型(多个房间roomType+"/"+roomType),房间号码(多个房间roomNumebr+"/"+roomNumber)
 	 * @return 生成订单
 	 * */
-	public boolean createOrder(int roomTotal,String roomType,String roomNumber);
+	public boolean createOrder(String roomType,String roomNumber);
 	
 	/**
 	 * @param 房间号码(number+"/"+number)

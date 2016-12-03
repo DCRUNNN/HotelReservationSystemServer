@@ -16,6 +16,7 @@ package po;
  * point_surroundings   酒店的周围环境综合评分
  * commentList          酒店的评价列表(clientID+":"+comment+"|"+extraComment+"%"+clientID+":"+comment+"|"+extraComment)
  * commentPeople        对酒店进行评价的人数
+ * company              合作企业的记录(company1+"/"+company2)
  * @author Xihao Zeng
  * */
 public class HotelPO {
@@ -49,6 +50,8 @@ public class HotelPO {
 	private String commentList;
 	
 	private int commentPeople;
+	
+	private String company;
 	
 	public String getHotelAddress() {
 		return hotelAddress;
@@ -168,5 +171,11 @@ public class HotelPO {
 		this.commentList = commentList;
 	}
 	
+	public String getCompany(){
+		return company;
+	}
 	
+	public void setCompany(String company){
+		this.company = company;
+	}
 }

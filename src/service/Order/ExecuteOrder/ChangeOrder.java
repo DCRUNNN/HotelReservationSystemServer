@@ -1,6 +1,8 @@
 package service.Order.ExecuteOrder;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -10,7 +12,7 @@ import data.dao.impl.OrderDaoImpl;
 import po.OrderPO;
 import service.Hotel.ProvidedService.HotelProvidedServiceForOrderImpl;
 import service.Order.CreateOrder.AllRooms;
-import service.Order.InteractWithHotel.HotelProvidedServiceForOrder;
+import service.Order.help.CreateOrderVO;
 import vo.OrderVO;
 
 /**
@@ -23,7 +25,6 @@ public class ChangeOrder {
 
 	private OrderPO po;
 	private OrderDao orderDao;
-	private HotelProvidedServiceForOrder hotelService;
 	private HelpExecuteOrder help;
 	private AllRooms allrooms;
 	private String hotelID;
@@ -33,7 +34,7 @@ public class ChangeOrder {
 	public ChangeOrder(String hotelID){
 		
 		orderDao = OrderDaoImpl.getInstance();
-		hotelService = new HotelProvidedServiceForOrderImpl();
+		new HotelProvidedServiceForOrderImpl();
 		help = new HelpExecuteOrder();
 		allrooms = new AllRooms(hotelID);
 		this.hotelID = hotelID;
@@ -43,19 +44,13 @@ public class ChangeOrder {
 		
 	    List<OrderPO> polist = orderDao.getClientOrdersInaHotel(clientID, hotelID);
 	    List<OrderVO> result = new ArrayList<OrderVO>();
+	    CreateOrderVO help = new CreateOrderVO();
 	    
 	    for(OrderPO po:polist){
 			//遍历所有的客户在酒店的订单
 			if("未执行".equals(po.getOrderStatus())){
 				//把所有的未执行订单加入到result
-				String hotelID = po.getHotelID();
-				String hotelProvince = hotelService.getHotelProvince(hotelID);
-				String hotelCity = hotelService.getHotelCity(hotelID);
-				String hotelCBD = hotelService.getHotelCBD(hotelID);
-				String hotelAddress = hotelService.getHotelAddress(hotelID);
-				String hotelName = hotelService.getHotelName(hotelID);
-				OrderVO vo = new OrderVO(po,hotelProvince,hotelCity,hotelCBD,hotelAddress,hotelName);//完成了po向vo的转化
-				result.add(vo);
+				result.add(help.createOrderVO(po));
 			}
 		}
 	    
@@ -64,24 +59,19 @@ public class ChangeOrder {
 
 	public List<OrderVO> getAbnormalOrders(String clientID) {
 		
-		List<OrderPO> polist = orderDao.getClientOrdersInaHotel(clientID, hotelID);
-		List<OrderVO> result = new ArrayList<OrderVO>();
-		
-		for(OrderPO po:polist){
-			//遍历订单
+	    List<OrderPO> polist = orderDao.getClientOrdersInaHotel(clientID, hotelID);
+	    List<OrderVO> result = new ArrayList<OrderVO>();
+	    CreateOrderVO help = new CreateOrderVO();
+	    
+	    for(OrderPO po:polist){
+			//遍历所有的客户在酒店的订单
 			if("异常".equals(po.getOrderStatus())){
-				//把所有的异常订单加到result
-				String hotelID = po.getHotelID();
-				String hotelProvince = hotelService.getHotelProvince(hotelID);
-				String hotelCity = hotelService.getHotelCity(hotelID);
-				String hotelCBD = hotelService.getHotelCBD(hotelID);
-				String hotelAddress = hotelService.getHotelAddress(hotelID);
-				String hotelName = hotelService.getHotelName(hotelID);
-				OrderVO vo = new OrderVO(po,hotelProvince,hotelCity,hotelCBD,hotelAddress,hotelName);//完成了po向vo的转化
-				result.add(vo);
+				//把所有的异常订单加入到result
+				result.add(help.createOrderVO(po));
 			}
 		}
-		return result;
+	    
+	    return result;
 	}
 
 	/**
@@ -254,6 +244,8 @@ public class ChangeOrder {
 		po.setPeopleNumber(roomPeople2);//改变订单的入住人数
 		po.setHasChild(roomChild2);//改变订单的有无儿童
 		po.setRoomTotal(roomNumber);//改变订单的房间人数
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		po.setOrderBeginDate(sdf.format(new Date()));//设置客户入住时间
 		
 		if(!orderDao.change(po)){
 			return false;

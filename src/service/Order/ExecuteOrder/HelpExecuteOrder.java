@@ -43,7 +43,7 @@ public class HelpExecuteOrder {
 		
 		CreditPO po = new CreditPO();
 		double point = price/2;
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:MM:ss");
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		String currentTime = sdf.format(new java.util.Date());
 		po.setCause("¶©µ¥Ö´ÐÐ");
 		po.setChange("+"+point);

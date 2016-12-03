@@ -1,7 +1,6 @@
 package vo;
 
 import po.PersonnelPO;
-import java.util.Vector;
 
 /**
  * personnelID           工作人员id
