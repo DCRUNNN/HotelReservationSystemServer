@@ -1,5 +1,7 @@
 package service.Client.ApplyForVip;
 
+import java.rmi.RemoteException;
+
 import data.dao.ClientDAO;
 import data.dao.impl.ClientDaoImpl;
 import po.ClientPO;
@@ -26,14 +28,14 @@ public class ApplyForVipServiceImpl implements ApplyForVipService{
 	}
 	
 	@Override
-	public ClientVO getClientVO(String clientID) {
+	public ClientVO getClientVO(String clientID) throws RemoteException{
 		
 		ClientPO po = clientDao.getClientPO(clientID);
 		return new CreateClientVO().createClientVO(po);
 	}
 
 	@Override
-	public boolean applyNormalVip(String clientID, String birthday) {
+	public boolean applyNormalVip(String clientID, String birthday) throws RemoteException{
 		
 		ClientPO po = clientDao.getClientPO(clientID);
 		if(checkBusinessVip(clientID)){
@@ -54,7 +56,7 @@ public class ApplyForVipServiceImpl implements ApplyForVipService{
 	}
 
 	@Override
-	public boolean applyBusinessVip(String clientID, String companyAddress, String hotelID) {
+	public boolean applyBusinessVip(String clientID, String companyAddress, String hotelID) throws RemoteException{
 	
 		ClientPO po = clientDao.getClientPO(clientID);
 		if(checkNormalVip(clientID)){
@@ -109,7 +111,7 @@ public class ApplyForVipServiceImpl implements ApplyForVipService{
 	}
 
 	@Override
-	public boolean checkNormalVip(String clientID) {
+	public boolean checkNormalVip(String clientID) throws RemoteException{
 		
 		ClientPO po = clientDao.getClientPO(clientID);
 		String userType = po.getClientType();
@@ -120,7 +122,7 @@ public class ApplyForVipServiceImpl implements ApplyForVipService{
 	}
 
 	@Override
-	public boolean checkBusinessVip(String clientID) {
+	public boolean checkBusinessVip(String clientID)throws RemoteException {
 		
 		ClientPO po = clientDao.getClientPO(clientID);
 		String clientType = po.getClientType();

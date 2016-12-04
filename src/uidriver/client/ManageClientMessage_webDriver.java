@@ -1,5 +1,6 @@
 package uidriver.client;
 
+import java.rmi.RemoteException;
 import java.util.List;
 
 import service.Client.ManageClientMessage_webManager.ClientMessage_webManagerService;
@@ -8,7 +9,7 @@ import vo.ClientVO;
 
 public class ManageClientMessage_webDriver {
 
-	public static void main(String args[]){
+	public static void main(String args[]) throws RemoteException{
 		
 		ClientMessage_webManagerService service = new ClientMessage_webManagerServiceImpl();
 		

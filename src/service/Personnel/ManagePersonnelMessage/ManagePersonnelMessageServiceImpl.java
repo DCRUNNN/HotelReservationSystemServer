@@ -1,5 +1,6 @@
 package service.Personnel.ManagePersonnelMessage;
 
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
 import data.dao.PersonnelDAO;
@@ -27,7 +28,7 @@ public class ManagePersonnelMessageServiceImpl implements ManagePersonnelMessage
 	
 	
 	@Override
-	public List<PersonnelVO> getAllHotelWorkers() {
+	public List<PersonnelVO> getAllHotelWorkers()throws RemoteException {
 		
 		List<PersonnelVO> volist = new ArrayList<PersonnelVO>();
 		List<PersonnelPO> polist = personnelDao.getAllPersonnelPOList();
@@ -40,7 +41,7 @@ public class ManagePersonnelMessageServiceImpl implements ManagePersonnelMessage
 	}
 
 	@Override
-	public List<PersonnelVO> getAllWebSalers() {
+	public List<PersonnelVO> getAllWebSalers()throws RemoteException {
 		
 		List<PersonnelVO> volist = new ArrayList<PersonnelVO>();
 		List<PersonnelPO> polist = personnelDao.getAllPersonnelPOList();
@@ -53,7 +54,7 @@ public class ManagePersonnelMessageServiceImpl implements ManagePersonnelMessage
 	}
 
 	@Override
-	public List<PersonnelVO> getHotelWorkersByHotelName(String hotelName) {
+	public List<PersonnelVO> getHotelWorkersByHotelName(String hotelName) throws RemoteException{
 		
 		List<PersonnelVO> volist = new ArrayList<PersonnelVO>();
 		List<PersonnelPO> polist = personnelDao.getAllPersonnelPOList();
@@ -69,7 +70,7 @@ public class ManagePersonnelMessageServiceImpl implements ManagePersonnelMessage
 	}
 
 	@Override
-	public PersonnelVO getHotelWorkerByHotelID(String hotelID) {
+	public PersonnelVO getHotelWorkerByHotelID(String hotelID) throws RemoteException{
 		
 		List<PersonnelPO> polist = personnelDao.getAllPersonnelPOList();
 		for(PersonnelPO po:polist){
@@ -81,7 +82,7 @@ public class ManagePersonnelMessageServiceImpl implements ManagePersonnelMessage
 	}
 
 	@Override
-	public PersonnelVO getPersonnelVO(String personnelID) {
+	public PersonnelVO getPersonnelVO(String personnelID)throws RemoteException {
 		
 		List<PersonnelPO> polist = personnelDao.getAllPersonnelPOList();
 		for(PersonnelPO po:polist){
@@ -93,7 +94,7 @@ public class ManagePersonnelMessageServiceImpl implements ManagePersonnelMessage
 	}
 
 	@Override
-	public List<PersonnelVO> getPersonnelVOByPersonnelName(String personnelName) {
+	public List<PersonnelVO> getPersonnelVOByPersonnelName(String personnelName)throws RemoteException {
 		
 		List<PersonnelVO> volist = new ArrayList<PersonnelVO>();
 		List<PersonnelPO> polist = personnelDao.getAllPersonnelPOList();
@@ -107,7 +108,7 @@ public class ManagePersonnelMessageServiceImpl implements ManagePersonnelMessage
 	}
 
 	@Override
-	public boolean modifyPersonnel(PersonnelVO vo) {
+	public boolean modifyPersonnel(PersonnelVO vo)throws RemoteException {
 		
 		PersonnelPO po = new PersonnelPO();
 		po.setName(vo.getname());
@@ -117,7 +118,7 @@ public class ManagePersonnelMessageServiceImpl implements ManagePersonnelMessage
 	}
 
 	@Override
-	public String addNewWebsalers(PersonnelVO vo) {
+	public String addNewWebsalers(PersonnelVO vo)throws RemoteException {
 		
 		PersonnelPO po = new PersonnelPO();
 		po.setName(vo.getname());
@@ -138,7 +139,7 @@ public class ManagePersonnelMessageServiceImpl implements ManagePersonnelMessage
 	}
 
 	@Override
-	public boolean savePassword(String personnelID, String password) {
+	public boolean savePassword(String personnelID, String password)throws RemoteException {
 		
 		return accountService.insert(personnelID, password);
 	}

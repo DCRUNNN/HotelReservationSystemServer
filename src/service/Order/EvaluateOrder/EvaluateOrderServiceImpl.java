@@ -1,5 +1,7 @@
 package service.Order.EvaluateOrder;
 
+import java.rmi.RemoteException;
+
 import data.dao.OrderDao;
 import data.dao.impl.OrderDaoImpl;
 import po.OrderPO;
@@ -15,17 +17,16 @@ public class EvaluateOrderServiceImpl implements EvaluateOrderService{
 
 	private OrderDao orderDao;
 	private HotelProvidedServiceForOrder hotelservice;
-	private String orderID;
+
 	
-	public EvaluateOrderServiceImpl(String orderID){
+	public EvaluateOrderServiceImpl(){
 		
-		this.orderID = orderID;
 		orderDao = OrderDaoImpl.getInstance();
 		hotelservice = new HotelProvidedServiceForOrderImpl();
 	}
 	
 	@Override
-	public boolean addComment(String comment, int point_facilities, int point_service, int surroundings) {
+	public boolean addComment(String orderID,String comment, int point_facilities, int point_service, int surroundings) throws RemoteException{
 		
 		OrderPO po = orderDao.getOrderPO(orderID);
 		if(po==null){
@@ -46,7 +47,7 @@ public class EvaluateOrderServiceImpl implements EvaluateOrderService{
 	}
 
 	@Override
-	public boolean addExtraComment(String comment) {
+	public boolean addExtraComment(String orderID,String comment) throws RemoteException{
 		
 		OrderPO po = orderDao.getOrderPO(orderID);
 		String comment1 = po.getComment();

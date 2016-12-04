@@ -1,12 +1,19 @@
 package vo;
 
+import java.io.Serializable;
+
 /**
  * orderID             订单编号
  * orderStatus         订单状态
  * orderCreatedDate    订单生成时间
  * orderBeginDate      订单入住时间
  * */
-public class SimpleSearchVO {
+public class SimpleSearchVO implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2810443120778557522L;
 
 	private String orderID;
 	

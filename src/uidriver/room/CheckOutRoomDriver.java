@@ -1,16 +1,18 @@
 package uidriver.room;
 
+import java.rmi.RemoteException;
+
 import service.Room.CheckOutRoom.CheckOutRoomService;
 import service.Room.CheckOutRoom.CheckOutRoomServiceImpl;
 
 public class CheckOutRoomDriver {
 
-	public static void main(String args[]){
+	public static void main(String args[]) throws RemoteException{
 		
 		demo1();
 	}
 
-	private static void demo1() {
+	private static void demo1() throws RemoteException {
 		
 		CheckOutRoomService service = new CheckOutRoomServiceImpl();
 		String clientID = "0000001";

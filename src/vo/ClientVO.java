@@ -1,5 +1,7 @@
 package vo;
 
+import java.io.Serializable;
+
 import po.ClientPO;
 
 /**
@@ -19,8 +21,13 @@ import po.ClientPO;
  * hotelInfo = hotelProvince+hotelCity+hotelCBD+hotelAddress+hotelName
  * */
 
-public class ClientVO {
+public class ClientVO implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -9052957221006030221L;
+	
 	private String id;
 	private String name;
 	private String sex;

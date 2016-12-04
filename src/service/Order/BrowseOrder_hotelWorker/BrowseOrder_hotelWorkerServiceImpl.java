@@ -1,5 +1,6 @@
 package service.Order.BrowseOrder_hotelWorker;
 
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,16 +20,14 @@ import vo.OrderVO;
 public class BrowseOrder_hotelWorkerServiceImpl implements BrowseOrder_hotelWorkerService{
 
 	private OrderDao orderDao;
-	private String hotelID;
 	
-	public BrowseOrder_hotelWorkerServiceImpl (String hotelID){
+	public BrowseOrder_hotelWorkerServiceImpl (){
 		
-		this.hotelID = hotelID;
 		orderDao = OrderDaoImpl.getInstance();
 	}
 	
 	@Override
-	public OrderVO getOrder(String orderID) {
+	public OrderVO getOrder(String orderID) throws RemoteException{
 		
 		OrderPO po = orderDao.getOrderPO(orderID);
 		if(po==null){
@@ -38,7 +37,7 @@ public class BrowseOrder_hotelWorkerServiceImpl implements BrowseOrder_hotelWork
 	}
 
 	@Override
-	public List<OrderVO> getExecutedOrders() {
+	public List<OrderVO> getExecutedOrders(String hotelID)throws RemoteException {
 		
 		List<OrderPO> allHotelOrders = orderDao.getHotelOrderPOList(hotelID);
 		List<OrderVO> volist = new ArrayList<OrderVO>();
@@ -53,7 +52,7 @@ public class BrowseOrder_hotelWorkerServiceImpl implements BrowseOrder_hotelWork
 	}
 
 	@Override
-	public List<OrderVO> getUnexecutedOrders() {
+	public List<OrderVO> getUnexecutedOrders(String hotelID) throws RemoteException{
 		
 		List<OrderPO> allHotelOrders = orderDao.getHotelOrderPOList(hotelID);
 		List<OrderVO> volist = new ArrayList<OrderVO>();
@@ -68,7 +67,7 @@ public class BrowseOrder_hotelWorkerServiceImpl implements BrowseOrder_hotelWork
 	}
 
 	@Override
-	public List<OrderVO> getWithdrawnOrders() {
+	public List<OrderVO> getWithdrawnOrders(String hotelID) throws RemoteException{
 		
 		List<OrderPO> allHotelOrders = orderDao.getHotelOrderPOList(hotelID);
 		List<OrderVO> volist = new ArrayList<OrderVO>();
@@ -83,7 +82,7 @@ public class BrowseOrder_hotelWorkerServiceImpl implements BrowseOrder_hotelWork
 	}
 
 	@Override
-	public List<OrderVO> getAbnormalOrders() {
+	public List<OrderVO> getAbnormalOrders(String hotelID) throws RemoteException{
 		
 		List<OrderPO> allHotelOrders = orderDao.getHotelOrderPOList(hotelID);
 		List<OrderVO> volist = new ArrayList<OrderVO>();

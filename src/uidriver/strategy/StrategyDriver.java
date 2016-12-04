@@ -1,5 +1,6 @@
 package uidriver.strategy;
 
+import java.rmi.RemoteException;
 import java.util.List;
 
 import service.Strategy.ManageHotelStrategy.ManageHotelStrategyService;
@@ -14,15 +15,15 @@ public class StrategyDriver {
     ManageWebsiteStrategyService webstrategy = new ManageWebsiteStrategyServiceImpl();
 	//StrategyProvidedService providedservice = new StrategyProvidedServiceImpl();
 	
-	public boolean addWebStrategy(StrategyVO vo){
+	public boolean addWebStrategy(StrategyVO vo) throws RemoteException{
 		return webstrategy.addStrategy(vo);
 	}
 	
-	public boolean addHotelStrategy(StrategyVO vo){
+	public boolean addHotelStrategy(StrategyVO vo) throws RemoteException{
 		return hotelstrategy.addHotelStrategy(vo);
 	}
 	
-	public static void main(String args[]){
+	public static void main(String args[]) throws RemoteException{
 		
 		String hotelID = "00001";
 		

@@ -1,5 +1,6 @@
 package service.Hotel.BrowseHotel;
 
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,6 +10,7 @@ import po.HotelPO;
 import po.OrderPO;
 import service.Client.InteractWithHotel.ClientProvidedServiceForHotel;
 import service.Client.InteractWithHotel.ClientProvidedServiceForHotelImpl;
+import service.Hotel.help.CreateHotelVO;
 import service.Order.InteractWithHotel.OrderProvidedServiceForHotel;
 import service.Order.InteractWithHotel.OrderProvidedServiceForHotelImpl;
 import vo.HotelVO;
@@ -21,52 +23,59 @@ import vo.OrderVO;
  * */
 public class BrowseHotelServiceImpl implements BrowseHotelService{
 
-	private String clientID;
-	private AllHotels allhotel;
+	private CreateHotelVO help;
 	private OrderProvidedServiceForHotel orderService;
 	private ClientProvidedServiceForHotel clientservice;
 	private HotelDao hotelDao;
 	
-	public BrowseHotelServiceImpl(String clientID){
+	public BrowseHotelServiceImpl(){
 		
-		this.clientID = clientID;
-		allhotel = new AllHotels(clientID);
+		help = new CreateHotelVO();
 		clientservice = new ClientProvidedServiceForHotelImpl();
 		orderService = new OrderProvidedServiceForHotelImpl();
 	    hotelDao = HotelDaoImpl.getInstance();
 	}
 	
 	@Override
-	public String getProvinces() {
+	public String getProvinces() throws RemoteException{
 		
-		return allhotel.getProvinces();
+		return hotelDao.getProvinces();
 	}
 
 	@Override
-	public String getCities(String hotelProvince) {
+	public String getCities(String hotelProvince)throws RemoteException {
 
-		return allhotel.getCities(hotelProvince);
+		return hotelDao.getCities(hotelProvince);
 	}
 	
 	@Override
-	public String getCBDS(String hotelProvince, String hotelCity) {
+	public String getCBDS(String hotelProvince, String hotelCity)throws RemoteException {
 		
-		return allhotel.getCBDS(hotelProvince,hotelCity);
+		return hotelDao.getCBDS(hotelProvince,hotelCity);
 	}
 
 	@Override
-	public List<HotelVO> getAllHotels(String hotelProvince, String hotelCity, String hotelCBD) {
+	public List<HotelVO> getAllHotels(String clientID,String hotelProvince, String hotelCity, String hotelCBD) throws RemoteException{
 		
-		return allhotel.getAllHotels(hotelCBD);
+		List<HotelPO> list = hotelDao.getAllHotel(hotelProvince, hotelCity, hotelCBD);
+		List<HotelVO> polist = new ArrayList<HotelVO>();
+		for(HotelPO po:list){
+			HotelVO vo = help.create(clientID, po);
+			polist.add(vo);
+		}
+		return polist;
 	}
 
 	@Override
-	public HotelVO getHotelVO(String hotelID) {
-		return allhotel.getHotelVO(hotelID);
+	public HotelVO getHotelVO(String clientID,String hotelID) throws RemoteException{
+		
+		HotelPO po = hotelDao.getHotelPO(hotelID);
+		
+		return help.create(clientID, po);
 	}
 
 	@Override
-	public List<OrderVO> getAllOrders(String hotelID) {
+	public List<OrderVO> getAllOrders(String clientID,String hotelID) throws RemoteException{
 		
 		List<OrderPO> polist =  orderService.getAllOrdersOfClientInaHotel(clientID,hotelID);
 		if(polist==null){
@@ -85,30 +94,5 @@ public class BrowseHotelServiceImpl implements BrowseHotelService{
 		}
 		return volist;
 	}
-
-	@Override
-	public List<HotelVO> showHotelByStar() {
-		
-		return allhotel.showByStar();
-	}
-
-	@Override
-	public List<HotelVO> showHotelByPoint() {
-		
-		return allhotel.showByPoint();
-	}
-
-	@Override
-	public List<HotelVO> showHotelByPrice() {
-		
-		return allhotel.showByprice();
-	}
-
-	@Override
-	public List<HotelVO> showHotelOrdered() {
-		
-		return allhotel.showHotelOrdered();
-	}
-
 	
 }

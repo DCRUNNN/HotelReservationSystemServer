@@ -1,5 +1,7 @@
 package vo;
 
+import java.io.Serializable;
+
 import po.RoomPO;
 
 /**
@@ -12,9 +14,14 @@ import po.RoomPO;
  * roomIntroduction   ·¿¼ä¼ò½é
  * */
 
-public class RoomVO {
+public class RoomVO implements Serializable{
 
-    private String hotelID;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 6202517090083043103L;
+
+	private String hotelID;
 	
 	private String roomType;
 	

@@ -1,5 +1,7 @@
 package uidriver.strategy;
 
+import java.rmi.RemoteException;
+
 import service.Strategy.ManageHotelStrategy.ManageHotelStrategyService;
 import service.Strategy.ManageHotelStrategy.ManageHotelStrategyServiceImpl;
 import service.Strategy.ProvidedService.StrategyProvidedService;
@@ -8,7 +10,7 @@ import vo.StrategyVO;
 
 public class StrategyProvidedServiceDriver {
 
-	public static void main(String args[]){
+	public static void main(String args[]) throws RemoteException{
 		
 		StrategyProvidedService service = new StrategyProvidedServiceImpl();
 		String hotelID = "00001";

@@ -1,12 +1,14 @@
 package uidriver.client;
 
+import java.rmi.RemoteException;
+
 import service.Client.ManageClientMessage_client.ManageClientMessage_clientService;
 import service.Client.ManageClientMessage_client.ManageClientMessage_clientServiceImpl;
 import vo.ClientVO;
 
 public class ManageClientMessage_clientDriver {
 
-	public static void main(String args[]){
+	public static void main(String args[]) throws RemoteException{
 		
 		ManageClientMessage_clientService service = new ManageClientMessage_clientServiceImpl();
 		

@@ -40,5 +40,33 @@ public class RoomProvidedServiceForOrderImpl implements RoomProvidedServiceForOr
 	
 		return roomDao.changeBookDate(hotelID,roomNumber,bookDate);
 	}
+	
+	@Override
+	public String getAvailableRoomNumbers(String hotelID, String roomType) {
+    	
+    	List<RoomPO> allrooms = roomDao.getAllRoomList(hotelID);
+    	StringBuilder sb = new StringBuilder();
+    	for(RoomPO po:allrooms){
+    		if("ø’œ–".equals(po.getRoomState())){
+    			if(roomType.equals(po.getRoomType())){
+    				sb.append(po.getRoomNumber()+"/");
+    			}
+    		}
+    	}
+    	
+    	if(sb.length()==0){
+    		return "";
+    	}else{
+    		String result = sb.toString().substring(0, sb.length()-1);
+        	return result;
+    	}
+    }
+	
+	@Override
+	public double getRoomPrice(String hotelID, String roomNumber) {
+		
+		RoomPO po = roomDao.getRoomByNum(hotelID, roomNumber);
+		return po.getPrice();
+	}
 
 }

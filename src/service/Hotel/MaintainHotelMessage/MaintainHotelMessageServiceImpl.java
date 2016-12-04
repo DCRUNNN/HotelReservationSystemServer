@@ -1,5 +1,7 @@
 package service.Hotel.MaintainHotelMessage;
 
+import java.rmi.RemoteException;
+
 import data.dao.HotelDao;
 import data.dao.impl.HotelDaoImpl;
 import po.HotelPO;
@@ -11,17 +13,17 @@ import vo.HotelVO;
  * */
 public class MaintainHotelMessageServiceImpl implements MaintainHotelMessageService{
 
-	private String hotelID;
+
 	private HotelDao hotelDao;
 	
-	public MaintainHotelMessageServiceImpl(String hotelID){
-		this.hotelID = hotelID;
+	public MaintainHotelMessageServiceImpl(){
+
 		hotelDao = HotelDaoImpl.getInstance();
 	}
 	
 	@Override
-	public boolean changeHotelInfo(String hotelProvince,String hotelCity, String hotelCBD,String hotelAddress,String hotelName, String introduction, String facilities,
-			int star, String roomTypeAndPrices) {
+	public boolean changeHotelInfo(String hotelID,String hotelProvince,String hotelCity, String hotelCBD,String hotelAddress,String hotelName, String introduction, String facilities,
+			int star, String roomTypeAndPrices) throws RemoteException{
 		
 		HotelPO po = hotelDao.getHotelPO(hotelID);
 		po.setHotelProvince(hotelProvince);
@@ -37,7 +39,7 @@ public class MaintainHotelMessageServiceImpl implements MaintainHotelMessageServ
 	}
 
 	@Override
-	public HotelVO getHotelVO() {
+	public HotelVO getHotelVO(String hotelID) throws RemoteException{
 		
 		HotelPO po = hotelDao.getHotelPO(hotelID);//可能为空的
 		if(po==null){
@@ -50,7 +52,7 @@ public class MaintainHotelMessageServiceImpl implements MaintainHotelMessageServ
 	}
 
 	@Override
-	public boolean changeHotelInfo(HotelVO vo) {
+	public boolean changeHotelInfo(String hotelID,HotelVO vo)throws RemoteException {
 		
 		HotelPO po = hotelDao.getHotelPO(hotelID);
 		po.setHotelProvince(vo.getHotelProvince());
@@ -66,7 +68,7 @@ public class MaintainHotelMessageServiceImpl implements MaintainHotelMessageServ
 	}
 
 	@Override
-	public boolean addCompany(String companyAddress) {
+	public boolean addCompany(String hotelID,String companyAddress) throws RemoteException{
 		
 		HotelPO po = hotelDao.getHotelPO(hotelID);
 		String company = po.getCompany();
@@ -88,7 +90,7 @@ public class MaintainHotelMessageServiceImpl implements MaintainHotelMessageServ
 	}
 
 	@Override
-	public boolean deleteCompany(String companyAddress) {
+	public boolean deleteCompany(String hotelID,String companyAddress)throws RemoteException {
 		
 		HotelPO po = hotelDao.getHotelPO(hotelID);
 		String company = po.getCompany();

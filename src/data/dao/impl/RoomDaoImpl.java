@@ -85,6 +85,18 @@ public class RoomDaoImpl implements RoomDao {
 		return roomDataHelper.changeBookDate(hotelId, roomId, bookDate);
 	}
 
+	@Override
+	public List<String> getRoomType(String hotelId) {
+		
+		return roomDataHelper.getRoomType(hotelId);
+	}
+
+	@Override
+	public List<String> getRoomState(String hotelId) {
+		
+		return roomDataHelper.getRoomState(hotelId);
+	}
+
 	
 
 }

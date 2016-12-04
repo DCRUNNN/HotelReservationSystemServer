@@ -9,7 +9,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import service.Order.CreateOrder.AllRooms;
+import service.Order.InteractWithRoom.RoomProvidedServiceForOrder;
+import service.Room.ProvidedService.RoomProvidedServiceForOrderImpl;
 import vo.HotelVO;
 import vo.RoomVO;
 import vo.SearchVO;
@@ -24,8 +25,10 @@ public class Search {
 	
 	private List<HotelVO> allHotels;
 	private Map<Double,HotelVO> price = new HashMap<Double,HotelVO>();
-	
+	private RoomProvidedServiceForOrder roomservice ;
 	public Search(List<HotelVO> allHotels){
+		
+		roomservice = new RoomProvidedServiceForOrderImpl();
 		this.allHotels = allHotels;
 	}
 	
@@ -97,7 +100,8 @@ public class Search {
 		if(!"".equals(roomType)&&roomType!=null){
 			
 			for(HotelVO hotelvo:hotels){
-				List<RoomVO> allroom = new AllRooms(hotelvo.getHotelID()).getAllRooms();
+				
+				List<RoomVO> allroom = roomservice.getAllRooms(hotelvo.getHotelID());
 				List<RoomVO> allroomForaType = new ArrayList<RoomVO>();//保存特定类型的所有房间
 				
 				for(RoomVO roomvo:allroom){
@@ -146,7 +150,8 @@ public class Search {
 								date2 = sdf.parse(sdf.format(new Date()));
 							} catch (ParseException e) {
 								e.printStackTrace();
-							}
+								}
+							
 			        		c2.setTime(date2);//得到现在的系统日期
 			        		
 			        		if(c2.after(c1)){
@@ -173,7 +178,7 @@ public class Search {
 		    }else{
 		    	//时间不为空的话，需要进行判断
 		    	for(HotelVO hotelvo:hotels){
-		    		List<RoomVO> allrooms = new AllRooms(hotelvo.getHotelID()).getAllRooms();
+		    		List<RoomVO> allrooms = roomservice.getAllRooms(hotelvo.getHotelID());
 		    		int countFree=0,countBook=0;
 		    		for(RoomVO roomvo:allrooms){
 		    			if("空闲".equals(roomvo.getRoomState())){
@@ -209,6 +214,7 @@ public class Search {
 			        		}
 			        	}
 		    		}//完成了对allrooms的遍历
+		    		
 		    		if(countFree+countBook>=roomTotal){
 		    			result.add(hotelvo);
 		    		}

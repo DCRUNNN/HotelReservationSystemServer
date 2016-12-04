@@ -1,5 +1,7 @@
 package vo;
 
+import java.io.Serializable;
+
 import po.OrderPO;
 
 /**
@@ -30,8 +32,13 @@ import po.OrderPO;
  * comment            客户对订单的评价
  * */	
 	
-public class OrderVO{
+public class OrderVO implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5992777685418175892L;
+	
 	private String orderID;
 	private String clientID;
 	private String orderCreatedDate;

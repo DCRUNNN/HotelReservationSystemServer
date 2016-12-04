@@ -1,5 +1,7 @@
 package service.Room.CreateRoom;
 
+import java.rmi.RemoteException;
+
 import data.dao.RoomDao;
 import data.dao.impl.RoomDaoImpl;
 import po.RoomPO;
@@ -19,7 +21,7 @@ public class CreateRoomInfoServiceImpl implements CreateRoomInfoService {
 	}
 	
 	@Override
-	public boolean CreateRoom(RoomVO roomVO) {
+	public boolean CreateRoom(RoomVO roomVO) throws RemoteException{
 		
 		RoomPO roomPO=new RoomPO();
 		roomPO.setHotelID(roomVO.getHotelID());
@@ -33,7 +35,7 @@ public class CreateRoomInfoServiceImpl implements CreateRoomInfoService {
 	}
 
 	@Override
-	public String getAllRoomTypeAndPrice(String hotelID) {
+	public String getAllRoomTypeAndPrice(String hotelID) throws RemoteException{
 		
 		return hotelservice.getRoomTypeAndPrice(hotelID);
 	}

@@ -1,7 +1,9 @@
 package service.Order.BrowseOrder_webWorker;
 
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Vector;
 
 import data.dao.OrderDao;
 import data.dao.impl.OrderDaoImpl;
@@ -22,8 +24,10 @@ public class BrowseOrder_webWorkerServiceImpl implements BrowseOrder_webWorkerSe
     	
           orderDao = OrderDaoImpl.getInstance();
     }
+   
+    
 	@Override
-	public List<OrderVO> getAllUnexecutedOrders() {
+	public List<OrderVO> getAllUnexecutedOrders() throws RemoteException{
 		
 		List<OrderPO> allHotelOrders = orderDao.getAllOrders();
 		List<OrderVO> volist = new ArrayList<OrderVO>();
@@ -38,7 +42,7 @@ public class BrowseOrder_webWorkerServiceImpl implements BrowseOrder_webWorkerSe
 	}
 
 	@Override
-	public List<OrderVO> getAllAbnormalOrders() {
+	public List<OrderVO> getAllAbnormalOrders() throws RemoteException{
 		
 		List<OrderPO> allHotelOrders = orderDao.getAllOrders();
 		List<OrderVO> volist = new ArrayList<OrderVO>();
@@ -53,13 +57,13 @@ public class BrowseOrder_webWorkerServiceImpl implements BrowseOrder_webWorkerSe
 	}
 
 	@Override
-	public boolean withdrawAbnormalOrder(String orderID) {
+	public boolean withdrawAbnormalOrder(String orderID) throws RemoteException{
 		
 		return new WithdrawAbnormalOrder().withdraw(orderID);
 	}
 
 	@Override
-	public OrderVO getOrderVO(String orderID) {
+	public OrderVO getOrderVO(String orderID) throws RemoteException{
 
 		OrderPO po = orderDao.getOrderPO(orderID);
 		if(po==null){
@@ -70,7 +74,7 @@ public class BrowseOrder_webWorkerServiceImpl implements BrowseOrder_webWorkerSe
 	}
 
 	@Override
-	public List<OrderVO> getClientAbnormalOrders(String clientID) {
+	public List<OrderVO> getClientAbnormalOrders(String clientID)throws RemoteException {
 		
 		List<OrderPO> allHotelOrders = orderDao.getOrderPOList(clientID);//得到客户的所有订单
 		List<OrderVO> volist = new ArrayList<OrderVO>();
@@ -85,4 +89,5 @@ public class BrowseOrder_webWorkerServiceImpl implements BrowseOrder_webWorkerSe
 	
 	}
 
+	
 }

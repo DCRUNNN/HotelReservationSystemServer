@@ -1,5 +1,6 @@
 package uidriver.credit;
 
+import java.rmi.RemoteException;
 import java.util.List;
 
 import service.Credit.ShowCreditRecord.ShowCreditRecordService;
@@ -8,7 +9,7 @@ import vo.CreditVO;
 
 public class ShowCreditRecordDriver {
 
-	public static void main(String args[]){
+	public static void main(String args[]) throws RemoteException{
 		
 		ShowCreditRecordService service = new ShowCreditRecordServiceImpl();
 		String clientID ="0000001";

@@ -1,5 +1,6 @@
 package service.Credit.ShowCreditRecord;
 
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,7 +23,7 @@ public class ShowCreditRecordServiceImpl implements ShowCreditRecordService{
 	}
 	
 	@Override
-	public List<CreditVO> ShowAllCredit(String clientID) {
+	public List<CreditVO> ShowAllCredit(String clientID) throws RemoteException{
 		
 		List<CreditPO> polist = creditDao.getAllClientCreditPO(clientID);
 		if(polist==null){
@@ -38,7 +39,7 @@ public class ShowCreditRecordServiceImpl implements ShowCreditRecordService{
 	}
 
 	@Override
-	public double getCreditPoint(String clientID) {
+	public double getCreditPoint(String clientID) throws RemoteException{
 	
 		return clientService.getCreditPoint(clientID);
 	}

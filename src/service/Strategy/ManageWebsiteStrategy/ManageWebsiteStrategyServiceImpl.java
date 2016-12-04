@@ -1,5 +1,6 @@
 package service.Strategy.ManageWebsiteStrategy;
 
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,7 +24,7 @@ public class ManageWebsiteStrategyServiceImpl implements ManageWebsiteStrategySe
 	}
 	
 	@Override
-	public List<StrategyVO> getAllWebsiteStrategy() {
+	public List<StrategyVO> getAllWebsiteStrategy() throws RemoteException{
 		
 		List<StrategyVO> allStrategy = new ArrayList<StrategyVO>();
 		List<StrategyPO> strategies = strategyDao.getAllWebsiteStrategies();
@@ -35,7 +36,7 @@ public class ManageWebsiteStrategyServiceImpl implements ManageWebsiteStrategySe
 	}
 
 	@Override
-	public boolean addStrategy(StrategyVO strategyVO) {
+	public boolean addStrategy(StrategyVO strategyVO) throws RemoteException{
 	
 		StrategyPO po = new StrategyPO();
 		String strategyID = new CreateStrategyID().nextWebsiteStrategyID();
@@ -63,7 +64,7 @@ public class ManageWebsiteStrategyServiceImpl implements ManageWebsiteStrategySe
 	}
 
 	@Override
-	public boolean changeStrategy(StrategyVO strategyVO) {
+	public boolean changeStrategy(StrategyVO strategyVO)throws RemoteException {
 		
 		StrategyPO po = new StrategyPO();
 		po.setStrategyID(strategyVO.getStrategyID());
@@ -86,7 +87,7 @@ public class ManageWebsiteStrategyServiceImpl implements ManageWebsiteStrategySe
 	}
 
 	@Override
-	public boolean deleteStrategy(String strategyID) {
+	public boolean deleteStrategy(String strategyID) throws RemoteException{
 		
 		return strategyDao.deleteStrategy(strategyID);
 	}

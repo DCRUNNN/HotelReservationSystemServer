@@ -1,5 +1,6 @@
 package uidriver.order;
 
+import java.rmi.RemoteException;
 import java.util.List;
 
 import service.Order.MyOrder.MyOrderService;
@@ -9,7 +10,7 @@ import vo.OrderVO;
 
 public class ThreadDriver {
 
-	public static void main(String args[]){
+	public static void main(String args[]) throws RemoteException{
 
 		Thread t1 = new Thread(new ChangeToAbnormal());
 		t1.start();
@@ -18,18 +19,18 @@ public class ThreadDriver {
 	}
 	
 
-	private static void demo1() {
+	private static void demo1() throws RemoteException {
 		
 		//对0000001客户的订单进行查看
 		String clientID = "0000001";
-		MyOrderService service = new MyOrderServiceImpl(clientID);
-		List<OrderVO> volist = service.getAbnormalOrders();
+		MyOrderService service = new MyOrderServiceImpl();
+		List<OrderVO> volist = service.getAbnormalOrders(clientID);
 		System.out.println(volist.size()==0?"暂时没有异常订单":"存在异常订单");
-		volist = service.getUnexecutedOrders();
+		volist = service.getUnexecutedOrders(clientID);
 		System.out.println(volist.size()==0?"暂时没有未执行订单":"存在未执行订单");
-		volist = service.getWithdrawnOrders();
+		volist = service.getWithdrawnOrders(clientID);
 		System.out.println(volist.size()==0?"暂时没有已撤销订单":"存在已撤销订单");
-		volist = service.getExecutedOrders();
+		volist = service.getExecutedOrders(clientID);
 		for(OrderVO vo:volist){
 			show(vo);
 		}

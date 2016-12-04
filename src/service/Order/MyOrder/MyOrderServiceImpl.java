@@ -1,5 +1,6 @@
 package service.Order.MyOrder;
 
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,19 +14,17 @@ import vo.OrderVO;
  * MyOrderService的实现类
  * @see AllClientOrder
  * */
-public class MyOrderServiceImpl implements MyOrderService{
+public class MyOrderServiceImpl implements MyOrderService {
 
-	private String clientID;
 	private OrderDao orderDao;
 	
-	public MyOrderServiceImpl(String clientID){
-		
-		this.clientID = clientID;
+	public MyOrderServiceImpl(){
+
 		orderDao = OrderDaoImpl.getInstance();
 	}
 	
 	@Override
-	public List<OrderVO> getExecutedOrders() {
+	public List<OrderVO> getExecutedOrders(String clientID) {
 		
 	    List<OrderPO> polist = orderDao.getOrderPOList(clientID);
 	    List<OrderVO> result = new ArrayList<OrderVO>();
@@ -43,7 +42,7 @@ public class MyOrderServiceImpl implements MyOrderService{
 	}
 
 	@Override
-	public List<OrderVO> getUnexecutedOrders() {
+	public List<OrderVO> getUnexecutedOrders(String clientID) throws RemoteException{
 		
 	    List<OrderPO> polist = orderDao.getOrderPOList(clientID);
 	    List<OrderVO> result = new ArrayList<OrderVO>();
@@ -61,7 +60,7 @@ public class MyOrderServiceImpl implements MyOrderService{
 	}
 
 	@Override
-	public List<OrderVO> getWithdrawnOrders() {
+	public List<OrderVO> getWithdrawnOrders(String clientID) throws RemoteException{
 		
 	    List<OrderPO> polist = orderDao.getOrderPOList(clientID);
 	    List<OrderVO> result = new ArrayList<OrderVO>();
@@ -79,7 +78,7 @@ public class MyOrderServiceImpl implements MyOrderService{
 	}
 
 	@Override
-	public List<OrderVO> getAbnormalOrders() {
+	public List<OrderVO> getAbnormalOrders(String clientID) throws RemoteException{
 		
 	    List<OrderPO> polist = orderDao.getOrderPOList(clientID);
 	    List<OrderVO> result = new ArrayList<OrderVO>();
@@ -97,7 +96,7 @@ public class MyOrderServiceImpl implements MyOrderService{
 	}
 
 	@Override
-	public OrderVO getOrderVO(String orderID) {
+	public OrderVO getOrderVO(String orderID) throws RemoteException{
 		
 		OrderPO po = orderDao.getOrderPO(orderID);
 		if(po==null){
@@ -108,7 +107,7 @@ public class MyOrderServiceImpl implements MyOrderService{
 	}
 
 	@Override
-	public boolean withdraw(String orderID) {
+	public boolean withdraw(String clientID,String orderID) throws RemoteException{
 		
 		Withdraw withdraw = new Withdraw(clientID);
 		return withdraw.withdraw(orderID);

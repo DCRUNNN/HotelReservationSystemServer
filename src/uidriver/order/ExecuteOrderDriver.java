@@ -1,5 +1,6 @@
 package uidriver.order;
 
+import java.rmi.RemoteException;
 import java.util.List;
 
 import service.Order.ExecuteOrder.ExecuteOrderService;
@@ -8,7 +9,7 @@ import vo.OrderVO;
 
 public class ExecuteOrderDriver {
 
-	public static void main(String args[]){
+	public static void main(String args[]) throws RemoteException{
 		
 		demo1();
 		demo2();
@@ -21,13 +22,13 @@ public class ExecuteOrderDriver {
 		String hotelID = "00001";
 	}
 
-	private static void demo1() {
+	private static void demo1() throws RemoteException {
 	
 		//客户在正常时间内进行入住
 		String clientID = "0000001";
 		String hotelID = "00001";
-		ExecuteOrderService service = new ExecuteOrderServiceImpl(hotelID);
-		List<OrderVO> volist = service.getUnexecutedOrders(clientID);//首先得到客户的在酒店的所有未执行订单
+		ExecuteOrderService service = new ExecuteOrderServiceImpl();
+		List<OrderVO> volist = service.getUnexecutedOrders(hotelID, clientID);//首先得到客户的在酒店的所有未执行订单
 		for(OrderVO vo:volist){
 			show(vo);
 		}

@@ -1,5 +1,7 @@
 package vo;
 
+import java.io.Serializable;
+
 /**
  * hotelName          酒店名称
  * roomType           房间类型
@@ -13,7 +15,12 @@ package vo;
  * maxpoint           最高评分
  * hasOrdered         是否曾经预订
  * */
-public class SearchVO {
+public class SearchVO implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2778105593297895677L;
 
 	private String hotelName;
 	

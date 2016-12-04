@@ -1,5 +1,6 @@
 package uidriver.order;
 
+import java.rmi.RemoteException;
 import java.util.List;
 
 import service.Order.MyOrder.MyOrderService;
@@ -8,42 +9,42 @@ import vo.OrderVO;
 
 public class MyOrderDriver {
 
-	public static void main(String args[]){
+	public static void main(String args[]) throws RemoteException{
 		
-		//demo1();
-		demo2();
+		demo1();
+		//demo2();
 	}
 
-	private static void demo1() {
+	private static void demo1() throws RemoteException {
 		
 		//对0000001客户的订单进行查看
 		String clientID = "0000001";
-		MyOrderService service = new MyOrderServiceImpl(clientID);
-		List<OrderVO> volist = service.getAbnormalOrders();
+		MyOrderService service = new MyOrderServiceImpl();
+		List<OrderVO> volist = service.getAbnormalOrders(clientID);
 		System.out.println(volist.size()==0?"暂时没有异常订单":"存在异常订单");
-		volist = service.getUnexecutedOrders();
+		volist = service.getUnexecutedOrders(clientID);
 		System.out.println(volist.size()==0?"暂时没有未执行订单":"存在未执行订单");
-		volist = service.getWithdrawnOrders();
+		volist = service.getWithdrawnOrders(clientID);
 		System.out.println(volist.size()==0?"暂时没有已撤销订单":"存在已撤销订单");
-		volist = service.getExecutedOrders();
+		volist = service.getExecutedOrders(clientID);
 		for(OrderVO vo:volist){
 			show(vo);
 		}
 	}
 
-	private static void demo2() {
+	private static void demo2() throws RemoteException {
 		
 		//对0000001的未执行订单进行撤销
 		String clientID = "0000001";
-		MyOrderService service = new MyOrderServiceImpl(clientID);
-		List<OrderVO> volist = service.getUnexecutedOrders();
+		MyOrderService service = new MyOrderServiceImpl();
+		List<OrderVO> volist = service.getUnexecutedOrders(clientID);
 		if(volist.size()==0){
 			System.out.println("暂时没有未执行订单！");
 			System.exit(0);
 		}
 		
 		String orderID = volist.get(0).getOrderID();
-		System.out.println(service.withdraw(orderID)?"撤销订单成功!":"撤销订单失败！");
+		System.out.println(service.withdraw(clientID, orderID)?"撤销订单成功!":"撤销订单失败！");
 	}
 	
 	private static void show(OrderVO vo){

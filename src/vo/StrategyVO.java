@@ -1,5 +1,7 @@
 package vo;
 
+import java.io.Serializable;
+
 import po.StrategyPO;
 
 /**
@@ -20,8 +22,12 @@ import po.StrategyPO;
  * discount              ²ßÂÔµÄÕÛ¿Û           
  * */
 
-public class StrategyVO {
+public class StrategyVO implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5610492037480985121L;
 	private String strategyID;
 	private String name;
 	private String introduction;

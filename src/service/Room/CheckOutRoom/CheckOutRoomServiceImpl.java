@@ -1,5 +1,6 @@
 package service.Room.CheckOutRoom;
 
+import java.rmi.RemoteException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -21,7 +22,7 @@ public class CheckOutRoomServiceImpl implements CheckOutRoomService{
 	}
 	
 	@Override
-	public String checkOutRoom(String clientID,String hotelID) {
+	public String checkOutRoom(String clientID,String hotelID)throws RemoteException {
 		
 		String allrooms = orderService.getRoomNumber(clientID, hotelID);
 		String roomNumbers[] = allrooms.split("/");

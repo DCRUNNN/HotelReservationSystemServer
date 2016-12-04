@@ -1,4 +1,4 @@
-package service.Hotel.CreateHotelID;
+package service.Hotel.help;
 
 import java.util.List;
 

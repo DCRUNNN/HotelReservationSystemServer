@@ -1,11 +1,13 @@
 package service.Hotel.AddHotel;
 
+import java.rmi.RemoteException;
+
 import data.dao.HotelDao;
 import data.dao.impl.HotelDaoImpl;
 import po.HotelPO;
 import service.Account.ProvidedService.AccountProvidedService;
 import service.Account.ProvidedService.AccountProvidedServiceImpl;
-import service.Hotel.CreateHotelID.CreateHotelID;
+import service.Hotel.help.CreateHotelID;
 import service.Personnel.providedservice.PersonnelProvidedService;
 import service.Personnel.providedservice.PersonnelProvidedServiceImpl;
 import vo.HotelVO;
@@ -29,7 +31,7 @@ public class AddHotelServiceImpl implements AddHotelService{
 	}
 	
 	@Override
-	public String addHotel(HotelVO vo){ 
+	public String addHotel(HotelVO vo)throws RemoteException{ 
 		
 		HotelPO po = new HotelPO();
 		//po.setCommentList(vo.getCommentList());
@@ -59,7 +61,7 @@ public class AddHotelServiceImpl implements AddHotelService{
 	}
 
 	@Override
-	public boolean addHotelWorker(PersonnelVO vo) {
+	public boolean addHotelWorker(PersonnelVO vo)throws RemoteException {
 		
 		String hotelID = vo.gethotelID();
 		if(hoteldao.getHotelPO(hotelID)==null){
@@ -69,13 +71,13 @@ public class AddHotelServiceImpl implements AddHotelService{
 	}
 
 	@Override
-	public boolean savePassword(String personnelID, String password) {
+	public boolean savePassword(String personnelID, String password)throws RemoteException {
 		
 		return accountService.insert(personnelID, password);
 	}
 
 	@Override
-	public boolean isExist(HotelVO vo) {
+	public boolean isExist(HotelVO vo) throws RemoteException{
 		
 		String hotelProvince = vo.getHotelProvince();
 		String hotelCity = vo.getHotelCity();

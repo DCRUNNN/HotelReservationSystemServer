@@ -1,5 +1,7 @@
 package uidriver.hotel;
 
+import java.rmi.RemoteException;
+
 import service.Hotel.AddHotel.AddHotelService;
 import service.Hotel.AddHotel.AddHotelServiceImpl;
 import vo.HotelVO;
@@ -7,7 +9,7 @@ import vo.PersonnelVO;
 
 public class AddHotelDriver {
 
-	public static void main(String args[]){
+	public static void main(String args[]) throws RemoteException{
 		
 		HotelVO vo1 = new HotelVO("江苏省", "南京市", "仙林商圈", "南京大学仙林校区旁", "聪少酒店", 5, "酒店很好", "设施齐全", "单人房|50/双人房|100");
 		HotelVO vo2 = new HotelVO("江苏省","苏州市","北区商圈","苏州大学旁","志哥酒店",5,"酒店不好你来打我",

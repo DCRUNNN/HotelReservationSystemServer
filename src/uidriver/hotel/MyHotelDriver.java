@@ -1,5 +1,6 @@
 package uidriver.hotel;
 
+import java.rmi.RemoteException;
 import java.util.List;
 
 import service.Hotel.MyHotel.MyHotelService;
@@ -8,7 +9,7 @@ import vo.HotelVO;
 
 public class MyHotelDriver {
 
-	public static void main(String args[]){
+	public static void main(String args[]) throws RemoteException{
 		
 		demo1();
 		demo2();
@@ -19,20 +20,20 @@ public class MyHotelDriver {
 		String clientID = "0000002";
 	}
 
-	private static void demo1() {
+	private static void demo1() throws RemoteException {
 		
 		String clientID = "0000001";
-		MyHotelService service = new MyHotelServiceImpl(clientID);
-		List<HotelVO> volist = service.getAbnormalHotels();
+		MyHotelService service = new MyHotelServiceImpl();
+		List<HotelVO> volist = service.getAbnormalHotels(clientID);
 		System.out.println(volist.size()==0?"暂时没有异常酒店！":"存在异常订单的酒店");
-		volist = service.getUnexecutedHotels();
+		volist = service.getUnexecutedHotels(clientID);
 		System.out.println(volist.size()==0?"暂时没有未执行酒店！":"存在未执行的酒店！");
-		volist = service.getWithdrawnHotels();
+		volist = service.getWithdrawnHotels(clientID);
 		for(HotelVO vo:volist){
 			show(vo);
 		}
 		
-		volist = service.getExecutedHotels();
+		volist = service.getExecutedHotels(clientID);
 		System.out.println(volist.size()==0?"暂时没有已执行酒店！":"存在已执行订单的酒店");
 		for(HotelVO vo:volist){
 			show(vo);

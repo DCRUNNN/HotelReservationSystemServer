@@ -1,5 +1,7 @@
 package vo;
 
+import java.io.Serializable;
+
 import po.PersonnelPO;
 
 /**
@@ -12,8 +14,12 @@ import po.PersonnelPO;
  * @author lewis_chen
  *
  */
-public class PersonnelVO {
+public class PersonnelVO implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6365141306313600252L;
 	private String personnelID;
 	private String type;
 	private String name;

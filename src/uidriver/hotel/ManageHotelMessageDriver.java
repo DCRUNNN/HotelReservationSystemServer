@@ -1,5 +1,7 @@
 package uidriver.hotel;
 
+import java.rmi.RemoteException;
+
 import service.Hotel.MaintainHotelMessage.MaintainHotelMessageService;
 import service.Hotel.MaintainHotelMessage.MaintainHotelMessageServiceImpl;
 import vo.HotelVO;
@@ -7,15 +9,15 @@ import vo.HotelVO;
 public class ManageHotelMessageDriver {
 
 	//可以了
-	public static void main (String args[]){
+	public static void main (String args[]) throws RemoteException{
 		
 		String hotelID = "00001";
-		MaintainHotelMessageService service = new MaintainHotelMessageServiceImpl(hotelID);
-		show(service.getHotelVO());//展示一下酒店信息
+		MaintainHotelMessageService service = new MaintainHotelMessageServiceImpl();
+		show(service.getHotelVO(hotelID));//展示一下酒店信息
 		
-		HotelVO vo = service.getHotelVO();
-		service.changeHotelInfo(vo.getHotelProvince(), vo.getHotelCity(), vo.getHotelCBD(), vo.getHotelAddress(), vo.getHotelName(), vo.getIntroduction(), vo.getFacilities(), vo.getHotelStar(), "标准单人间|20/标准双人间|50/豪华单人间|100/豪华双人间|150/标准家庭间|200");
-		show(service.getHotelVO());//修改信息之后再显示一下
+		HotelVO vo = service.getHotelVO(hotelID);
+		service.changeHotelInfo(hotelID,vo.getHotelProvince(), vo.getHotelCity(), vo.getHotelCBD(), vo.getHotelAddress(), vo.getHotelName(), vo.getIntroduction(), vo.getFacilities(), vo.getHotelStar(), "标准单人间|20/标准双人间|50/豪华单人间|100/豪华双人间|150/标准家庭间|200");
+		show(service.getHotelVO(hotelID));//修改信息之后再显示一下
 		
 	}
 	

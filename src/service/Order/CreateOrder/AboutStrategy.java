@@ -27,7 +27,7 @@ public class AboutStrategy {
 	 * @param hotelCBD 酒店所在的商圈
 	 * @param hotelCity 酒店所在的城市
 	 * @param hotelProvince 酒店所在的省份
-	 * @return 得到客户在该酒店的综合的最优惠的策略
+	 * @return 得到客户在该酒店的综合的最优惠的策略 例如8折
 	 * */
 	public double getPriceByStrategy(String clientID,String hotelID,int roomTotal, String hotelProvince, String hotelCity, String hotelCBD){
 		

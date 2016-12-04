@@ -1,15 +1,17 @@
 package service.Order.CreateOrder;
 
+import java.rmi.RemoteException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-
 import data.dao.OrderDao;
 import data.dao.impl.OrderDaoImpl;
 import po.OrderPO;
 import service.Hotel.ProvidedService.HotelProvidedServiceForOrderImpl;
-import service.Order.CreateOrderID.CreateOrderID;
 import service.Order.InteractWithHotel.HotelProvidedServiceForOrder;
+import service.Order.InteractWithRoom.RoomProvidedServiceForOrder;
+import service.Order.help.CreateOrderID;
+import service.Room.ProvidedService.RoomProvidedServiceForOrderImpl;
 
 /**
  * CreateOrderService 的实现类 主要实现了生成订单的职责, 与其他模块的交互大部份分委托给了AllRooms类去实现
@@ -22,37 +24,34 @@ import service.Order.InteractWithHotel.HotelProvidedServiceForOrder;
  * */
 public class CreateOrderServiceImpl implements CreateOrderService{
 
-	private String clientID;
-	private String hotelID;
 	private HotelProvidedServiceForOrder hotelservice;
+    private RoomProvidedServiceForOrder roomservice;
 	private OrderDao orderDao;
-	private AllRooms allrooms;
 	
 	/**
 	 * @param clientID 客户编号
 	 * @param hotelID 酒店编号
 	 * @return 传递clientID，hotelID作为构造函数的参数
 	 * */
-	public CreateOrderServiceImpl(String clientID,String hotelID){
+	public CreateOrderServiceImpl(){
 		
-		this.clientID = clientID;
-		this.hotelID = hotelID;
 		hotelservice = new HotelProvidedServiceForOrderImpl();
+		roomservice = new RoomProvidedServiceForOrderImpl();
 		orderDao = OrderDaoImpl.getInstance();
-		allrooms = new AllRooms(hotelID);
 	}
 	@Override
-	public String getRoomTypeAndPrice() {
+	public String getRoomTypeAndPrice(String hotelID) throws RemoteException{
 		return hotelservice.getRoomTypeAndPrice(hotelID);
 	}
 
 	@Override
-	public String getAllRoomNumber(String roomType) {
-		return allrooms.getAllRoomNumber(roomType);
+	public String getAllRoomNumber(String hotelID,String roomType) throws RemoteException{
+		
+		return roomservice.getAvailableRoomNumbers(hotelID,roomType);
 	}
 
 	@Override
-	public boolean createOrder( String roomType, String roomNumber) {
+	public boolean createOrder(String hotelID,String clientID, String roomType, String roomNumber) throws RemoteException{
 		
 		OrderPO po = new OrderPO();
 		
@@ -77,10 +76,7 @@ public class CreateOrderServiceImpl implements CreateOrderService{
 		String orderBeginDate = "";//订单入住时间为空
 		String orderEndDate = "";//订单退房时间为空
 		
-		String hotelProvince = hotelservice.getHotelProvince(hotelID);
-		String hotelCity = hotelservice.getHotelCity(hotelID);
-		String hotelCBD = hotelservice.getHotelCBD(hotelID);
-		double price = allrooms.getPriceByStrategy(clientID,hotelID,roomNumber,hotelProvince,hotelCity,hotelCBD);
+		double price = this.getPriceByStrategy(hotelID,clientID,roomNumber);
 		String peopleNumber = "";//入住人数为空
 	    String hasChild ="";//有无儿童为空
 	    String orderStatus = "未执行";
@@ -107,10 +103,10 @@ public class CreateOrderServiceImpl implements CreateOrderService{
 	    
 	    String numbers[] = roomNumber.split("/");
 	    for(int i=0;i<numbers.length;i++){
-	    	if(!allrooms.changeRoomState(numbers[i],"已预订")){
+	    	if(!roomservice.changeRoomState(hotelID,numbers[i],"已预订")){
 		    	return false;
 		    }
-	    	if(!allrooms.setBookDate(numbers[i], orderCreatedDate)){
+	    	if(!roomservice.setBookDate(hotelID,numbers[i], orderCreatedDate)){
 	    		return false;
 	    	}
 	    }//改变房间状态,设置预订时间
@@ -119,15 +115,25 @@ public class CreateOrderServiceImpl implements CreateOrderService{
 	}
 
 	@Override
-	public double getPriceByStrategy(String roomNumber) {
-		
-		String hotelProvince = hotelservice.getHotelProvince(hotelID);
+	public double getPriceByStrategy(String hotelID,String clientID,String roomNumber)throws RemoteException {
+	
+    	double total1 = 0;
+        String numbers[] = roomNumber.split("/");
+        for(String number:numbers){
+        	total1+=roomservice.getRoomPrice(hotelID,number);
+        }
+        
+        String hotelProvince = hotelservice.getHotelProvince(hotelID);
 		String hotelCity = hotelservice.getHotelCity(hotelID);
 		String hotelCBD = hotelservice.getHotelCBD(hotelID);
-		return allrooms.getPriceByStrategy(clientID,hotelID,roomNumber,hotelProvince,hotelCity,hotelCBD);
+		
+        double discount = new AboutStrategy().getPriceByStrategy(clientID, hotelID,numbers.length,hotelProvince,hotelCity,hotelCBD);
+        return total1*discount/10;
+    
+		
 	}
 	@Override
-	public boolean checkCreditPoint() {
+	public boolean checkCreditPoint(String clientID) throws RemoteException{
 		return new AboutStrategy().checkCreditPoint(clientID);
 	}
 

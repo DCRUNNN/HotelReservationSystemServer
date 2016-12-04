@@ -1,5 +1,6 @@
 package uidriver.hotel;
 
+import java.rmi.RemoteException;
 import java.util.List;
 
 import service.Hotel.BrowseHotel.BrowseHotelService;
@@ -9,30 +10,30 @@ import vo.OrderVO;
 
 public class BrowseHotelDriver {
 
-	public static void main(String args[]){
+	public static void main(String args[])  throws RemoteException{
 		
 		demo1();
 	}
 
-	private static void demo1() {
+	private static void demo1() throws RemoteException {
 	
 		String hotelProvince = "广东省";
 		String hotelCity = "茂名市";
 		String hotelCBD = "化州商圈";
 		String clientID = "0000001";
 		String hotelID = "00001";
-		BrowseHotelService service = new BrowseHotelServiceImpl(clientID);
+		BrowseHotelService service = new BrowseHotelServiceImpl();
 		
 		System.out.println(service.getProvinces());//输出所有的省份
 		System.out.println(service.getCities(hotelProvince));//输出所有的城市
 		System.out.println(service.getCBDS(hotelProvince, hotelCity));//输出所有的商圈
 		
-		List<HotelVO> volist = service.getAllHotels(hotelProvince, hotelCity, hotelCBD);//展示某个商圈内的酒店
+		List<HotelVO> volist = service.getAllHotels(clientID,hotelProvince, hotelCity, hotelCBD);//展示某个商圈内的酒店
 		for(HotelVO vo:volist){
 			show(vo);
 		}
 		
-		List<OrderVO> ordervo = service.getAllOrders(hotelID);
+		List<OrderVO> ordervo = service.getAllOrders(clientID,hotelID);
 		for(OrderVO vo:ordervo){
 			show(vo);
 		}

@@ -3,10 +3,14 @@ package data.datahelper.impl;
 /**
  * @author Cong Deng
  */
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
-
 
 import data.datahelper.RoomDataHelper;
 import po.RoomPO;
@@ -311,6 +315,62 @@ public class RoomDataSqlHelperImpl implements RoomDataHelper {
 			return false;
 		}
 		return true;
+	}
+
+	@Override
+	public List<String> getRoomType(String hotelId) {
+		// TODO Auto-generated method stub
+		List<String> roomType=new ArrayList<String>();
+		String result="";
+		//create sql statement
+		String sql="SELECT * FROM t_room WHERE hotelid='"+hotelId+"';";
+		ResultSet set=RoomDataSqlHelperImpl.executeQuery(sql);
+		try{
+			while(set.next()){
+				String type=set.getString("roomtype");
+				result+=type+"/";
+			}
+			result=toString(result.substring(0,result.length()-1));
+			roomType=Arrays.asList(result.split("/"));
+			return roomType;
+		}catch(SQLException e){
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	@Override
+	public List<String> getRoomState(String hotelId) {
+		// TODO Auto-generated method stub
+		List<String> roomState=new ArrayList<String>();
+		//create sql statement
+		String sql="SELECT * FROM t_room WHERE hotelid='"+hotelId+"';";
+		String result="";
+		ResultSet set=RoomDataSqlHelperImpl.executeQuery(sql);
+		try{
+			while(set.next()){
+				String type=set.getString("roomstate");
+				result+=type+"/";
+			}
+			result=toString(result.substring(0,result.length()-1));
+			roomState=Arrays.asList(result.split("/"));
+			return roomState;
+		}catch(SQLException e){
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	private String toString(String str){
+		
+		String[] list=str.split("/");
+		String result="";
+		for(int i=0;i<list.length;i++){
+			if(!result.contains(list[i])){
+				result= result+list[i]+"/";
+			}
+		}
+		return result.substring(0,result.length()-1);
 	}
 
 }

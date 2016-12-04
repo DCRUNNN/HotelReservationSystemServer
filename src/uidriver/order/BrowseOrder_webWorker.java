@@ -1,5 +1,6 @@
 package uidriver.order;
 
+import java.rmi.RemoteException;
 import java.util.List;
 
 import service.Order.BrowseOrder_webWorker.BrowseOrder_webWorkerService;
@@ -8,12 +9,12 @@ import vo.OrderVO;
 
 public class BrowseOrder_webWorker {
 
-	public static void main(String args[]){
+	public static void main(String args[]) throws RemoteException{
 		
 		demo1();
 	}
 
-	private static void demo1() {
+	private static void demo1() throws RemoteException {
 		
 		String cientID = "0000001";
 		BrowseOrder_webWorkerService service = new BrowseOrder_webWorkerServiceImpl();

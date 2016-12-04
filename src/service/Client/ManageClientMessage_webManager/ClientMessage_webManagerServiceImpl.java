@@ -1,5 +1,6 @@
 package service.Client.ManageClientMessage_webManager;
 
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,7 +21,7 @@ public class ClientMessage_webManagerServiceImpl implements ClientMessage_webMan
 	}
 	
 	@Override
-	public List<ClientVO> getAllClients() {
+	public List<ClientVO> getAllClients() throws RemoteException{
 		
 		List<ClientPO> polist = clientDao.getAllClient();
 		if(polist==null){
@@ -39,7 +40,7 @@ public class ClientMessage_webManagerServiceImpl implements ClientMessage_webMan
 	}
 
 	@Override
-	public List<ClientVO> getClientsByName(String name) {
+	public List<ClientVO> getClientsByName(String name) throws RemoteException{
 	
 		if(allclients==null){
 			return null;
@@ -54,7 +55,7 @@ public class ClientMessage_webManagerServiceImpl implements ClientMessage_webMan
 	}
 
 	@Override
-	public List<ClientVO> getClientByPhoneNumber(String phoneNumber) {
+	public List<ClientVO> getClientByPhoneNumber(String phoneNumber) throws RemoteException{
 		
 		if(allclients==null){
 			return null;
@@ -69,7 +70,7 @@ public class ClientMessage_webManagerServiceImpl implements ClientMessage_webMan
 	}
 
 	@Override
-	public boolean modifyClientMessage(ClientVO vo) {	
+	public boolean modifyClientMessage(ClientVO vo) throws RemoteException{	
 		
 		//首先对allclients进行修改
 		for(int i=0;i<allclients.size();i++){
@@ -98,7 +99,7 @@ public class ClientMessage_webManagerServiceImpl implements ClientMessage_webMan
 	}
 
 	@Override
-	public ClientVO getClientMessage(String clientID) {
+	public ClientVO getClientMessage(String clientID) throws RemoteException{
 		
 		ClientVO vo =null;
 		for(ClientVO clientVO:allclients){

@@ -1,5 +1,6 @@
 package uidriver.personnel;
 
+import java.rmi.RemoteException;
 import java.util.List;
 
 import service.Personnel.ManagePersonnelMessage.ManagePersonnelMessageService;
@@ -9,7 +10,7 @@ import vo.PersonnelVO;
 public class ManagePersonnelMessageDriver {
 
 	//注意一下返回对象为空，和返回的list长度为0的情况,其他没有什么问题
-	public static void main(String args[]){
+	public static void main(String args[]) throws RemoteException{
 		
 		ManagePersonnelMessageService service = new ManagePersonnelMessageServiceImpl();
 		PersonnelVO per1 = new PersonnelVO(null, null, "邓聪", "男", "132546879", null);

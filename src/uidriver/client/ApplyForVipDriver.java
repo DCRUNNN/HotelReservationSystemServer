@@ -1,5 +1,7 @@
 package uidriver.client;
 
+import java.rmi.RemoteException;
+
 import service.Client.ApplyForVip.ApplyForVipService;
 import service.Client.ApplyForVip.ApplyForVipServiceImpl;
 import vo.ClientVO;
@@ -8,7 +10,7 @@ public class ApplyForVipDriver {
 	
 	//ok
 	
-	public static void main(String args[]){
+	public static void main(String args[]) throws RemoteException{
 		
 		ApplyForVipService service = new ApplyForVipServiceImpl();
 		String clientID = "0000001";

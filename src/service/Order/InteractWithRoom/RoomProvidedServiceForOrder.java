@@ -24,4 +24,18 @@ public interface RoomProvidedServiceForOrder {
 	 * */
 	public boolean setBookDate(String hotelID,String roomNumber,String bookDate);
 
+	/**
+	 * @param hotelID 酒店编号
+	 * @param roomType 房间类型
+	 * @return 返回现在酒店可用的符合类型的房间号码 (roomNumebr1+"/"+roomNumber2)
+	 * */
+	public String getAvailableRoomNumbers(String hotelID, String roomType);
+
+	/**
+	 * @param hotelID 酒店编号
+	 * @param roomNumber 房间号码
+	 * @return 返回所有的房间对应的价格
+	 * */
+	public double getRoomPrice(String hotelID, String roomNumber);
+
 }

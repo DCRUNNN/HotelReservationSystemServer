@@ -1,5 +1,6 @@
 package uidriver.room;
 
+import java.rmi.RemoteException;
 import java.util.List;
 
 import service.Room.ChangeRoomInfo.ChangeRoomInfoService;
@@ -9,10 +10,10 @@ import vo.RoomVO;
 
 public class ChangeRoomInfoDriver {
 
-	public static void main(String args[]){
+	public static void main(String args[]) throws RemoteException{
 		
 		String hotelID = "00001";
-		ChangeRoomInfoService service = new ChangeRoomInfoServiceImpl(hotelID);
+		ChangeRoomInfoService service = new ChangeRoomInfoServiceImpl();
 		
 		//改变某一类型的房间的价格
 		String roomTypeAndPrice = new CreateRoomInfoServiceImpl().getAllRoomTypeAndPrice(hotelID);
@@ -22,17 +23,17 @@ public class ChangeRoomInfoDriver {
 		
 		System.out.println(service.changeRoomPrice(type, 100, hotelID)?"成功改变房间价格！":"改变房间价格失败！");
 	    
-		List<RoomVO> volist = service.getAllRoomList();
+		List<RoomVO> volist = service.getAllRoomList(hotelID);
 		for(RoomVO vo:volist){
 			show(vo);
 		}//展示所有的房间信息
 		
-	    List<RoomVO> temp = service.getRoomByState("空闲");
+	    List<RoomVO> temp = service.getRoomByState(hotelID,"空闲");
 	    for(RoomVO vo:temp){
 	    	show(vo);
 	    }//展示所有的空闲房间信息
 	    
-	    List<RoomVO> typeRoom = service.getRoomByType("豪华单人间");
+	    List<RoomVO> typeRoom = service.getRoomByType(hotelID,"豪华单人间");
 	    for(RoomVO vo:typeRoom){
 	    	show(vo);
 	    }//展示所有的豪华单人间信息
@@ -40,10 +41,10 @@ public class ChangeRoomInfoDriver {
 	    RoomVO vo1 = volist.get(2);
 	    String roomID = vo1.getRoomNumber();
 	    System.out.println(service.changeRoomState(hotelID, roomID, "已入住")?"成功改变状态！":"改变状态失败！");
-		show(service.getRoomByNum(roomID));//展示修改后的房间信息
+		show(service.getRoomByNum(hotelID,roomID));//展示修改后的房间信息
 		
 		System.out.println(service.deleteRoom(hotelID, roomID)?"成功删除房间！":"删除房间失败！");//删除房间
-		volist = service.getAllRoomList();
+		volist = service.getAllRoomList(hotelID);
 		for(RoomVO vo:volist){
 			show(vo);
 		}

@@ -11,8 +11,9 @@ import data.dao.OrderDao;
 import data.dao.impl.OrderDaoImpl;
 import po.OrderPO;
 import service.Hotel.ProvidedService.HotelProvidedServiceForOrderImpl;
-import service.Order.CreateOrder.AllRooms;
+import service.Order.InteractWithRoom.RoomProvidedServiceForOrder;
 import service.Order.help.CreateOrderVO;
+import service.Room.ProvidedService.RoomProvidedServiceForOrderImpl;
 import vo.OrderVO;
 
 /**
@@ -26,7 +27,7 @@ public class ChangeOrder {
 	private OrderPO po;
 	private OrderDao orderDao;
 	private HelpExecuteOrder help;
-	private AllRooms allrooms;
+	private RoomProvidedServiceForOrder roomservice;
 	private String hotelID;
 	private Map<String,Integer> roomPeople;//每个房间对应的入住人数
 	private Map<String,String> roomChild;//每个房间对应的有无儿童
@@ -34,9 +35,9 @@ public class ChangeOrder {
 	public ChangeOrder(String hotelID){
 		
 		orderDao = OrderDaoImpl.getInstance();
+		roomservice = new RoomProvidedServiceForOrderImpl();
 		new HotelProvidedServiceForOrderImpl();
 		help = new HelpExecuteOrder();
-		allrooms = new AllRooms(hotelID);
 		this.hotelID = hotelID;
 	}
 	
@@ -123,7 +124,7 @@ public class ChangeOrder {
 	    for(int i=0;i<types.length;i++){
 	    	boolean isContain = false;
 	    	String type=types[i];
-	        String roomNumber[] = allrooms.getAllRoomNumber(type).split("/");
+	        String roomNumber[] = roomservice.getAvailableRoomNumbers(hotelID, type).split("/");
 	        if(roomNumber.length==0){
 	        	numbers[i]="无空闲房间";
 	        	continue;

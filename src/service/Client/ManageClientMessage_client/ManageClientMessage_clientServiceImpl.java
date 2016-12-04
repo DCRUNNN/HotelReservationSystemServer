@@ -1,5 +1,7 @@
 package service.Client.ManageClientMessage_client;
 
+import java.rmi.RemoteException;
+
 import data.dao.ClientDAO;
 import data.dao.impl.ClientDaoImpl;
 import po.ClientPO;
@@ -16,7 +18,7 @@ public class ManageClientMessage_clientServiceImpl implements ManageClientMessag
 	}
 	
 	@Override
-	public ClientVO getClientVO(String clientID) {
+	public ClientVO getClientVO(String clientID) throws RemoteException {
 		
 		ClientPO po = clientDao.getClientPO(clientID);
 		if(po==null){
@@ -28,7 +30,7 @@ public class ManageClientMessage_clientServiceImpl implements ManageClientMessag
 	}
 
 	@Override
-	public boolean changeClientMessage(ClientVO vo) {
+	public boolean changeClientMessage(ClientVO vo) throws RemoteException{
 		
 		ClientPO po = new ClientPO();
 		//vo×ª»¯Îªpo

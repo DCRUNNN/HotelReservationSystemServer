@@ -1,5 +1,7 @@
 package vo;
 
+import java.io.Serializable;
+
 import po.HotelPO;
 
 /**
@@ -25,7 +27,12 @@ import po.HotelPO;
  * company                       酒店的所有合作企业(company1+"/"+company2)
  * @author Xihao Zeng
  * */
-public class HotelVO {
+public class HotelVO implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2122926414648553490L;
 
 	private String orderCreateDate;
 	

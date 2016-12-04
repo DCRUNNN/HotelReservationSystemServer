@@ -1,5 +1,7 @@
 package vo;
 
+import java.io.Serializable;
+
 import po.CreditPO;
 
 /**
@@ -9,9 +11,14 @@ import po.CreditPO;
  * cause       引起信用变化的原因
  * change      变化幅度
  * */
-public class CreditVO {
+public class CreditVO implements Serializable{
 
-    private String time;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -8780211311542514238L;
+
+	private String time;
 	
 	private String clientID;
 	

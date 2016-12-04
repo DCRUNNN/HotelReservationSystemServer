@@ -1,5 +1,6 @@
 package uidriver.order;
 
+import java.rmi.RemoteException;
 import java.util.List;
 
 import service.Order.BrowseOrder_hotelWorker.BrowseOrder_hotelWorkerService;
@@ -8,17 +9,17 @@ import vo.OrderVO;
 
 public class BrowseOrder_hotelWorkerDriver {
 
-	public static void main(String args[]){
+	public static void main(String args[]) throws RemoteException{
 		
 		demo1();
 	}
 
-	private static void demo1() {
+	private static void demo1() throws RemoteException {
 		
 		String hotelID = "00001";
-		BrowseOrder_hotelWorkerService service = new BrowseOrder_hotelWorkerServiceImpl(hotelID);
+		BrowseOrder_hotelWorkerService service = new BrowseOrder_hotelWorkerServiceImpl();
 		
-		List<OrderVO> volist = service.getExecutedOrders();
+		List<OrderVO> volist = service.getExecutedOrders(hotelID);
 		for(OrderVO vo:volist){
 			show(vo);
 		}

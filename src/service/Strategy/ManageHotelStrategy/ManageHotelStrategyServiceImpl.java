@@ -1,5 +1,6 @@
 package service.Strategy.ManageHotelStrategy;
 
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,7 +23,7 @@ public class ManageHotelStrategyServiceImpl implements ManageHotelStrategyServic
 		dao = StrategyDaoImpl.getInstance();
 	}
 	@Override
-	public List<StrategyVO> getAllHotelStrategy(String hotelID) {
+	public List<StrategyVO> getAllHotelStrategy(String hotelID) throws RemoteException{
 		
 		List<StrategyPO> polist = dao.getAllHotelStrategies(hotelID);
 		List<StrategyVO> volist = new ArrayList<StrategyVO>();
@@ -34,7 +35,7 @@ public class ManageHotelStrategyServiceImpl implements ManageHotelStrategyServic
 	}
 
 	@Override
-	public boolean addHotelStrategy(StrategyVO strategyVO) {
+	public boolean addHotelStrategy(StrategyVO strategyVO)throws RemoteException {
 		
 		StrategyPO po = new StrategyPO();
 		
@@ -63,7 +64,7 @@ public class ManageHotelStrategyServiceImpl implements ManageHotelStrategyServic
 	}
 
 	@Override
-	public boolean changeHotelStrategy(StrategyVO strategyVO) {
+	public boolean changeHotelStrategy(StrategyVO strategyVO) throws RemoteException{
 		
 		StrategyPO po = new StrategyPO();
 		po.setStrategyID(strategyVO.getStrategyID());
@@ -85,7 +86,7 @@ public class ManageHotelStrategyServiceImpl implements ManageHotelStrategyServic
 	}
 
 	@Override
-	public boolean deleteHotelStrategy(String strategyID) {
+	public boolean deleteHotelStrategy(String strategyID) throws RemoteException{
 		
 		return dao.deleteStrategy(strategyID);
 	}

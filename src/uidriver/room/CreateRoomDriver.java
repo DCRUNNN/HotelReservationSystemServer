@@ -1,12 +1,14 @@
 package uidriver.room;
 
+import java.rmi.RemoteException;
+
 import service.Room.CreateRoom.CreateRoomInfoService;
 import service.Room.CreateRoom.CreateRoomInfoServiceImpl;
 import vo.RoomVO;
 
 public class CreateRoomDriver {
 
-	public static void main(String args[]){
+	public static void main(String args[]) throws RemoteException{
 		
 		CreateRoomInfoService service = new CreateRoomInfoServiceImpl();
 		

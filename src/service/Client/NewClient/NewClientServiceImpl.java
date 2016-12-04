@@ -5,7 +5,7 @@ import data.dao.impl.ClientDaoImpl;
 import po.ClientPO;
 import service.Account.ProvidedService.AccountProvidedService;
 import service.Account.ProvidedService.AccountProvidedServiceImpl;
-import service.Client.CreateClientID.CreateClientID;
+import service.Client.help.CreateClientID;
 import vo.ClientVO;
 
 public class NewClientServiceImpl implements NewClientService{

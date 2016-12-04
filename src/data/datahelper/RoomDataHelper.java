@@ -26,5 +26,9 @@ public interface RoomDataHelper {
 	public boolean changeRoomState(String hotelId, String roomId, String state);
 	
 	public boolean changeBookDate(String hotelId, String roomId, String bookDate);
+
+	public List<String> getRoomType(String hotelId);
+
+	public List<String> getRoomState(String hotelId);
 	
 }

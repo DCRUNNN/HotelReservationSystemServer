@@ -1,5 +1,6 @@
 package service.Order.ExecuteOrder;
 
+import java.rmi.RemoteException;
 import java.util.List;
 
 import vo.OrderVO;
@@ -12,53 +13,56 @@ public class ExecuteOrderServiceImpl implements ExecuteOrderService{
 
     private ChangeOrder change;
     
-	public ExecuteOrderServiceImpl(String hotelID){
+	public ExecuteOrderServiceImpl(){
 		
-		change = new ChangeOrder(hotelID);
+		//把change的实例化留在输入酒店id之后
 	}
 	
 	@Override
-	public List<OrderVO> getUnexecutedOrders(String clientID){
+	public List<OrderVO> getUnexecutedOrders(String hotelID,String clientID)throws RemoteException{
 		
+		change = new ChangeOrder(hotelID);
 		return change.getUnexecutedOrders(clientID);
 	}
 	
 	@Override
-	public List<OrderVO> getAbnormalOrders(String clientID){
+	public List<OrderVO> getAbnormalOrders(String hotelID,String clientID)throws RemoteException{
+		
+		change = new ChangeOrder(hotelID);
 		return change.getAbnormalOrders(clientID);
 	}
 	@Override
-	public String getAllRoomType(String orderID) {
+	public String getAllRoomType(String orderID)throws RemoteException {
 		
 		return change.getAllRoomType(orderID);
 	}
 
 	@Override
-	public String getAllRoomNumber(String orderID) {
+	public String getAllRoomNumber(String orderID) throws RemoteException{
 		
 		return change.getAllRoomNumber(orderID);
 	}
 
 	@Override
-	public void setRoomPeople(String roomNumber, int peopleNumber) {
+	public void setRoomPeople(String roomNumber, int peopleNumber)throws RemoteException {
 		
 		change.serRoomPeople(roomNumber, peopleNumber);
 	}
 
 	@Override
-	public void setRoomChild(String roomNumber, boolean hasChild) {
+	public void setRoomChild(String roomNumber, boolean hasChild) throws RemoteException{
 		
 		change.setRoomChild(roomNumber, hasChild);
 	}
 
 	@Override
-	public boolean executeOrder() {
+	public boolean executeOrder()throws RemoteException {
 		
 		return change.executeOrder();
 	}
 
 	@Override
-	public String getDelayRoomNumber(String orderID) {
+	public String getDelayRoomNumber(String orderID) throws RemoteException{
 		
 		return change.getDelayRoomNumber(orderID);
 	}

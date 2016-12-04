@@ -1,5 +1,6 @@
 package service.Room.ChangeRoomInfo;
 
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,83 +12,70 @@ import service.Hotel.ProvidedService.HotelProvidedServiceImpl;
 import vo.RoomVO;
 
 public class ChangeRoomInfoServiceImpl implements ChangeRoomInfoService {
-
-	private String hotelId;
-	
-	private List<RoomVO> hotelRoomList;
 	
 	private HotelProvidedService hotelService;
 	
 	private RoomDao roomDao;
 	
-	public ChangeRoomInfoServiceImpl(String hotelId) {
+	public ChangeRoomInfoServiceImpl() {
 		
-		this.hotelId=hotelId;
 		roomDao=RoomDaoImpl.getInstance();
 		hotelService = new HotelProvidedServiceImpl();
-		initHotelRoomList();
 	}
 	
-	private void initHotelRoomList() {
-	
-		hotelRoomList = new ArrayList<RoomVO>();
-	    List<RoomPO> polist = roomDao.getAllRoomList(hotelId);
+	@Override
+	public List<RoomVO> getAllRoomList(String hotelID) throws RemoteException{
+		
+		List<RoomVO> hotelRoomList = new ArrayList<RoomVO>();
+	    List<RoomPO> polist = roomDao.getAllRoomList(hotelID);
 	    for(RoomPO po:polist){
 	    	RoomVO vo = new RoomVO(po);
 	    	hotelRoomList.add(vo);
 	    }
-	}
-	@Override
-	public List<RoomVO> getAllRoomList() {
-		
 		return hotelRoomList;
 	}
 
 	@Override
-	public RoomVO getRoomByNum(String roomId) {
+	public RoomVO getRoomByNum(String hotelID,String roomId)  throws RemoteException{
 		
-		for(RoomVO vo:hotelRoomList){
-			if(roomId.equals(vo.getRoomNumber())){
-				return vo;
-			}
-		}
+	    List<RoomPO> polist = roomDao.getAllRoomList(hotelID);
+	    for(RoomPO po:polist){
+	    	if(roomId.equals(po.getRoomNumber())){
+	    		return new RoomVO(po);
+	    	}
+	    }
 		return null;
 	}
 
 	@Override
-	public List<RoomVO> getRoomByState(String state) {
-	
-		List<RoomVO> list=new ArrayList<RoomVO>();
-		for(RoomVO roomVO:hotelRoomList){
-			if(state.equals(roomVO.getRoomState())){
-				list.add(roomVO);
-			}
-		}
-		return list;
-	}
-
-	@Override
-	public List<RoomVO> getRoomByType(String type) {
-	
-		List<RoomVO> list=new ArrayList<RoomVO>();
-		for(RoomVO roomVO:hotelRoomList){
-			//遍历所有的房间信息，找到房间状态为type的房间进行返回
-			if(type.equals(roomVO.getRoomType())){
-				list.add(roomVO);
-			}
-		}
-		return list;
-	}
-
-	@Override
-	public boolean changeRoomPrice(String type, double price, String hotelId) {
+	public List<RoomVO> getRoomByState(String hotelID,String state)  throws RemoteException{
 		
-		//改变对象里面的List<RoomVO>
-		for(RoomVO vo:hotelRoomList){
-			if(type.equals(vo.getRoomType())){
-				vo.setPrice(price);
-			}
-		}
+		List<RoomVO> hotelRoomList = new ArrayList<RoomVO>();
+	    List<RoomPO> polist = roomDao.getAllRoomList(hotelID);
+	    for(RoomPO po:polist){
+	        if(po.getRoomState().equals(state)){
+	        	hotelRoomList.add(new RoomVO(po));
+	        }
+	    }
+		return hotelRoomList;
+	}
+
+	@Override
+	public List<RoomVO> getRoomByType(String hotelID,String type) throws RemoteException {
+		
+		List<RoomVO> hotelRoomList = new ArrayList<RoomVO>();
+	    List<RoomPO> polist = roomDao.getAllRoomList(hotelID);
+	    for(RoomPO po:polist){
+	        if(po.getRoomType().equals(type)){
+	        	hotelRoomList.add(new RoomVO(po));
+	        }
+	    }
+		return hotelRoomList;
+	}
+
+	@Override
+	public boolean changeRoomPrice(String type, double price, String hotelId)  throws RemoteException{
+		
 		
 		if(!hotelService.changeRoomTypeAndPrice(type,price,hotelId)){
 			return false;
@@ -96,29 +84,27 @@ public class ChangeRoomInfoServiceImpl implements ChangeRoomInfoService {
 	}
 
 	@Override
-	public boolean changeRoomState(String hotelId, String roomId, String state) {
+	public boolean changeRoomState(String hotelId, String roomId, String state) throws RemoteException {
 	
-		//改变hotelRoomList的房间状态
-		for(RoomVO vo:hotelRoomList){
-			if(roomId.equals(vo.getRoomNumber())){
-				vo.setRoomState(state);
-			}
-		}
 		return roomDao.changeRoomState(hotelId, roomId, state);
 	}
 
 	@Override
-	public boolean deleteRoom(String hotelId, String roomId) {
-	
-		RoomVO roomvo = null;
-		for(RoomVO vo:hotelRoomList){
-			if(roomId.equals(vo.getRoomNumber())){
-				roomvo = vo;
-			}
-		}
-		hotelRoomList.remove(roomvo);//在hotelRoomList里面删除房间信息
+	public boolean deleteRoom(String hotelId, String roomId)  throws RemoteException{
 		
 		return roomDao.deleteRoom(hotelId, roomId);
+	}
+
+	@Override
+	public List<String> getRoomType(String hotelId)throws RemoteException {
+		
+		return roomDao.getRoomType(hotelId);
+	}
+
+	@Override
+	public List<String> getRoomState(String hotelId)throws RemoteException {
+		
+		return roomDao.getRoomState(hotelId);
 	}
 
 }
