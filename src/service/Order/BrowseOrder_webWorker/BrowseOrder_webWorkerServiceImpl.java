@@ -3,8 +3,6 @@ package service.Order.BrowseOrder_webWorker;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Vector;
-
 import data.dao.OrderDao;
 import data.dao.impl.OrderDaoImpl;
 import po.OrderPO;

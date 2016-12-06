@@ -1,5 +1,6 @@
 package data.datahelper;
 
+import java.io.InputStream;
 /**
  * @author Cong Deng
  */
@@ -27,5 +28,9 @@ public interface HotelDataHelper {
 
 	public boolean isExist(String hotelProvince, String hotelCity, String hotelCBD, String hotelAddress,
 			String hotelName);
+
+	public boolean addPhoto(InputStream in, String hotelID);
+
+	public InputStream getHotelImage(String hotelID);
 
 }

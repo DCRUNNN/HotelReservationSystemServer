@@ -2,6 +2,7 @@ package uidriver.room;
 
 import java.rmi.RemoteException;
 
+import rmi.HotelWorkerDataRemoteObject;
 import service.Room.CreateRoom.CreateRoomInfoService;
 import service.Room.CreateRoom.CreateRoomInfoServiceImpl;
 import vo.RoomVO;
@@ -10,7 +11,8 @@ public class CreateRoomDriver {
 
 	public static void main(String args[]) throws RemoteException{
 		
-		CreateRoomInfoService service = new CreateRoomInfoServiceImpl();
+		//CreateRoomInfoService service = new CreateRoomInfoServiceImpl();
+		HotelWorkerDataRemoteObject service = new HotelWorkerDataRemoteObject();
 		
 		String hotelID = "00001";
 	    String []roomTypeAndPrice = service.getAllRoomTypeAndPrice(hotelID).split("/");

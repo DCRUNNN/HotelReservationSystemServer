@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<hotelworkerservice>
+  <maintainHotel>service.Hotel.MaintainHotelMessage.MaintainHotelMessageServiceImpl</maintainHotel> 
+  <createRoom>service.Room.CreateRoom.CreateRoomInfoServiceImpl</createRoom>
+  <hotelStrategy>service.Strategy.ManageHotelStrategy.ManageHotelStrategyServiceImpl</hotelStrategy>
+  <executeOrder>service.Order.ExecuteOrder.ExecuteOrderServiceImpl</executeOrder>
+  <checkOut>service.Room.CheckOutRoom.CheckOutRoomServiceImpl</checkOut>
+  <browseOrder>service.Order.BrowseOrder_hotelWorker.BrowseOrder_hotelWorkerServiceImpl</browseOrder>
+  <changeRoom>service.Room.ChangeRoomInfo.ChangeRoomInfoServiceImpl</changeRoom>
+</hotelworkerservice>

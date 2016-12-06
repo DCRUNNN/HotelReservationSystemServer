@@ -4,20 +4,14 @@ import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.List;
 
+import data.datahelper.xmlhelper.XMLHelper;
 import service.Hotel.MaintainHotelMessage.MaintainHotelMessageService;
-import service.Hotel.MaintainHotelMessage.MaintainHotelMessageServiceImpl;
 import service.Order.BrowseOrder_hotelWorker.BrowseOrder_hotelWorkerService;
-import service.Order.BrowseOrder_hotelWorker.BrowseOrder_hotelWorkerServiceImpl;
 import service.Order.ExecuteOrder.ExecuteOrderService;
-import service.Order.ExecuteOrder.ExecuteOrderServiceImpl;
 import service.Room.ChangeRoomInfo.ChangeRoomInfoService;
-import service.Room.ChangeRoomInfo.ChangeRoomInfoServiceImpl;
 import service.Room.CheckOutRoom.CheckOutRoomService;
-import service.Room.CheckOutRoom.CheckOutRoomServiceImpl;
 import service.Room.CreateRoom.CreateRoomInfoService;
-import service.Room.CreateRoom.CreateRoomInfoServiceImpl;
 import service.Strategy.ManageHotelStrategy.ManageHotelStrategyService;
-import service.Strategy.ManageHotelStrategy.ManageHotelStrategyServiceImpl;
 import vo.HotelVO;
 import vo.OrderVO;
 import vo.RoomVO;
@@ -42,13 +36,21 @@ public class HotelWorkerDataRemoteObject extends UnicastRemoteObject implements 
 	public HotelWorkerDataRemoteObject() throws RemoteException {
 		
 		super();
-		maintainHotel = new MaintainHotelMessageServiceImpl();
-		createRoom = new CreateRoomInfoServiceImpl();
-		hotelStrategy = new ManageHotelStrategyServiceImpl();
-		executeOrder = new ExecuteOrderServiceImpl();
-		checkOut = new CheckOutRoomServiceImpl();
-		browseOrder = new BrowseOrder_hotelWorkerServiceImpl();
-		changeRoom = new ChangeRoomInfoServiceImpl();
+		String filePath = "./xml/servicexml/hotelworkerservice.xml";
+		try {
+			//使用反射和配置文件来配置接口的实现类
+			maintainHotel = (MaintainHotelMessageService) Class.forName(XMLHelper.getClass(filePath, "maintainHotel")).newInstance();
+			createRoom = (CreateRoomInfoService) Class.forName(XMLHelper.getClass(filePath, "createRoom")).newInstance();
+			hotelStrategy = (ManageHotelStrategyService) Class.forName(XMLHelper.getClass(filePath, "hotelStrategy")).newInstance();
+			executeOrder = (ExecuteOrderService) Class.forName(XMLHelper.getClass(filePath, "executeOrder")).newInstance();
+			checkOut = (CheckOutRoomService) Class.forName(XMLHelper.getClass(filePath, "checkOut")).newInstance();
+			browseOrder = (BrowseOrder_hotelWorkerService) Class.forName(XMLHelper.getClass(filePath, "browseOrder")).newInstance();
+			changeRoom = (ChangeRoomInfoService) Class.forName(XMLHelper.getClass(filePath, "changeRoom")).newInstance();
+		
+		} catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		
 	}
 
 	@Override

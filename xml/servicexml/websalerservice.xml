@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<websalerservice>
+   <websiteStrategy>service.Strategy.ManageWebsiteStrategy.ManageWebsiteStrategyServiceImpl</websiteStrategy>
+   <browseOrder>service.Order.BrowseOrder_webWorker.BrowseOrder_webWorkerServiceImpl</browseOrder>
+   <addcredit>service.Credit.AddClientCredit.AddClientCreditServiceImpl</addcredit>
+</websalerservice>

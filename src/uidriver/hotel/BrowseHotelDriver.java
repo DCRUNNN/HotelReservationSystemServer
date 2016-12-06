@@ -3,6 +3,7 @@ package uidriver.hotel;
 import java.rmi.RemoteException;
 import java.util.List;
 
+import rmi.ClientDataRemoteObject;
 import service.Hotel.BrowseHotel.BrowseHotelService;
 import service.Hotel.BrowseHotel.BrowseHotelServiceImpl;
 import vo.HotelVO;
@@ -22,8 +23,9 @@ public class BrowseHotelDriver {
 		String hotelCBD = "化州商圈";
 		String clientID = "0000001";
 		String hotelID = "00001";
-		BrowseHotelService service = new BrowseHotelServiceImpl();
-		
+		//BrowseHotelService service = new BrowseHotelServiceImpl();
+		 ClientDataRemoteObject service = new ClientDataRemoteObject();
+		 
 		System.out.println(service.getProvinces());//输出所有的省份
 		System.out.println(service.getCities(hotelProvince));//输出所有的城市
 		System.out.println(service.getCBDS(hotelProvince, hotelCity));//输出所有的商圈

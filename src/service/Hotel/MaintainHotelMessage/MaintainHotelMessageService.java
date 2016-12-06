@@ -1,5 +1,6 @@
 package service.Hotel.MaintainHotelMessage;
 
+import java.io.InputStream;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 
@@ -47,4 +48,17 @@ public interface MaintainHotelMessageService extends Remote{
 	 * @return 返回是否删除成功
 	 * */
 	public boolean deleteCompany(String hotelID,String companyAddress)throws RemoteException;
+	
+	/**
+	 * @param hotelID 酒店编号
+	 * @return InputStream 返回酒店对应的图片的输入流
+	 * */
+	//public InputStream getHotelImage(String hotelID) throws RemoteException;
+	
+	/**
+	 * @param in 图片文件流
+	 * @param hotelID 酒店编号
+	 * @return 图片文件以流的方式上传到服务器，成功返回true，否则为false
+	 * */
+    //public boolean uploadHotelImage(InputStream in,String hotelID) throws RemoteException;
 }

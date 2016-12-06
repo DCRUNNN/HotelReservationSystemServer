@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<clientserviceimpl>
+   <manageMessage>service.Client.ManageClientMessage_client.ManageClientMessage_clientServiceImpl</manageMessage>
+   <myOrder>service.Order.MyOrder.MyOrderServiceImpl</myOrder>
+   <myHotel>service.Hotel.MyHotel.MyHotelServiceImpl</myHotel>
+   <showCredit>service.Credit.ShowCreditRecord.ShowCreditRecordServiceImpl</showCredit>
+   <browseHotel>service.Hotel.BrowseHotel.BrowseHotelServiceImpl</browseHotel>
+   <searchHotel>service.Hotel.SearchHotel.SearchHotelServiceImpl</searchHotel>
+   <createOrder>service.Order.CreateOrder.CreateOrderServiceImpl</createOrder>
+   <evaluateOrder>service.Order.EvaluateOrder.EvaluateOrderServiceImpl</evaluateOrder>
+   <applyVip>service.Client.ApplyForVip.ApplyForVipServiceImpl</applyVip>
+</clientserviceimpl>

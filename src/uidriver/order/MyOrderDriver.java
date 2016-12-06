@@ -3,6 +3,7 @@ package uidriver.order;
 import java.rmi.RemoteException;
 import java.util.List;
 
+import rmi.ClientDataRemoteObject;
 import service.Order.MyOrder.MyOrderService;
 import service.Order.MyOrder.MyOrderServiceImpl;
 import vo.OrderVO;
@@ -19,7 +20,8 @@ public class MyOrderDriver {
 		
 		//对0000001客户的订单进行查看
 		String clientID = "0000001";
-		MyOrderService service = new MyOrderServiceImpl();
+		//MyOrderService service = new MyOrderServiceImpl();
+		 ClientDataRemoteObject service = new ClientDataRemoteObject();
 		List<OrderVO> volist = service.getAbnormalOrders(clientID);
 		System.out.println(volist.size()==0?"暂时没有异常订单":"存在异常订单");
 		volist = service.getUnexecutedOrders(clientID);

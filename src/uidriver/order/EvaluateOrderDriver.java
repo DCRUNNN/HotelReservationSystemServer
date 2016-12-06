@@ -22,6 +22,7 @@ public class EvaluateOrderDriver {
 		EvaluateOrderService service = new EvaluateOrderServiceImpl();
 		String comment = "追加酒店工作人员的服务态度很不错！";
 		System.out.println(service.addExtraComment(orderID,comment)?"追加评论成功！":"评论失败！");
+		
 	}
 
 	private static void demo3() throws RemoteException {

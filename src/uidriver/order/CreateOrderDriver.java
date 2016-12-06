@@ -2,6 +2,7 @@ package uidriver.order;
 
 import java.rmi.RemoteException;
 
+import rmi.ClientDataRemoteObject;
 import service.Order.CreateOrder.CreateOrderService;
 import service.Order.CreateOrder.CreateOrderServiceImpl;
 
@@ -57,8 +58,8 @@ public class CreateOrderDriver {
 		//当客户的信用点低于0的时候 会提示生成订单失败
 		String clientID = "0000002";
 		String hotelID = "00001";
-		CreateOrderService service = new CreateOrderServiceImpl();
-		
+		//CreateOrderService service = new CreateOrderServiceImpl();
+		 ClientDataRemoteObject service = new ClientDataRemoteObject();
 		System.out.println(service.checkCreditPoint(clientID));
 	}
 

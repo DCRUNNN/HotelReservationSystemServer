@@ -4,24 +4,16 @@ import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.List;
 
+import data.datahelper.xmlhelper.XMLHelper;
 import service.Client.ApplyForVip.ApplyForVipService;
-import service.Client.ApplyForVip.ApplyForVipServiceImpl;
 import service.Client.ManageClientMessage_client.ManageClientMessage_clientService;
-import service.Client.ManageClientMessage_client.ManageClientMessage_clientServiceImpl;
 import service.Credit.ShowCreditRecord.ShowCreditRecordService;
-import service.Credit.ShowCreditRecord.ShowCreditRecordServiceImpl;
 import service.Hotel.BrowseHotel.BrowseHotelService;
-import service.Hotel.BrowseHotel.BrowseHotelServiceImpl;
 import service.Hotel.MyHotel.MyHotelService;
-import service.Hotel.MyHotel.MyHotelServiceImpl;
 import service.Hotel.SearchHotel.SearchHotelService;
-import service.Hotel.SearchHotel.SearchHotelServiceImpl;
 import service.Order.CreateOrder.CreateOrderService;
-import service.Order.CreateOrder.CreateOrderServiceImpl;
 import service.Order.EvaluateOrder.EvaluateOrderService;
-import service.Order.EvaluateOrder.EvaluateOrderServiceImpl;
 import service.Order.MyOrder.MyOrderService;
-import service.Order.MyOrder.MyOrderServiceImpl;
 import vo.ClientVO;
 import vo.CreditVO;
 import vo.HotelVO;
@@ -37,7 +29,7 @@ public class ClientDataRemoteObject extends UnicastRemoteObject
 	 */
 	private static final long serialVersionUID = -3573180055433011613L;
 	private ManageClientMessage_clientService manageMessage;
-	private MyOrderService myorder;
+	private MyOrderService myOrder;
 	private MyHotelService myHotel;
 	private ShowCreditRecordService showCredit;
 	private BrowseHotelService browseHotel;
@@ -46,18 +38,25 @@ public class ClientDataRemoteObject extends UnicastRemoteObject
 	private EvaluateOrderService evaluateOrder;
 	private ApplyForVipService applyVip;
 	
-	protected ClientDataRemoteObject() throws RemoteException {
+	public ClientDataRemoteObject() throws RemoteException {
 		
 		super();
-		manageMessage = new ManageClientMessage_clientServiceImpl();
-		myorder = new MyOrderServiceImpl();
-		myHotel = new MyHotelServiceImpl();
-		showCredit = new ShowCreditRecordServiceImpl();
-		browseHotel = new BrowseHotelServiceImpl();
-		searchHotel = new SearchHotelServiceImpl();
-		createOrder = new CreateOrderServiceImpl();
-		evaluateOrder = new EvaluateOrderServiceImpl();
-		applyVip = new ApplyForVipServiceImpl();
+		String filePath = "./xml/servicexml/clientservice.xml";
+		try {
+			//利用反射机制和配置文件 加强可修改性
+			manageMessage = (ManageClientMessage_clientService)Class.forName(XMLHelper.getClass(filePath, "manageMessage")).newInstance();
+			myOrder = (MyOrderService)Class.forName(XMLHelper.getClass(filePath, "myOrder")).newInstance();
+			myHotel = (MyHotelService)Class.forName(XMLHelper.getClass(filePath, "myHotel")).newInstance();
+			showCredit = (ShowCreditRecordService)Class.forName(XMLHelper.getClass(filePath, "showCredit")).newInstance();
+			browseHotel = (BrowseHotelService)Class.forName(XMLHelper.getClass(filePath, "browseHotel")).newInstance();
+			searchHotel = (SearchHotelService)Class.forName(XMLHelper.getClass(filePath, "searchHotel")).newInstance();
+			createOrder = (CreateOrderService)Class.forName(XMLHelper.getClass(filePath, "createOrder")).newInstance();
+			evaluateOrder = (EvaluateOrderService)Class.forName(XMLHelper.getClass(filePath, "evaluateOrder")).newInstance();
+			applyVip = (ApplyForVipService)Class.forName(XMLHelper.getClass(filePath, "applyVip")).newInstance();
+		
+		} catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override
@@ -216,37 +215,37 @@ public class ClientDataRemoteObject extends UnicastRemoteObject
 	@Override
 	public List<OrderVO> getExecutedOrders(String clientID) throws RemoteException{
 		
-		return myorder.getExecutedOrders(clientID);
+		return myOrder.getExecutedOrders(clientID);
 	}
 
 	@Override
 	public List<OrderVO> getUnexecutedOrders(String clientID) throws RemoteException{
 		
-		return myorder.getUnexecutedOrders(clientID);
+		return myOrder.getUnexecutedOrders(clientID);
 	}
 
 	@Override
 	public List<OrderVO> getWithdrawnOrders(String clientID) throws RemoteException{
 		
-		return myorder.getWithdrawnOrders(clientID);
+		return myOrder.getWithdrawnOrders(clientID);
 	}
 
 	@Override
 	public List<OrderVO> getAbnormalOrders(String clientID) throws RemoteException{
 		
-		return myorder.getAbnormalOrders(clientID);
+		return myOrder.getAbnormalOrders(clientID);
 	}
 
 	@Override
 	public OrderVO getOrderVO(String orderID)throws RemoteException{
 		
-		return myorder.getOrderVO(orderID);
+		return myOrder.getOrderVO(orderID);
 	}
 
 	@Override
 	public boolean withdraw(String clientID, String orderID)throws RemoteException {
 		
-		return myorder.withdraw(clientID, orderID);
+		return myOrder.withdraw(clientID, orderID);
 	}
 
 	@Override

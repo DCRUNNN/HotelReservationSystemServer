@@ -3,6 +3,7 @@ package uidriver.credit;
 import java.rmi.RemoteException;
 import java.util.List;
 
+import rmi.ClientDataRemoteObject;
 import service.Credit.ShowCreditRecord.ShowCreditRecordService;
 import service.Credit.ShowCreditRecord.ShowCreditRecordServiceImpl;
 import vo.CreditVO;
@@ -11,7 +12,8 @@ public class ShowCreditRecordDriver {
 
 	public static void main(String args[]) throws RemoteException{
 		
-		ShowCreditRecordService service = new ShowCreditRecordServiceImpl();
+		 ClientDataRemoteObject service = new ClientDataRemoteObject();
+		//ShowCreditRecordService service = new ShowCreditRecordServiceImpl();
 		String clientID ="0000001";
 		List<CreditVO> volist = service.ShowAllCredit(clientID);
 		System.out.println(service.getCreditPoint(clientID));//输出；客户的剩余信用点

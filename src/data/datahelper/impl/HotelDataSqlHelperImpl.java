@@ -1,5 +1,6 @@
 package data.datahelper.impl;
 
+import java.io.InputStream;
 /**
  * @author Cong Deng
  */
@@ -368,6 +369,60 @@ public class HotelDataSqlHelperImpl implements HotelDataHelper {
 			e.printStackTrace();
 		}
 		return false;
+	}
+
+	@Override
+	public boolean addPhoto(InputStream in, String hotelID) {
+		
+		PreparedStatement ps = null;
+		if(this.conn ==null){
+			new HotelDataSqlHelperImpl();
+		}
+		
+		try{
+			String sql = "insert into hotelphoto (hotelid,photo) values(?,?)";
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, hotelID);
+			ps.setBinaryStream(2, in,in.available());
+			
+			int count = ps.executeUpdate();
+			if(count>0){
+				return true;
+			}
+			
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			if(ps!=null){
+				try {
+					ps.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			
+			HotelDataSqlHelperImpl.close();
+		}
+		
+		return false;
+	}
+
+	@Override
+	public InputStream getHotelImage(String hotelID) {
+	
+		String sql = "select *from hotelphoto where hotelid="+hotelID;
+		InputStream in = null;
+		ResultSet set = HotelDataSqlHelperImpl.executeQuery(sql);
+		try{
+			while(set.next()){
+				in = set.getBinaryStream("photo");
+			}
+			HotelDataSqlHelperImpl.close();
+		}catch(SQLException e){
+			e.printStackTrace();
+			HotelDataSqlHelperImpl.close();
+		}
+		return in;
 	}
 
 }

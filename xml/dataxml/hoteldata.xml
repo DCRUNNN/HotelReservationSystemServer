@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<hoteldata>
+  <class>data.datahelper.impl.HotelDataSqlHelperImpl</class>
+</hoteldata>

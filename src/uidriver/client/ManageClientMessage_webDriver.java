@@ -3,6 +3,7 @@ package uidriver.client;
 import java.rmi.RemoteException;
 import java.util.List;
 
+import rmi.WebManagerDataRemoteObject;
 import service.Client.ManageClientMessage_webManager.ClientMessage_webManagerService;
 import service.Client.ManageClientMessage_webManager.ClientMessage_webManagerServiceImpl;
 import vo.ClientVO;
@@ -11,7 +12,8 @@ public class ManageClientMessage_webDriver {
 
 	public static void main(String args[]) throws RemoteException{
 		
-		ClientMessage_webManagerService service = new ClientMessage_webManagerServiceImpl();
+		//ClientMessage_webManagerService service = new ClientMessage_webManagerServiceImpl();
+		WebManagerDataRemoteObject service = new WebManagerDataRemoteObject();
 		
 		List<ClientVO> volist = service.getAllClients();//得到所有的客户信息
 		for(ClientVO vo:volist){

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<webmanagerservice>
+   <manageClient>service.Client.ManageClientMessage_webManager.ClientMessage_webManagerServiceImpl</manageClient>
+   <managePersonnel>service.Personnel.ManagePersonnelMessage.ManagePersonnelMessageServiceImpl</managePersonnel>
+   <addHotel>service.Hotel.AddHotel.AddHotelServiceImpl</addHotel>
+</webmanagerservice>

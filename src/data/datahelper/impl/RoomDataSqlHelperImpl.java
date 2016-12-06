@@ -241,21 +241,24 @@ public class RoomDataSqlHelperImpl implements RoomDataHelper {
 
 	@Override
 	public boolean addRoom(RoomPO po) {
-		
 		String hotelId=po.getHotelID();
+		String roomNumber=po.getRoomNumber();
+		
+		if(getRoomByNum(hotelId, roomNumber)!=null){
+			return false;
+		}
+		
 		String bookDate=po.getBookDate();
 		String roomIntro=po.getRoomIntroduction();
 		String roomState=po.getRoomState();
 		String roomType=po.getRoomType();
-		String roomNumber=po.getRoomNumber();
 		double price=po.getPrice();
-		
+
 		//create sql statement
 		String sql="INSERT INTO t_room(hotelid,roomnumber,roomtype,roomstate,"+
 					"introduction,bookdate,price) VALUES "+ "('"+hotelId+"','"
 					+roomNumber+"','"+roomType+"','"+roomState+"','"+roomIntro+"','"
 					+bookDate+"',"+price+");";
-		
 		int i=RoomDataSqlHelperImpl.executeUpdate(sql);
 		RoomDataSqlHelperImpl.close();
 		if(-1==i){
@@ -266,6 +269,10 @@ public class RoomDataSqlHelperImpl implements RoomDataHelper {
 
 	@Override
 	public boolean deleteRoom(String hotelId, String roomId) {
+		
+		if(getRoomByNum(hotelId, roomId)==null){
+			return false;
+		}
 		
 		//create sql statement
 		String sql="DELETE FROM t_room WHERE hotelid='"+hotelId
@@ -282,6 +289,9 @@ public class RoomDataSqlHelperImpl implements RoomDataHelper {
 	public boolean changeRoomPrice(String type, double price, String hotelId) {
 		
 		//create sql statement
+		if(getRoomByType(hotelId, type)==null){
+			return false;
+		}
 		String sql="UPDATE t_room SET price='"+price+"' WHERE hotelid='"+hotelId+"' AND roomtype='"+type+"';";
 		int i=RoomDataSqlHelperImpl.executeUpdate(sql);
 		RoomDataSqlHelperImpl.close();
@@ -293,6 +303,10 @@ public class RoomDataSqlHelperImpl implements RoomDataHelper {
 
 	@Override
 	public boolean changeRoomState(String hotelId, String roomId, String state) {
+		
+		if(getRoomByNum(hotelId, roomId)==null){
+			return false;
+		}
 		
 		//create sql statement
 		String sql="UPDATE t_room SET roomstate='"+state+"' WHERE hotelid='"+hotelId+"' AND roomnumber='"+roomId+"';";
@@ -306,8 +320,11 @@ public class RoomDataSqlHelperImpl implements RoomDataHelper {
 
 	@Override
 	public boolean changeBookDate(String hotelId, String roomId, String bookDate) {
-	
-		//create sql statement
+		if(getRoomByNum(hotelId, roomId)==null){
+			return false;
+		}
+		
+		//create sql statement		
 		String sql="UPDATE t_room SET bookdate='"+bookDate+"' WHERE hotelid='"+hotelId+"' AND roomnumber='"+roomId+"';";
 		int i=RoomDataSqlHelperImpl.executeUpdate(sql);
 		RoomDataSqlHelperImpl.close();
@@ -373,4 +390,5 @@ public class RoomDataSqlHelperImpl implements RoomDataHelper {
 		return result.substring(0,result.length()-1);
 	}
 
+	
 }

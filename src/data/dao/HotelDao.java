@@ -1,5 +1,6 @@
 package data.dao;
 
+import java.io.InputStream;
 import java.util.List;
 
 import po.HotelPO;
@@ -64,5 +65,18 @@ public interface HotelDao {
 	 * */
 	public boolean isExist(String hotelProvince, String hotelCity, String hotelCBD, String hotelAddress,
 			String hotelName);
+
+	/**
+	 * @param in 图片输入流
+	 * @param hotelID 酒店编号
+	 * @return 将图片流保存到数据库，成功返回true，失败返回false
+	 * */
+	//public boolean addPhoto(InputStream in, String hotelID);
+
+	/**
+	 * @param hotelID 酒店编号
+	 * @return InputStream 图片的输入流
+	 * */
+	//public InputStream getHotelImage(String hotelID);
 
 }

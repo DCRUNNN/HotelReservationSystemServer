@@ -4,12 +4,14 @@ import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.List;
 
+import data.datahelper.xmlhelper.XMLHelper;
 import service.Client.ManageClientMessage_webManager.ClientMessage_webManagerService;
 import service.Client.ManageClientMessage_webManager.ClientMessage_webManagerServiceImpl;
 import service.Hotel.AddHotel.AddHotelService;
 import service.Hotel.AddHotel.AddHotelServiceImpl;
 import service.Personnel.ManagePersonnelMessage.ManagePersonnelMessageService;
 import service.Personnel.ManagePersonnelMessage.ManagePersonnelMessageServiceImpl;
+import service.Strategy.ManageWebsiteStrategy.ManageWebsiteStrategyService;
 import vo.ClientVO;
 import vo.HotelVO;
 import vo.PersonnelVO;
@@ -29,9 +31,15 @@ public class WebManagerDataRemoteObject extends UnicastRemoteObject implements C
 	public WebManagerDataRemoteObject() throws RemoteException {
 		
 		super();
-		manageClient = new ClientMessage_webManagerServiceImpl();
-		managePersonnel = new ManagePersonnelMessageServiceImpl();
-		addHotel = new AddHotelServiceImpl();
+		String filePath = "./xml/servicexml/webmanagerservice.xml";
+		try {
+			manageClient = (ClientMessage_webManagerService) Class.forName(XMLHelper.getClass(filePath, "manageClient")).newInstance();
+			managePersonnel = (ManagePersonnelMessageService) Class.forName(XMLHelper.getClass(filePath, "managePersonnel")).newInstance();
+			addHotel = (AddHotelService) Class.forName(XMLHelper.getClass(filePath, "addHotel")).newInstance();
+		} catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		
 	}
 
 	@Override

@@ -3,6 +3,7 @@ package uidriver.hotel;
 import java.rmi.RemoteException;
 import java.util.List;
 
+import rmi.ClientDataRemoteObject;
 import service.Hotel.MyHotel.MyHotelService;
 import service.Hotel.MyHotel.MyHotelServiceImpl;
 import vo.HotelVO;
@@ -23,7 +24,8 @@ public class MyHotelDriver {
 	private static void demo1() throws RemoteException {
 		
 		String clientID = "0000001";
-		MyHotelService service = new MyHotelServiceImpl();
+		//MyHotelService service = new MyHotelServiceImpl();
+		 ClientDataRemoteObject service = new ClientDataRemoteObject();
 		List<HotelVO> volist = service.getAbnormalHotels(clientID);
 		System.out.println(volist.size()==0?"暂时没有异常酒店！":"存在异常订单的酒店");
 		volist = service.getUnexecutedHotels(clientID);

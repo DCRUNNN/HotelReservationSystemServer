@@ -3,6 +3,7 @@ package uidriver.order;
 import java.rmi.RemoteException;
 import java.util.List;
 
+import rmi.WebSalerDataRemoteObject;
 import service.Order.BrowseOrder_webWorker.BrowseOrder_webWorkerService;
 import service.Order.BrowseOrder_webWorker.BrowseOrder_webWorkerServiceImpl;
 import vo.OrderVO;
@@ -17,7 +18,9 @@ public class BrowseOrder_webWorker {
 	private static void demo1() throws RemoteException {
 		
 		String cientID = "0000001";
-		BrowseOrder_webWorkerService service = new BrowseOrder_webWorkerServiceImpl();
+		//BrowseOrder_webWorkerService service = new BrowseOrder_webWorkerServiceImpl();
+		WebSalerDataRemoteObject service = new WebSalerDataRemoteObject();
+		
 		List<OrderVO> volist = service.getAllAbnormalOrders();//得到所有的异常订单并且显示
 		for(OrderVO vo:volist){
 			show(vo);
@@ -32,8 +35,8 @@ public class BrowseOrder_webWorker {
 			show(vo);
 		}//得到客户的所有异常订单并且显示
 		
-		String orderID = volist.get(0).getOrderID();
-		System.out.println(service.withdrawAbnormalOrder(orderID)?"撤销异常成功！":"撤销异常失败！");
+		//String orderID = volist.get(0).getOrderID();
+		//System.out.println(service.withdrawAbnormalOrder(orderID)?"撤销异常成功！":"撤销异常失败！");
 		
 	}
 	

@@ -4,12 +4,10 @@ import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.List;
 
+import data.datahelper.xmlhelper.XMLHelper;
 import service.Credit.AddClientCredit.AddClientCreditService;
-import service.Credit.AddClientCredit.AddClientCreditServiceImpl;
 import service.Order.BrowseOrder_webWorker.BrowseOrder_webWorkerService;
-import service.Order.BrowseOrder_webWorker.BrowseOrder_webWorkerServiceImpl;
 import service.Strategy.ManageWebsiteStrategy.ManageWebsiteStrategyService;
-import service.Strategy.ManageWebsiteStrategy.ManageWebsiteStrategyServiceImpl;
 import vo.OrderVO;
 import vo.StrategyVO;
 
@@ -25,12 +23,18 @@ public class WebSalerDataRemoteObject extends UnicastRemoteObject implements Man
 	private BrowseOrder_webWorkerService browseOrder;
 	private AddClientCreditService addcredit;
 	
-	protected WebSalerDataRemoteObject() throws RemoteException {
+	public WebSalerDataRemoteObject() throws RemoteException {
 		
 		super();
-		websiteStrategy = new ManageWebsiteStrategyServiceImpl();
-		browseOrder = new BrowseOrder_webWorkerServiceImpl();
-		addcredit = new AddClientCreditServiceImpl();
+		String filePath = "./xml/servicexml/websalerservice.xml";
+		try {
+			websiteStrategy = (ManageWebsiteStrategyService) Class.forName(XMLHelper.getClass(filePath, "websiteStrategy")).newInstance();
+			browseOrder = (BrowseOrder_webWorkerService) Class.forName(XMLHelper.getClass(filePath, "browseOrder")).newInstance();
+			addcredit = (AddClientCreditService) Class.forName(XMLHelper.getClass(filePath, "addcredit")).newInstance();
+		} catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		
 	}
 
 	@Override
