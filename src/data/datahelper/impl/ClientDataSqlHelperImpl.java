@@ -98,7 +98,7 @@ public class ClientDataSqlHelperImpl implements ClientDataHelper{
 				String birthday=set.getString("birthday");
 				int vipGrade=set.getInt("vipgrade");
 				String hotelIDs = set.getString("hotelids");
-				String companyAddress=set.getString("companyaddress");
+				String companyAddress=set.getString(  "companyaddress");
 				//create a po object to transmit
 				po.setId(id);
 				po.setName(name);
@@ -118,6 +118,12 @@ public class ClientDataSqlHelperImpl implements ClientDataHelper{
 		}
 		ClientDataSqlHelperImpl.close();
 		return po;
+	}
+	
+	public static void main(String args[]){
+		
+		ClientPO po = new ClientDataSqlHelperImpl().getClientPO("0000001");
+		System.out.println(po.getName());
 	}
 
 	@Override

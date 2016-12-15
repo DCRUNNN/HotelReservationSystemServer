@@ -23,7 +23,7 @@ public class MaintainHotelMessageServiceImpl implements MaintainHotelMessageServ
 	
 	@Override
 	public boolean changeHotelInfo(String hotelID,String hotelProvince,String hotelCity, String hotelCBD,String hotelAddress,String hotelName, String introduction, String facilities,
-			int star, String roomTypeAndPrices) throws RemoteException{
+			int star, String roomTypeAndPrices,String telephone) throws RemoteException{
 		
 		HotelPO po = hotelDao.getHotelPO(hotelID);
 		po.setHotelProvince(hotelProvince);
@@ -35,6 +35,7 @@ public class MaintainHotelMessageServiceImpl implements MaintainHotelMessageServ
 		po.setFacilities(facilities);
 		po.setHotelStar(star);
 		po.setRoomTypeAndPrice(roomTypeAndPrices);
+		po.setTelephone(telephone);
 		return hotelDao.change(po);
 	}
 

@@ -28,7 +28,7 @@ public interface ExecuteOrderService extends Remote{
 	 * @param clientID
 	 * @return 返回客户在酒店的预订房间的所有类型(类型1+"/"+类型2)
 	 * */
-	public String getAllRoomType(String orderID)throws RemoteException;
+	public String getAllRoomType(String orderID,String hotelID)throws RemoteException;
 	
 	/**
 	 * @param 客户编号
@@ -36,7 +36,7 @@ public interface ExecuteOrderService extends Remote{
 	 * 相对应的就是 输入客户id 之后的点击确定按钮的事件
 	 * 方法调用的顺序一定要保证 先调用getAllRoomNumber 在其他的设置之前
 	 * */
-	public String getAllRoomNumber(String orderID)throws RemoteException;
+	public String getAllRoomNumber(String orderID,String hotelID)throws RemoteException;
 	
 	/**
 	 * @return 返回的是客户延期入住的房间号码（若之前的房间没有被预订，那么还是之前的房间号码，如果被预订了，

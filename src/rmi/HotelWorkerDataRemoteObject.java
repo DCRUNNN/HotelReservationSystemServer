@@ -84,11 +84,16 @@ public class HotelWorkerDataRemoteObject extends UnicastRemoteObject implements 
 	}
 
 	@Override
-	public String checkOutRoom(String clientID, String hotelID)throws RemoteException {
+	public boolean checkOutRoom(String clientID, String hotelID,String roomNumber)throws RemoteException {
 	
-		return checkOut.checkOutRoom(clientID, hotelID);
+		return checkOut.checkOutRoom(clientID, hotelID,roomNumber);
 	}
 
+	@Override
+	public List<RoomVO> getAllRooms(String clientID,String hotelID) throws RemoteException{
+		
+		return checkOut.getAllRooms(clientID, hotelID);
+	}
 	@Override
 	public List<OrderVO> getUnexecutedOrders(String hotelID, String clientID)throws RemoteException {
 	
@@ -102,15 +107,15 @@ public class HotelWorkerDataRemoteObject extends UnicastRemoteObject implements 
 	}
 
 	@Override
-	public String getAllRoomType(String orderID) throws RemoteException{
+	public String getAllRoomType(String orderID,String hotelID) throws RemoteException{
 		
-		return executeOrder.getAllRoomNumber(orderID);
+		return executeOrder.getAllRoomNumber(orderID, hotelID);
 	}
 
 	@Override
-	public String getAllRoomNumber(String orderID) throws RemoteException{
+	public String getAllRoomNumber(String orderID,String hotelID) throws RemoteException{
 		
-		return executeOrder.getAllRoomNumber(orderID);
+		return executeOrder.getAllRoomNumber(orderID, hotelID);
 	}
 
 	@Override
@@ -176,9 +181,9 @@ public class HotelWorkerDataRemoteObject extends UnicastRemoteObject implements 
 	@Override
 	public boolean changeHotelInfo(String hotelID, String hotelProvince, String hotelCity, String hotelCBD,
 			String hotelAddress, String hotelName, String introduction, String facilities, int star,
-			String roomTypeAndPrices) throws RemoteException{
+			String roomTypeAndPrices,String telephone) throws RemoteException{
 		
-		return maintainHotel.changeHotelInfo(hotelID, hotelProvince, hotelCity, hotelCBD, hotelAddress, hotelName, introduction, facilities, star, roomTypeAndPrices);
+		return maintainHotel.changeHotelInfo(hotelID, hotelProvince, hotelCity, hotelCBD, hotelAddress, hotelName, introduction, facilities, star, roomTypeAndPrices,telephone);
 	}
 
 	@Override

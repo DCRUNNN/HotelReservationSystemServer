@@ -143,6 +143,7 @@ public class HotelDataSqlHelperImpl implements HotelDataHelper {
 				double surroundingPoint=set.getDouble("surroundingpoint");
 				int commentPeople=set.getInt("commentpeople");
 				String company = set.getString("company");
+				String telephone=set.getString("telephone");
 				
 				//create a po to transmit
 				po=new HotelPO();
@@ -162,6 +163,7 @@ public class HotelDataSqlHelperImpl implements HotelDataHelper {
 				po.setPoint_surroundings(surroundingPoint);
 				po.setRoomTypeAndPrice(roomTypeAndPrice);	
 				po.setCompany(company);
+				po.setTelephone(telephone);
 			}
 		}catch(SQLException e){
 			e.printStackTrace();
@@ -196,6 +198,7 @@ public class HotelDataSqlHelperImpl implements HotelDataHelper {
 				double servicePoint=set.getDouble("servicepoint");
 				double surroundingPoint=set.getDouble("surroundingpoint");
 				int commentPeople=set.getInt("commentpeople");
+				String telephone=set.getString("telephone");
 				
 				//create a po to transmit
 				HotelPO po=new HotelPO();
@@ -214,6 +217,7 @@ public class HotelDataSqlHelperImpl implements HotelDataHelper {
 				po.setPoint_service(servicePoint);
 				po.setPoint_surroundings(surroundingPoint);
 				po.setRoomTypeAndPrice(roomTypeAndPrice);
+				po.setTelephone(telephone);
 				
 				hotels.add(po);
 			}
@@ -245,12 +249,13 @@ public class HotelDataSqlHelperImpl implements HotelDataHelper {
 		String comment=po.getCommentList();
 		int commentPeople=po.getCommentPeople();
 		String company = po.getCompany();
+		String telephone=po.getTelephone();
 		
 		//create sql statement
 		String sql="UPDATE t_hotel SET province='"+province+"',city='"+city+"',hotelcbd='"+hotelCBD+"',address='"+address+"',hotelname='"+hotelName
 				+"',hotelstar='"+hotelStar+"',introduction='"+intro+"',facility='"+facility+"',roomtypeandprice='"+roomTypeAndPrice
 				+"',facilitypoint='"+facilityPoint+"',servicepoint='"+servicePoint+"',surroundingpoint='"+surroundingPoint
-				+"',comment='"+comment+"',commentpeople='"+commentPeople+"',company='"+company+"' WHERE hotelid='"+hotelId+"';";
+				+"',comment='"+comment+"',commentpeople='"+commentPeople+"',company='"+company+"',telephone='"+telephone+"' WHERE hotelid='"+hotelId+"';";
 		
 		int i=HotelDataSqlHelperImpl.executeUpdate(sql);
 		HotelDataSqlHelperImpl.close();
@@ -278,13 +283,15 @@ public class HotelDataSqlHelperImpl implements HotelDataHelper {
 		double surroundingPoint=po.getPoint_surroundings();
 		String comment=po.getCommentList();
 		int commentPeople=po.getCommentPeople();
+		String company=po.getCompany();
+		String telephone=po.getTelephone();
 		
 		//create sql statement
 		String sql="INSERT INTO t_hotel(hotelid,hotelname,province,city,hotelcbd,address,hotelstar,introduction"
-					+",facility,roomtypeandprice,facilitypoint,servicepoint,surroundingpoint,comment,commentpeople) VALUES ('"
+					+",facility,roomtypeandprice,facilitypoint,servicepoint,surroundingpoint,comment,commentpeople,company,telephone) VALUES ('"
 					+hotelId+"','"+hotelName+"','"+province+"','"+city+"','"+hotelCBD+"','"+address+"','"+hotelStar+"','"+intro+"','"+facility
 					+"','"+roomTypeAndPrice+"','"+facilityPoint+"','"+servicePoint+"','"+surroundingPoint+"','"+comment+"','"+
-					commentPeople+"');";
+					commentPeople+"','"+company+"','"+telephone+"');";
 		
 		int i=HotelDataSqlHelperImpl.executeUpdate(sql);
 		HotelDataSqlHelperImpl.close();

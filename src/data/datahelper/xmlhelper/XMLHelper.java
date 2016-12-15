@@ -14,7 +14,7 @@ public class XMLHelper {
 	/**
 	 * @param filePath xml文件的路径
 	 * @param nodeName 要找的节点的名称
-	 * @return 返回文件下的根节点下面的class的内容
+	 * @return 返回文件下的根节点下面nodeName的内容
 	 * */
 	public static String getClass(String filePath,String nodeName){
 		

@@ -169,16 +169,7 @@ public class PersonnelDataSqlHelperImpl implements PersonnelDataHelper{
 		}
 		return true;
 	}
-
-	public static void main(String args[]){
-		
-		/*PersonnelPO po = new PersonnelPO();
-		po.setPersonnelID("100001");
-		new PersonnelDataSqlHelperImpl().insert(po);
-		PersonnelPO newPO = new PersonnelDataSqlHelperImpl().getPersonnelPO("100001");
-		newPO.setName("ÔøÎýºÀ");
-		System.out.println(new PersonnelDataSqlHelperImpl().change(newPO));*/
-	}
+	
 	@Override
 	public boolean isExist(String hotelID) {
 		

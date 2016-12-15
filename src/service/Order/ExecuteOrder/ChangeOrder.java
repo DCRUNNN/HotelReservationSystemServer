@@ -10,7 +10,6 @@ import java.util.Map;
 import data.dao.OrderDao;
 import data.dao.impl.OrderDaoImpl;
 import po.OrderPO;
-import service.Hotel.ProvidedService.HotelProvidedServiceForOrderImpl;
 import service.Order.InteractWithRoom.RoomProvidedServiceForOrder;
 import service.Order.help.CreateOrderVO;
 import service.Room.ProvidedService.RoomProvidedServiceForOrderImpl;
@@ -36,9 +35,9 @@ public class ChangeOrder {
 		
 		orderDao = OrderDaoImpl.getInstance();
 		roomservice = new RoomProvidedServiceForOrderImpl();
-		new HotelProvidedServiceForOrderImpl();
+		//new HotelProvidedServiceForOrderImpl();
 		help = new HelpExecuteOrder();
-		this.hotelID = hotelID;
+		//this.hotelID = hotelID;
 	}
 	
 	public List<OrderVO> getUnexecutedOrders(String clientID) {
@@ -76,7 +75,7 @@ public class ChangeOrder {
 	}
 
 	/**
-	 * @param 客户编号
+	 * @param 订单编号
 	 * @return 得到客户在酒店预订的所有房间类型
 	 * */
 	public String getAllRoomType(String orderID) {
@@ -89,7 +88,7 @@ public class ChangeOrder {
 	}
 
 	/**
-	 * @param 客户编号
+	 * @param 订单编号
 	 * @return 返回客户的订单的所有的房间号码
 	 * */
 	public String getAllRoomNumber(String orderID){

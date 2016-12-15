@@ -2,12 +2,15 @@ package service.Room.CheckOutRoom;
 
 import java.rmi.RemoteException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import data.dao.RoomDao;
 import data.dao.impl.RoomDaoImpl;
 import service.Order.InteractWithRoom.OrderProvidedServiceForRoom;
 import service.Order.InteractWithRoom.OrderProvidedServiceForRoomImpl;
+import vo.RoomVO;
 
 public class CheckOutRoomServiceImpl implements CheckOutRoomService{
 
@@ -22,29 +25,39 @@ public class CheckOutRoomServiceImpl implements CheckOutRoomService{
 	}
 	
 	@Override
-	public String checkOutRoom(String clientID,String hotelID)throws RemoteException {
+	public boolean checkOutRoom(String clientID,String hotelID,String roomNumber)throws RemoteException {
 		
-		String allrooms = orderService.getRoomNumber(clientID, hotelID);
-		String roomNumbers[] = allrooms.split("/");
-		if(roomNumbers.length==0){
-			//客户在酒店没有合适的房间号码
-			return "";
-		}
-		for(String str:roomNumbers){
-			//遍历房间，改变房间状态为空闲
-			if(!roomDao.changeRoomState(hotelID, str, "空闲")){
-				return "";
-			
-		}
+		if(!roomDao.changeRoomState(hotelID, roomNumber, "空闲")){
+			return false;
 		}
 		
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:MM:ss");
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		String outTime = sdf.format(new Date());
 		if(!orderService.setEndTime(clientID, hotelID, outTime)){
-			return "";
-		}
-		return allrooms;//设置订单的退房时间
-	
+			return false;
+		}//设置最晚退房时间
+		
+		return true;
 
 	}
+
+	@Override
+	public List<RoomVO> getAllRooms(String clientID, String hotelID) throws RemoteException {
+	
+		List<RoomVO> rooms = new ArrayList<RoomVO>();
+		String allRoom = orderService.getRoomNumber(clientID, hotelID);
+		if("".equals(allRoom)){
+			//没有房间
+			return rooms;
+		}
+		
+		String allRooms[] = allRoom.split("/");
+		for(String str:allRooms){
+			//遍历所有房间号码
+			RoomVO vo = new RoomVO(roomDao.getRoomByNum(hotelID, str));
+			rooms.add(vo);
+		}
+		return rooms;
+	}
+
 }

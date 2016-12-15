@@ -69,7 +69,7 @@ public class OrderVO implements Serializable{
 	 * 传递OrderPO，酒店省份，酒店市，酒店商圈，酒店详细地址，酒店名称，
 	 * 姓名，性别，身份证号，手机号码
 	 * */
-	public OrderVO(OrderPO po,String hotelProvince,String hotelCity,String hotelCBD,String hotelAddress,String hotelName,String clientName,String sex,String identityID,String phoneNummber){
+	public OrderVO(OrderPO po,String hotelProvince,String hotelCity,String hotelCBD,String hotelAddress,String hotelName,String clientName,String sex,String identityID,String phoneNumber){
 		
 		this.orderID = po.getOrderID();
 		this.clientID = po.getClientID();
@@ -96,7 +96,7 @@ public class OrderVO implements Serializable{
 		this.clientName = clientName;
 		this.sex = sex;
 		this.identityID = identityID;
-		this.peopleNumber = phoneNumber;
+		this.phoneNumber = phoneNumber;
 	}
 	
 	

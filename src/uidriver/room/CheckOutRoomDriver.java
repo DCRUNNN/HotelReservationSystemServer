@@ -17,6 +17,6 @@ public class CheckOutRoomDriver {
 		CheckOutRoomService service = new CheckOutRoomServiceImpl();
 		String clientID = "0000001";
 		String hotelID = "00001";
-		System.out.println(service.checkOutRoom(clientID, hotelID));
+		//System.out.println(service.checkOutRoom(clientID, hotelID));
 	}
 }

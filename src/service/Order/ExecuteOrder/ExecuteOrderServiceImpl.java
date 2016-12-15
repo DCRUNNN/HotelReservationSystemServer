@@ -32,14 +32,20 @@ public class ExecuteOrderServiceImpl implements ExecuteOrderService{
 		return change.getAbnormalOrders(clientID);
 	}
 	@Override
-	public String getAllRoomType(String orderID)throws RemoteException {
+	public String getAllRoomType(String orderID,String hotelID)throws RemoteException {
 		
+		if(change==null){
+			change = new ChangeOrder(hotelID);
+		}
 		return change.getAllRoomType(orderID);
 	}
 
 	@Override
-	public String getAllRoomNumber(String orderID) throws RemoteException{
+	public String getAllRoomNumber(String orderID,String hotelID) throws RemoteException{
 		
+		if(change==null){
+			change = new ChangeOrder(hotelID);
+		}
 		return change.getAllRoomNumber(orderID);
 	}
 

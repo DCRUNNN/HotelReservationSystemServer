@@ -25,6 +25,7 @@ import po.HotelPO;
  * commentList                   酒店的评价列表(clientID+":"+comment+extraComment"/"+clientID+":"+comment+extraComment)
  * commentPeople                 对酒店进行评价的人数
  * company                       酒店的所有合作企业(company1+"/"+company2)
+ * telephone                     酒店联系方式
  * @author Xihao Zeng
  * */
 public class HotelVO implements Serializable{
@@ -74,6 +75,8 @@ public class HotelVO implements Serializable{
 	
 	private String company;
 	
+	private String telephone;
+	
 	/**
 	 * orderInfo 一定要保证有四个"/" 
 	 * 每个orderinfo包含多个订单信息的话 多个信息之间用"|"隔开 但是hotelID是唯一的
@@ -102,13 +105,14 @@ public class HotelVO implements Serializable{
 	    this.commentList = po.getCommentList();
 	    this.commentPeople = po.getCommentPeople();
 	    this.company = po.getCompany();
+	    this.telephone = po.getTelephone();
 	}
 
 	/**
 	 * 传递酒店省份，酒店城市，酒店商圈，酒店详细地址，酒店名字，酒店星级，酒店介绍，酒店设施，酒店的房间类型和价格作为构造函数的参数
 	 * */
 	public HotelVO(String hotelProvince, String hotelCity, String hotelCBD,String hotelAddress, String hotelName, int hotelStar,
-			String introduction, String facilities, String roomTypeAndPrice) {
+			String introduction, String facilities, String roomTypeAndPrice,String telephone) {
 		
 		this.hotelProvince = hotelProvince;
 		this.hotelCity = hotelCity;
@@ -119,6 +123,7 @@ public class HotelVO implements Serializable{
 		this.introduction = introduction;
 		this.facilities = facilities;
 		this.roomTypeAndPrice = roomTypeAndPrice;
+		this.telephone = telephone;
 	}
 
 	public String getOrderCreateDate() {
@@ -201,4 +206,7 @@ public class HotelVO implements Serializable{
     	return company;
     }
 	
+    public String getTelephone(){
+    	return telephone;
+    }
 }

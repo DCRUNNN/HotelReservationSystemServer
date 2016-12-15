@@ -11,11 +11,11 @@ public class AddHotelDriver {
 
 	public static void main(String args[]) throws RemoteException{
 		
-		HotelVO vo1 = new HotelVO("江苏省", "南京市", "仙林商圈", "南京大学仙林校区旁", "聪少酒店", 5, "酒店很好", "设施齐全", "单人房|50/双人房|100");
+		HotelVO vo1 = new HotelVO("江苏省", "南京市", "仙林商圈", "南京大学仙林校区旁", "聪少酒店", 5, "酒店很好", "设施齐全", "单人房|50/双人房|100","132456");
 		HotelVO vo2 = new HotelVO("江苏省","苏州市","北区商圈","苏州大学旁","志哥酒店",5,"酒店不好你来打我",
-				"设施不是一般的齐全","单人房|20/双人房|50");
+				"设施不是一般的齐全","单人房|20/双人房|50",null);
 		HotelVO vo3 = new HotelVO("福建省","厦门市","厦大商圈","厦门大学旁","旻少酒店",5,"说酒店不好那是骗人的",
-				"神马都可以满足你","单人房|5/双人房|20");
+				"神马都可以满足你","单人房|5/双人房|20",null);
 
 		AddHotelService service = new AddHotelServiceImpl();
 		if(service.isExist(vo1)){

@@ -35,10 +35,10 @@ public class ExecuteOrderDriver {
 		//客户选择其中的一个订单
 		String orderID = volist.get(0).getOrderID();
 		
-		System.out.println(service.getAllRoomType(orderID));//把客户的所有房间类型展示
-		System.out.println(service.getAllRoomNumber(orderID));//把房间号展示
+		System.out.println(service.getAllRoomType(orderID,hotelID));//把客户的所有房间类型展示
+		System.out.println(service.getAllRoomNumber(orderID,hotelID));//把房间号展示
 		
-		String roomNumber[] = service.getAllRoomNumber(orderID).split("/");
+		String roomNumber[] = service.getAllRoomNumber(orderID,hotelID).split("/");
 		for(int i=0;i<roomNumber.length;i++){
 			//有人入住
 		    service.setRoomPeople(roomNumber[i], i+1);//设置入住人数

@@ -96,4 +96,13 @@ public class BrowseOrder_hotelWorkerServiceImpl implements BrowseOrder_hotelWork
 		return volist;
 	}
 
+	public static void main(String args[]){
+		
+		BrowseOrder_hotelWorkerServiceImpl ip = new BrowseOrder_hotelWorkerServiceImpl();
+		try {
+			System.out.append(ip.getOrder("201612020001").getPhoneNumber());
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
+	}
 }

@@ -6,12 +6,8 @@ import java.util.List;
 
 import data.datahelper.xmlhelper.XMLHelper;
 import service.Client.ManageClientMessage_webManager.ClientMessage_webManagerService;
-import service.Client.ManageClientMessage_webManager.ClientMessage_webManagerServiceImpl;
 import service.Hotel.AddHotel.AddHotelService;
-import service.Hotel.AddHotel.AddHotelServiceImpl;
 import service.Personnel.ManagePersonnelMessage.ManagePersonnelMessageService;
-import service.Personnel.ManagePersonnelMessage.ManagePersonnelMessageServiceImpl;
-import service.Strategy.ManageWebsiteStrategy.ManageWebsiteStrategyService;
 import vo.ClientVO;
 import vo.HotelVO;
 import vo.PersonnelVO;

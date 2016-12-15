@@ -77,8 +77,8 @@ public class Search {
 		List<HotelVO> result = new ArrayList<HotelVO>();
 		if(!"".equals(hotelName)&&hotelName!=null){
 			//hotelName不为空
-			for(HotelVO vo:result){
-				if(hotelName.equals(vo.getHotelName())){
+			for(HotelVO vo:hotels){
+				if(vo.getHotelName().contains(hotelName)){
 					result.add(vo);//名称相同的话，就把hotelvo加到result里面
 				}
 			}
@@ -105,7 +105,7 @@ public class Search {
 				List<RoomVO> allroomForaType = new ArrayList<RoomVO>();//保存特定类型的所有房间
 				
 				for(RoomVO roomvo:allroom){
-					if(roomType.equals(roomvo.getRoomType())){
+					if(roomvo.getRoomType().contains(roomType)){
 						allroomForaType.add(roomvo);
 					}
 				}
@@ -134,6 +134,7 @@ public class Search {
 			        		
 			        		String beginDate = roomvo.getBookDate();//预订时间
 			        		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			        		SimpleDateFormat sd = new SimpleDateFormat("yyyy-MM-dd");
 			        		Date lastDay = null;
 			        		try {
 								lastDay = sdf.parse(beginDate);
@@ -147,7 +148,7 @@ public class Search {
 			        		Calendar c2 = Calendar.getInstance();
 			        		Date date2 = null;
 			        		try {
-								date2 = sdf.parse(sdf.format(new Date()));
+								date2 = sd.parse(sdf.format(bookDate));
 							} catch (ParseException e) {
 								e.printStackTrace();
 								}
@@ -187,6 +188,7 @@ public class Search {
 			        		
 			        		String beginDate = roomvo.getBookDate();//预订时间
 			        		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			        		SimpleDateFormat sd = new SimpleDateFormat("yyyy-MM-dd");
 			        		Date lastDay = null;
 			        		try {
 								lastDay = sdf.parse(beginDate);
@@ -200,7 +202,7 @@ public class Search {
 			        		Calendar c2 = Calendar.getInstance();
 			        		Date date2 = null;
 			        		try {
-								date2 = sdf.parse(sdf.format(new Date()));
+								date2 = sd.parse(bookDate);
 							} catch (ParseException e) {
 								e.printStackTrace();
 							}
@@ -231,15 +233,15 @@ public class Search {
 				for(String str:typeAndPrice){
 					if(str.split("|")[0].equals(roomType)){
 						//只有酒店有相同类型的房间才加
-						price.put(Double.valueOf(str.split("|")[1]),vo);
+						price.put(Double.valueOf(str.split("[|]")[1]),vo);
 					}
 				}
 			}else{
 				//传进来的roomtype为空，确保房间数不小于1
-				double minPrice = Double.valueOf(typeAndPrice[0].split("|")[1]) ;//最低价格，初始化为第一个类型的价格
+				double minPrice = Double.valueOf(typeAndPrice[0].split("[|]")[1]) ;//最低价格，初始化为第一个类型的价格
 				for(String str:typeAndPrice){
 					//找到酒店房间的最低价格
-					double roomPrice = Double.valueOf(str.split("|")[1]);
+					double roomPrice = Double.valueOf(str.split("[|]")[1]);
 					if(roomPrice<minPrice){
 						minPrice = roomPrice;
 					}
@@ -380,4 +382,5 @@ public class Search {
 			return result;
 		}
 	}
+	
 }
