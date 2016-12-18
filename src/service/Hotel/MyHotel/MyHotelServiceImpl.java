@@ -21,19 +21,25 @@ public class MyHotelServiceImpl implements MyHotelService{
 	private HotelDao hotelDao;
 	private OrderProvidedServiceForHotel orderservice;
 	private List<HotelVO> allHotels;
+	private String clientID;
 	
 	public MyHotelServiceImpl(){
 		
 		hotelDao = HotelDaoImpl.getInstance();
 		orderservice = new OrderProvidedServiceForHotelImpl();
-		allHotels = new ArrayList<HotelVO>();
 	}
 	
 	@Override
 	public List<HotelVO> getExecutedHotels(String clientID) throws RemoteException{
 		
-		if(allHotels.size()==0){
+		if(clientID==null){
+			this.clientID = clientID;
 			initAllHotels(clientID);
+		}else{
+			if(!this.clientID.equals(clientID)){
+				//两次的客户id不一样
+				initAllHotels(clientID);
+			}
 		}
 		
 		List<HotelVO> list = new ArrayList<HotelVO>();
@@ -66,9 +72,15 @@ public class MyHotelServiceImpl implements MyHotelService{
 
 	@Override
 	public List<HotelVO> getUnexecutedHotels(String clientID) throws RemoteException{
-		
-		if(allHotels.size()==0){
+
+		if(clientID==null){
+			this.clientID = clientID;
 			initAllHotels(clientID);
+		}else{
+			if(!this.clientID.equals(clientID)){
+				//两次的客户id不一样
+				initAllHotels(clientID);
+			}
 		}
 		
 		List<HotelVO> list = new ArrayList<HotelVO>();
@@ -85,8 +97,15 @@ public class MyHotelServiceImpl implements MyHotelService{
 	@Override
 	public List<HotelVO> getWithdrawnHotels(String clientID)throws RemoteException {
 		
-		if(allHotels.size()==0){
+
+		if(clientID==null){
+			this.clientID = clientID;
 			initAllHotels(clientID);
+		}else{
+			if(!this.clientID.equals(clientID)){
+				//两次的客户id不一样
+				initAllHotels(clientID);
+			}
 		}
 		
 		List<HotelVO> list = new ArrayList<HotelVO>();
@@ -103,8 +122,15 @@ public class MyHotelServiceImpl implements MyHotelService{
 	@Override
 	public List<HotelVO> getAbnormalHotels(String clientID) throws RemoteException{
 		
-		if(allHotels.size()==0){
+
+		if(clientID==null){
+			this.clientID = clientID;
 			initAllHotels(clientID);
+		}else{
+			if(!this.clientID.equals(clientID)){
+				//两次的客户id不一样
+				initAllHotels(clientID);
+			}
 		}
 		
 		List<HotelVO> list = new ArrayList<HotelVO>();
