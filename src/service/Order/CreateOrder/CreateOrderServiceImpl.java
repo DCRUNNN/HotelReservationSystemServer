@@ -99,6 +99,7 @@ public class CreateOrderServiceImpl implements CreateOrderService{
 	    po.setHasChild(hasChild);
 	    po.setOrderStatus(orderStatus);
 	    po.setWithdrawTime(withdrawTime);
+	    po.setCheckOutTotal(0);
 	    po.setComment(comment);
 	    
 	    String numbers[] = roomNumber.split("/");

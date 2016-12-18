@@ -16,6 +16,7 @@ package po;
  * hasChild            有无儿童(采用hasChild+"/"+hasChild标准来分隔多个房间信息)
  * orderStatus         订单状态
  * withdrawTime        订单撤销时间
+ * checkOutTotal       总共退房数目     
  * comment             客户对订单的评价(comment+"|"+extraComment)
  * @author Xihao Zeng
  * */
@@ -51,7 +52,17 @@ public class OrderPO {
 	
 	private String withdrawTime;
 
+	private int checkOutTotal;
+	
 	private String comment;
+	
+	public int getCheckOutTotal() {
+		return checkOutTotal;
+	}
+
+	public void setCheckOutTotal(int checkOutTotal) {
+		this.checkOutTotal = checkOutTotal;
+	}
 
 	public String getWithdrawTime() {
 		return withdrawTime;

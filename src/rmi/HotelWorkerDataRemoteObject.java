@@ -119,16 +119,16 @@ public class HotelWorkerDataRemoteObject extends UnicastRemoteObject implements 
 	}
 
 	@Override
-	public String getDelayRoomNumber(String orderID)throws RemoteException {
+	public String getDelayRoomNumber(String orderID,String hotelID)throws RemoteException {
 		
-		return executeOrder.getDelayRoomNumber(orderID);
+		return executeOrder.getDelayRoomNumber(orderID,hotelID);
 	}
 
 	@Override
 	public void setRoomPeople(String roomNumber, int peopleNumebr) throws RemoteException{
 		
 		executeOrder.setRoomPeople(roomNumber, peopleNumebr);
-	}
+	} 
 
 	@Override
 	public void setRoomChild(String roomNumber, boolean hasChild)throws RemoteException {
@@ -262,5 +262,11 @@ public class HotelWorkerDataRemoteObject extends UnicastRemoteObject implements 
 	public List<String> getRoomState(String hotelId) throws RemoteException {
 		
 		return changeRoom.getRoomState(hotelId);
+	}
+
+	@Override
+	public List<OrderVO> getAllOrders(String hotelID) throws RemoteException {
+		
+		return browseOrder.getAllOrders(hotelID);
 	}
 }

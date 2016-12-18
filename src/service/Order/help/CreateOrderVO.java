@@ -28,14 +28,17 @@ public class CreateOrderVO {
 		String sex = clientservice.getSex(clientID);
 		String identityID = clientservice.getIdentityID(clientID);
 		String phoneNumber = clientservice.getPhoneNumber(clientID);
-		
+		String vipInfo=clientservice.getVIPInfo(clientID);
+		double credit=clientservice.getCreditPoint(clientID);
+
 		String hotelProvince = hotelservice.getHotelProvince(hotelID);
 		String hotelCity = hotelservice.getHotelCity(hotelID);
 		String hotelCBD = hotelservice.getHotelCBD(hotelID);
 		String hotelAddress = hotelservice.getHotelAddress(hotelID);
 		String hotelName = hotelservice.getHotelName(hotelID);
 		
-		OrderVO vo = new OrderVO(po,hotelProvince,hotelCity,hotelCBD,hotelAddress,hotelName,clientName,sex,identityID,phoneNumber);
+		OrderVO vo = new OrderVO(po,hotelProvince,hotelCity,hotelCBD,hotelAddress,hotelName,clientName,sex,identityID,phoneNumber,credit,vipInfo);
+		
 		return vo;
 	}
 }

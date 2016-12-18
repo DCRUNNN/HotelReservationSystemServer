@@ -89,7 +89,10 @@ public class BrowseHotelServiceImpl implements BrowseHotelService{
 			String sex = clientservice.getSex(clientID);
 			String identityID = clientservice.getIdentityID(clientID);
 			String phoneNumebr = clientservice.getPhoneNumber(clientID);
-			OrderVO ordervo = new OrderVO(orderpo,hotelPO.getHotelProvince(),hotelPO.getHotelCity(),hotelPO.getHotelCBD(),hotelPO.getHotelAddress(),hotelPO.getHotelName(),clientName,sex,identityID,phoneNumebr);
+		    String vipInfo = clientservice.getVIPInfo(clientID);
+		    double credit = clientservice.getCredit(clientID);
+		    
+			OrderVO ordervo = new OrderVO(orderpo,hotelPO.getHotelProvince(),hotelPO.getHotelCity(),hotelPO.getHotelCBD(),hotelPO.getHotelAddress(),hotelPO.getHotelName(),clientName,sex,identityID,phoneNumebr,credit,vipInfo);
 			volist.add(ordervo);
 		}
 		return volist;

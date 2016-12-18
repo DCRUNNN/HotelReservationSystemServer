@@ -38,4 +38,8 @@ public interface BrowseOrder_hotelWorkerService extends Remote{
 	 * */
 	public List<OrderVO> getAbnormalOrders(String hotelID)throws RemoteException;
 	
+	/**
+	 * @return 得到酒店的所有订单
+	 * */
+	public List<OrderVO> getAllOrders(String hotelID)throws RemoteException;
 }

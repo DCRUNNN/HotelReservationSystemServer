@@ -45,7 +45,7 @@ public interface ExecuteOrderService extends Remote{
 	 * 延迟入住在之前订单变异常时扣除了客户的订单价格一半的信用点 
 	 * 在客户重新办理入住之后 增加订单一半的信用点 相当于不增加也不减少 这样是很合理的
 	 * */
-	public String getDelayRoomNumber(String orderID)throws RemoteException;
+	public String getDelayRoomNumber(String orderID,String hotelID)throws RemoteException;
 
 	/**
 	 * @param 房间号码,入住人数

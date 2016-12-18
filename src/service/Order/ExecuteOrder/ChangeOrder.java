@@ -37,7 +37,7 @@ public class ChangeOrder {
 		roomservice = new RoomProvidedServiceForOrderImpl();
 		//new HotelProvidedServiceForOrderImpl();
 		help = new HelpExecuteOrder();
-		//this.hotelID = hotelID;
+		this.hotelID = hotelID;
 	}
 	
 	public List<OrderVO> getUnexecutedOrders(String clientID) {

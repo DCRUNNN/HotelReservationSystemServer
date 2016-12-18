@@ -38,7 +38,7 @@ public class WithdrawAbnormalOrder {
 		if(po==null){
 			return false;
 		}else{
-			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:MM:ss");
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 			String current = sdf.format(new Date());
 			po.setWithdrawTime(current);
 			po.setOrderStatus("ÒÑ³·Ïú");

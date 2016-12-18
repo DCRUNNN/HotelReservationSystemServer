@@ -28,31 +28,20 @@ public class CheckOutRoomServiceImpl implements CheckOutRoomService{
 	public boolean checkOutRoom(String clientID,String hotelID,String roomNumber)throws RemoteException {
 		
 		if(!roomDao.changeRoomState(hotelID, roomNumber, "空闲")){
+			//改变房间状态
 			return false;
 		}
 		
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		String outTime = sdf.format(new Date());
-		if(!orderService.setEndTime(clientID, hotelID, outTime)){
-			return false;
-		}//设置最晚退房时间
-		
-		return true;
-
+		return orderService.setEndTime(clientID, hotelID, roomNumber);
 	}
 
 	@Override
 	public List<RoomVO> getAllRooms(String clientID, String hotelID) throws RemoteException {
 	
 		List<RoomVO> rooms = new ArrayList<RoomVO>();
-		String allRoom = orderService.getRoomNumber(clientID, hotelID);
-		if("".equals(allRoom)){
-			//没有房间
-			return rooms;
-		}
+		List<String> allrooms = orderService.getRoomNumber(clientID, hotelID);
 		
-		String allRooms[] = allRoom.split("/");
-		for(String str:allRooms){
+		for(String str:allrooms){
 			//遍历所有房间号码
 			RoomVO vo = new RoomVO(roomDao.getRoomByNum(hotelID, str));
 			rooms.add(vo);

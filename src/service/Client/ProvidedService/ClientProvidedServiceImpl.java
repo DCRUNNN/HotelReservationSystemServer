@@ -145,6 +145,7 @@ public class ClientProvidedServiceImpl implements ClientProvidedService{
 		}
 		return po.getIdentityID();
 	}
+	
 	@Override
 	public String getPhoneNumber(String clientID) {
 		
@@ -153,6 +154,30 @@ public class ClientProvidedServiceImpl implements ClientProvidedService{
 			return "";
 		}
 		return po.getPhoneNumber();
+	}
+	
+	@Override
+	public String getVIPInfo(String clientID) {
+	
+		ClientPO po = clientDao.getClientPO(clientID);
+		if(po==null){
+			return "";
+		}
+		
+		if(po.getClientType().equals("ÆÕÍ¨¿Í»§")){
+			return po.getClientType();
+		}else{
+			return po.getClientType()+String.valueOf(po.getVipGrade());
+		}
+	}
+	@Override
+	public double getCredit(String clientID) {
+		
+		ClientPO po =clientDao.getClientPO(clientID);
+		if(po==null){
+			return 0;
+		}
+		return po.getCredit_point();
 	}
 	
 }

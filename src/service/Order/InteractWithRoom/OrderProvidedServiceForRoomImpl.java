@@ -1,5 +1,8 @@
 package service.Order.InteractWithRoom;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import data.dao.OrderDao;
@@ -14,7 +17,7 @@ public class OrderProvidedServiceForRoomImpl implements OrderProvidedServiceForR
 		orderDao = OrderDaoImpl.getInstance();
 	}
 	@Override
-	public boolean setEndTime(String clientID, String hotelID, String outTime) {
+	public boolean setEndTime(String clientID, String hotelID,String roomNumber) {
 		
 		List<OrderPO> polist = orderDao.getClientOrdersInaHotel(clientID, hotelID);
 		if(polist.size()==0){
@@ -25,8 +28,23 @@ public class OrderProvidedServiceForRoomImpl implements OrderProvidedServiceForR
 					//找到所有的已执行订单
 					if("".equals(po.getOrderEndDate())||po.getOrderEndDate()==null){
 						//找到还没有退房时间的
-						po.setOrderEndDate(outTime);
-						return orderDao.change(po);
+						if(po.getRoomNumber().contains(roomNumber)){
+							//找到包含该房间的订单
+							if(po.getCheckOutTotal()+1==po.getRoomTotal()){
+								//退了这一间房 达到了预订的总数目
+								SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+								String outTime = sdf.format(new Date());
+								int checkOutTotal = po.getCheckOutTotal();
+							    po.setCheckOutTotal(checkOutTotal+1);
+								po.setOrderEndDate(outTime);
+								return orderDao.change(po);
+							}else{
+								//否则还是不改变退房时间，最后一间房才改变退房时间,退房数目加1
+							    int checkOutTotal = po.getCheckOutTotal();
+							    po.setCheckOutTotal(checkOutTotal+1);
+								return orderDao.change(po);
+							}
+						}
 					}
 				}
 			}
@@ -35,24 +53,30 @@ public class OrderProvidedServiceForRoomImpl implements OrderProvidedServiceForR
 		return false;
 	}
 	@Override
-	public String getRoomNumber(String clientID, String hotelID) {
+	public List<String> getRoomNumber(String clientID, String hotelID) {
 	
+		List<String> result = new ArrayList<String>();
+		
 		List<OrderPO> polist = orderDao.getClientOrdersInaHotel(clientID, hotelID);
 		if(polist.size()==0){
-			return "";//找不到订单的时候，返回""
+			return result;//找不到订单的时候，返回""
 		}else{
 			for(OrderPO po:polist){
 				if("已执行".equals(po.getOrderStatus())){
 					//找到所有的已执行订单
 					if("".equals(po.getOrderEndDate())||po.getOrderEndDate()==null){
 						//找到还没有退房时间的
-						return po.getRoomNumber();
+						String rooms[] = po.getRoomNumber().split("/");
+						for(String str:rooms){
+							//把所有的房间加入到list中
+							result.add(str);
+						}
 					}
 				}
 			}
 		}
 	
-		return "";
+		return result;
 	}
 
 }

@@ -79,8 +79,11 @@ public class SearchHotelServiceImpl implements SearchHotelService{
 			String sex = clientservice.getSex(clientID);
 			String identityID = clientservice.getIdentityID(clientID);
 			String phoneNumebr = clientservice.getPhoneNumber(clientID);
-			OrderVO ordervo = new OrderVO(orderpo,hotelPO.getHotelProvince(),hotelPO.getHotelCity(),hotelPO.getHotelCBD(),hotelPO.getHotelAddress(),hotelPO.getHotelName(),clientName,sex,identityID,phoneNumebr);
-			volist.add(ordervo);
+			String vipInfo = clientservice.getVIPInfo(clientID);
+		    double credit = clientservice.getCredit(clientID);
+		    
+			OrderVO ordervo = new OrderVO(orderpo,hotelPO.getHotelProvince(),hotelPO.getHotelCity(),hotelPO.getHotelCBD(),hotelPO.getHotelAddress(),hotelPO.getHotelName(),clientName,sex,identityID,phoneNumebr,credit,vipInfo);
+		    volist.add(ordervo);
 		}
 		return volist;
 	}
@@ -97,27 +100,4 @@ public class SearchHotelServiceImpl implements SearchHotelService{
 		
 		searchHotel = new Search(polist);
 	}
-	
-
-	/*public static void main(String args[]){
-		
-		String clientID = "0000001";
-		String hotelProvince = "广东省";
-		String hotelCity = "茂名市";
-		String hotelCBD = "化州商圈";
-		SearchHotelServiceImpl se = new SearchHotelServiceImpl();
-		try {
-			se.initAllHotel(clientID, hotelProvince, hotelCity, hotelCBD);
-		} catch (RemoteException e) {
-			e.printStackTrace();
-		}
-		
-		SearchVO s = new SearchVO("星河大酒店", "", 1, -1, -1, "2016-10-20", -1, -1, -1, -1, false);
-		try {
-			System.out.println(se.search(s).size());
-		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}*/
 }

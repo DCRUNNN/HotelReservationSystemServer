@@ -96,7 +96,21 @@ public class BrowseOrder_hotelWorkerServiceImpl implements BrowseOrder_hotelWork
 		return volist;
 	}
 
-	public static void main(String args[]){
+	@Override
+	public List<OrderVO> getAllOrders(String hotelID) throws RemoteException {
+
+		List<OrderPO> allHotelOrders=orderDao.getHotelOrderPOList(hotelID);
+		List<OrderVO> voList=new ArrayList<OrderVO>();
+		CreateOrderVO help=new CreateOrderVO();
+		
+		for(OrderPO po:allHotelOrders){
+			voList.add(help.createOrderVO(po));
+		}
+		return voList;
+
+	}
+
+	/*public static void main(String args[]){
 		
 		BrowseOrder_hotelWorkerServiceImpl ip = new BrowseOrder_hotelWorkerServiceImpl();
 		try {
@@ -104,5 +118,7 @@ public class BrowseOrder_hotelWorkerServiceImpl implements BrowseOrder_hotelWork
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
-	}
+	}*/
+	
+	
 }

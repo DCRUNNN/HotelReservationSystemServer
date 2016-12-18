@@ -83,4 +83,16 @@ public interface ClientProvidedService {
 	 * @return 返回客户的手机号码
 	 * */
 	public String getPhoneNumber(String clientID);
+	
+	/**
+	 * @param clientID 客户编号
+	 * @return 返回客户的vip信息
+	 * */
+	public String getVIPInfo(String clientID);
+	
+	/**
+	 * @param clientID 客户编号
+	 * @return 返回客户的信用点
+	 * */
+	public double getCredit(String clientID);
 }

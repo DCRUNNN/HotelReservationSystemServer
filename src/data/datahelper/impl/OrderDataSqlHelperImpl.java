@@ -99,10 +99,11 @@ public class OrderDataSqlHelperImpl implements OrderDataHelper{
 		String orderstatus = po.getOrderStatus();
 		String withdrawtime = po.getWithdrawTime();
 		String comment = po.getComment();
+		int checkOutTotal = po.getCheckOutTotal();
 		
 		String sql = "update t_order set hotelid='"+hotelid+"',clientid='"+clientid+"',createddate='"+createddate+"',begindate='"+begindate
 				+"',enddate='"+enddate+"',lastdate='"+lastdate+"',price="+price+",roomtotal="+roomtotal+",roomtype='"+roomtype+"',roomnumber='"+roomnumber
-				+"',peoplenumber='"+peoplenumber+"',haschild='"+haschild+"',orderstatus='"+orderstatus+"',withdrawtime='"+withdrawtime+"',comment='"+comment+"' where orderid="+orderid;
+				+"',peoplenumber='"+peoplenumber+"',haschild='"+haschild+"',orderstatus='"+orderstatus+"',withdrawtime='"+withdrawtime+"',checkouttotal="+checkOutTotal+",comment='"+comment+"' where orderid="+orderid;
 		
 		int i = OrderDataSqlHelperImpl.executeUpdate(sql);
 		OrderDataSqlHelperImpl.close();
@@ -131,12 +132,13 @@ public class OrderDataSqlHelperImpl implements OrderDataHelper{
 		String orderstatus = po.getOrderStatus();
 		String withdrawtime = po.getWithdrawTime();
 		String comment = po.getComment();
+		int checkOutTotal = po.getCheckOutTotal();
 		
 		String sql ="insert into t_order(orderid,hotelid,clientid,createddate,begindate,enddate,lastdate,"
-				+ "price,roomtotal,roomtype,roomnumber,peoplenumber,haschild,orderstatus,withdrawtime,comment) values"
+				+ "price,roomtotal,roomtype,roomnumber,peoplenumber,haschild,orderstatus,withdrawtime,checkouttotal,comment) values"
 				+ "('"+orderid+"','"+hotelid+"','"+clientid+"','"+createddate+"','"+begindate+"','"+enddate+"','"+lastdate+"',"
 				+price+","+roomtotal+",'"+roomtype+"','"+roomnumber+"','"+peoplenumber+"','"+haschild+"','"+orderstatus+"','"
-				+withdrawtime+"','"+comment+"')";
+				+withdrawtime+"',"+checkOutTotal+",'"+comment+"')";
 		
 		int i =OrderDataSqlHelperImpl.executeUpdate(sql);
 		OrderDataSqlHelperImpl.close();
@@ -171,6 +173,7 @@ public class OrderDataSqlHelperImpl implements OrderDataHelper{
 				String orderstatus = set.getString("orderstatus");
 				String withdrawtime = set.getString("withdrawtime");
 				String comment = set.getString("comment");
+				int checkOutTotal = set.getInt("checkouttotal");
 				
 				//将数据形成一个PO传输
 				po = new OrderPO();
@@ -189,6 +192,7 @@ public class OrderDataSqlHelperImpl implements OrderDataHelper{
 				po.setHasChild(haschild);
 				po.setOrderStatus(orderstatus);
 				po.setWithdrawTime(withdrawtime);
+				po.setCheckOutTotal(checkOutTotal);
 				po.setComment(comment);
 				
 			}
@@ -223,6 +227,7 @@ public class OrderDataSqlHelperImpl implements OrderDataHelper{
 				String haschild = set.getString("haschild");
 				String orderstatus = set.getString("orderstatus");
 				String withdrawtime = set.getString("withdrawtime");
+				int checkOutTotal = set.getInt("checkouttotal");
 				String comment = set.getString("comment");
 				
 				//将数据形成一个PO传输
@@ -243,6 +248,7 @@ public class OrderDataSqlHelperImpl implements OrderDataHelper{
 				po.setHasChild(haschild);
 				po.setOrderStatus(orderstatus);
 				po.setWithdrawTime(withdrawtime);
+				po.setCheckOutTotal(checkOutTotal);
 				po.setComment(comment);
 				
 				polist.add(po);
@@ -279,6 +285,7 @@ public class OrderDataSqlHelperImpl implements OrderDataHelper{
 				String haschild = set.getString("haschild");
 				String orderstatus = set.getString("orderstatus");
 				String withdrawtime = set.getString("withdrawtime");
+				int checkOutTotal = set.getInt("checkouttotal");
 				String comment = set.getString("comment");
 				
 				//将数据形成一个PO传输
@@ -298,6 +305,7 @@ public class OrderDataSqlHelperImpl implements OrderDataHelper{
 				po.setHasChild(haschild);
 				po.setOrderStatus(orderstatus);
 				po.setWithdrawTime(withdrawtime);
+				po.setCheckOutTotal(checkOutTotal);
 				po.setComment(comment);
 				list.add(po);
 			}
@@ -333,6 +341,7 @@ public class OrderDataSqlHelperImpl implements OrderDataHelper{
 				String haschild = set.getString("haschild");
 				String orderstatus = set.getString("orderstatus");
 				String withdrawtime = set.getString("withdrawtime");
+				int checkOutTotal = set.getInt("checkouttotal");
 				String comment = set.getString("comment");
 				
 				//将数据形成一个PO传输
@@ -352,6 +361,7 @@ public class OrderDataSqlHelperImpl implements OrderDataHelper{
 				po.setHasChild(haschild);
 				po.setOrderStatus(orderstatus);
 				po.setWithdrawTime(withdrawtime);
+				po.setCheckOutTotal(checkOutTotal);
 				po.setComment(comment);
 				list.add(po);
 			}
@@ -387,6 +397,7 @@ public class OrderDataSqlHelperImpl implements OrderDataHelper{
 				String haschild = set.getString("haschild");
 				String orderstatus = set.getString("orderstatus");
 				String withdrawtime = set.getString("withdrawtime");
+				int checkOutTotal = set.getInt("checkouttotal");
 				String comment = set.getString("comment");
 				
 				//将数据形成一个PO传输
@@ -406,6 +417,7 @@ public class OrderDataSqlHelperImpl implements OrderDataHelper{
 				po.setHasChild(haschild);
 				po.setOrderStatus(orderstatus);
 				po.setWithdrawTime(withdrawtime);
+				po.setCheckOutTotal(checkOutTotal);
 				po.setComment(comment);
 				list.add(po);
 			}
@@ -436,4 +448,16 @@ public class OrderDataSqlHelperImpl implements OrderDataHelper{
 		return allids;
 	}
 
+	public static void main(String args[]){
+		
+		//String clientID ="0000001";
+		//String hotelID ="00001";
+		//System.out.println(new OrderDataSqlHelperImpl().getClientOrdersInaHotel(clientID, hotelID).size());
+	    OrderDataSqlHelperImpl service = new OrderDataSqlHelperImpl();
+		String orderID = "201612160002";
+	    OrderPO po = service.getOrderPO(orderID);
+	    po.setOrderBeginDate("213");
+	    System.out.println(service.change(po));
+	    System.out.println(po.getCheckOutTotal());
+	}
 }

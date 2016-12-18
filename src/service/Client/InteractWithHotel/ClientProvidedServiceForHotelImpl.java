@@ -1,56 +1,49 @@
 package service.Client.InteractWithHotel;
 
-import data.dao.ClientDAO;
-import data.dao.impl.ClientDaoImpl;
-import po.ClientPO;
+import service.Client.ProvidedService.ClientProvidedServiceImpl;
 
 public class ClientProvidedServiceForHotelImpl implements ClientProvidedServiceForHotel{
 
-	private ClientDAO clientDao;
+	private ClientProvidedServiceImpl service ;
 	
 	public ClientProvidedServiceForHotelImpl(){
 		
-		clientDao = ClientDaoImpl.getInstance();
+		service = new ClientProvidedServiceImpl();
 	}
 	
 	@Override
 	public String getClientName(String clientID) {
 		
-		ClientPO po = clientDao.getClientPO(clientID);
-		if(po==null){
-			return "";
-		}
-		return po.getName();
+		return service.getClientName(clientID);
 	}
 
 	@Override
 	public String getSex(String clientID) {
 		
-		ClientPO po = clientDao.getClientPO(clientID);
-		if(po==null){
-			return "";
-		}
-		return po.getSex();
+		return service.getSex(clientID);
 	}
 
 	@Override
 	public String getIdentityID(String clientID) {
 		
-		ClientPO po = clientDao.getClientPO(clientID);
-		if(po==null){
-			return "";
-		}
-		return po.getIdentityID();
+		return service.getIdentityID(clientID);
 	}
 
 	@Override
 	public String getPhoneNumber(String clientID) {
 		
-		ClientPO po = clientDao.getClientPO(clientID);
-		if(po==null){
-			return "";
-		}
-		return po.getPhoneNumber();
+		return service.getPhoneNumber(clientID);
 	}
 
+	@Override
+	public String getVIPInfo(String clientID) {
+	
+		return service.getVIPInfo(clientID);
+	}
+	
+	@Override
+	public double getCredit(String clientID) {
+		
+		return service.getCredit(clientID);
+	}
 }

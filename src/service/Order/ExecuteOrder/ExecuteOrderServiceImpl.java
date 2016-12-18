@@ -68,8 +68,11 @@ public class ExecuteOrderServiceImpl implements ExecuteOrderService{
 	}
 
 	@Override
-	public String getDelayRoomNumber(String orderID) throws RemoteException{
+	public String getDelayRoomNumber(String orderID,String hotelID) throws RemoteException{
 		
+		if(change==null){
+			change = new ChangeOrder(hotelID);
+		}
 		return change.getDelayRoomNumber(orderID);
 	}
 

@@ -12,12 +12,53 @@ public class CreateOrderDriver {
 
 	public static void main(String args[]) throws RemoteException{
 		
-	    demo1();
+	    /*demo1();
 	    demo2();
 	    demo3();
 		demo4();
 		demo5();
-		demo6();
+		demo6();*/
+		demo7();
+		demo8();
+		
+	}
+
+	private static void demo8() {
+		
+		//客户生成一个房间的订单
+		String clientID = "0000001";
+		String hotelID ="00001";
+		try {
+			ClientDataRemoteObject service = new ClientDataRemoteObject();
+			String roomType = "标准家庭间";
+			String roomNumber = service.getAllRoomNumber(hotelID, roomType).split("/")[0];
+			System.out.println(service.createOrder(hotelID, clientID, roomType, roomNumber)?"生成订单成功！":"生成订单失败！");
+		} catch (RemoteException e) {
+			
+			e.printStackTrace();
+		}
+		
+	}
+
+	private static void demo7() {
+		
+		//客户生成两个房间的订单
+		String clientID = "0000001";
+		String hotelID = "00001";
+		try {
+			ClientDataRemoteObject service = new ClientDataRemoteObject();
+			System.out.println(service.getRoomTypeAndPrice(hotelID));
+			String roomType = "标准单人间/标准双人间";
+			String roomNumber1 = service.getAllRoomNumber(hotelID, "标准单人间").split("/")[0];
+			String roomNumber2 = service.getAllRoomNumber(hotelID, "标准双人间").split("/")[0];
+			String roomNumber = roomNumber1+"/"+roomNumber2;
+			System.out.println("房间号码："+roomNumber);
+			
+			System.out.println(service.createOrder(hotelID, clientID, roomType, roomNumber)?"生成订单成功！":"生成订单失败！");
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
+
 	}
 
 	private static void demo6() throws RemoteException {
