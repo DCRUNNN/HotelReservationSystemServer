@@ -32,7 +32,7 @@ public class MyHotelServiceImpl implements MyHotelService{
 	@Override
 	public List<HotelVO> getExecutedHotels(String clientID) throws RemoteException{
 		
-		if(clientID==null){
+		if(this.clientID==null){
 			this.clientID = clientID;
 			initAllHotels(clientID);
 		}else{
@@ -63,6 +63,7 @@ public class MyHotelServiceImpl implements MyHotelService{
 			hotelPOList.add(hotelDao.getHotelPO(array[4]));//array[4]ÊÇhotelID
 		}
 		
+		allHotels = new ArrayList<HotelVO>();
 		for(HotelPO po:hotelPOList){
 			HotelVO vo = new CreateHotelVO().create(clientID, po);
 			allHotels.add(vo);
@@ -73,7 +74,7 @@ public class MyHotelServiceImpl implements MyHotelService{
 	@Override
 	public List<HotelVO> getUnexecutedHotels(String clientID) throws RemoteException{
 
-		if(clientID==null){
+		if(this.clientID==null){
 			this.clientID = clientID;
 			initAllHotels(clientID);
 		}else{
@@ -98,7 +99,7 @@ public class MyHotelServiceImpl implements MyHotelService{
 	public List<HotelVO> getWithdrawnHotels(String clientID)throws RemoteException {
 		
 
-		if(clientID==null){
+		if(this.clientID==null){
 			this.clientID = clientID;
 			initAllHotels(clientID);
 		}else{
@@ -123,7 +124,7 @@ public class MyHotelServiceImpl implements MyHotelService{
 	public List<HotelVO> getAbnormalHotels(String clientID) throws RemoteException{
 		
 
-		if(clientID==null){
+		if(this.clientID==null){
 			this.clientID = clientID;
 			initAllHotels(clientID);
 		}else{
