@@ -112,7 +112,7 @@ public class HotelVO implements Serializable{
 	 * 传递酒店省份，酒店城市，酒店商圈，酒店详细地址，酒店名字，酒店星级，酒店介绍，酒店设施，酒店的房间类型和价格作为构造函数的参数
 	 * */
 	public HotelVO(String hotelProvince, String hotelCity, String hotelCBD,String hotelAddress, String hotelName, int hotelStar,
-			String introduction, String facilities, String roomTypeAndPrice,String telephone) {
+			String introduction, String facilities, String roomTypeAndPrice,String company,String telephone) {
 		
 		this.hotelProvince = hotelProvince;
 		this.hotelCity = hotelCity;
@@ -123,6 +123,7 @@ public class HotelVO implements Serializable{
 		this.introduction = introduction;
 		this.facilities = facilities;
 		this.roomTypeAndPrice = roomTypeAndPrice;
+		this.company = company;
 		this.telephone = telephone;
 	}
 

@@ -52,6 +52,8 @@ public class AddHotelServiceImpl implements AddHotelService{
 		po.setHotelStar(vo.getHotelStar());
 		po.setIntroduction(vo.getIntroduction());
 		po.setRoomTypeAndPrice(vo.getRoomTypeAndPrice());
+		po.setTelephone(vo.getTelephone());
+		po.setCompany(vo.getCompany());
 		
         if(!hoteldao.change(po)){
         	return "";

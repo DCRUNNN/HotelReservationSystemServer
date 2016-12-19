@@ -265,4 +265,10 @@ public class ClientDataRemoteObject extends UnicastRemoteObject
 		
 		searchHotel.initAllHotel(clientID, hotelProvince, hotelCities, hotelCBD);
 	}
+
+	@Override
+	public boolean checkRoom(String hotelID, String roomNumber) throws RemoteException {
+		
+		return createOrder.checkRoom(hotelID, roomNumber);
+	}
 }

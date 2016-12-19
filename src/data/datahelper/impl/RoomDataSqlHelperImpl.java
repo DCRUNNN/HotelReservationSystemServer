@@ -393,7 +393,7 @@ public class RoomDataSqlHelperImpl implements RoomDataHelper {
 	public static void main(String args[]){
 		String hotelID = "00001";
 		String roomNumber = "101";
-		System.out.println(new RoomDataSqlHelperImpl().getRoomByNum(hotelID, roomNumber)==null);
+		System.out.println(new RoomDataSqlHelperImpl().getRoomByNum(hotelID, roomNumber).getPrice());
 		System.out.println(new RoomDataSqlHelperImpl().changeRoomState(hotelID, roomNumber, "ÒÑÈë×¡"));
 	}
 }

@@ -66,7 +66,19 @@ public class RoomProvidedServiceForOrderImpl implements RoomProvidedServiceForOr
 	public double getRoomPrice(String hotelID, String roomNumber) {
 		
 		RoomPO po = roomDao.getRoomByNum(hotelID, roomNumber);
+		
 		return po.getPrice();
+	}
+	
+	@Override
+	public boolean checkRoom(String hotelID, String roomNumber) {
+		
+		RoomPO po = roomDao.getRoomByNum(hotelID, roomNumber);
+		if(po==null){
+			return false;
+		}
+		
+		return "ø’œ–".equals(po.getRoomState());
 	}
 
 }

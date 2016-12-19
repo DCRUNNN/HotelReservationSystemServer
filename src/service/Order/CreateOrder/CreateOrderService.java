@@ -41,4 +41,11 @@ public interface CreateOrderService extends Remote{
 	 * */
 	public boolean checkCreditPoint(String clientID)throws RemoteException;
 	
+	/**
+	 * @param hotelID 酒店编号
+	 * @param roomNumber 房间号码
+	 * @return 判断房间状态是否为空闲，是的话返回true，否则false
+	 * */
+	public boolean checkRoom(String hotelID,String roomNumber) throws RemoteException;
+	
 }

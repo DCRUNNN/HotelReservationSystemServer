@@ -227,4 +227,12 @@ public class PersonnelDataSqlHelperImpl implements PersonnelDataHelper{
 		}
 	}
 
+	public static void main(String args[]){
+		
+		PersonnelDataSqlHelperImpl impl = new PersonnelDataSqlHelperImpl();
+		PersonnelPO po = impl.getPersonnelPO("100001");
+		po.setSex("ÄÐ");
+		System.out.println(impl.change(po));
+		System.out.println(impl.getPersonnelPO("100001").getSex());
+	}
 }

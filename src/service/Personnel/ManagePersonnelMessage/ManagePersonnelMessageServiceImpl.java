@@ -111,6 +111,9 @@ public class ManagePersonnelMessageServiceImpl implements ManagePersonnelMessage
 	public boolean modifyPersonnel(PersonnelVO vo)throws RemoteException {
 		
 		PersonnelPO po = new PersonnelPO();
+		po.setHotelID(vo.gethotelID());
+		po.setPersonnelID(vo.getpersonnelID());
+		po.setType(vo.getType());
 		po.setName(vo.getname());
 		po.setPhoneNumber(vo.getphoneNumber());
 		po.setSex(vo.getsex());

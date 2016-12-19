@@ -130,12 +130,17 @@ public class CreateOrderServiceImpl implements CreateOrderService{
 		
         double discount = new AboutStrategy().getPriceByStrategy(clientID, hotelID,numbers.length,hotelProvince,hotelCity,hotelCBD);
         return total1*discount/10;
-    
 		
 	}
 	@Override
 	public boolean checkCreditPoint(String clientID) throws RemoteException{
 		return new AboutStrategy().checkCreditPoint(clientID);
+	}
+	
+	@Override
+	public boolean checkRoom(String hotelID, String roomNumber) throws RemoteException {
+		
+		return roomservice.checkRoom(hotelID,roomNumber);
 	}
 
 }

@@ -38,4 +38,11 @@ public interface RoomProvidedServiceForOrder {
 	 * */
 	public double getRoomPrice(String hotelID, String roomNumber);
 
+	/**
+	 * @param hotelID 酒店编号
+	 * @param roomNumber 房间号码
+	 * @return 如果房间状态为空闲，返回true，否则false
+	 * */
+	public boolean checkRoom(String hotelID, String roomNumber);
+
 }
