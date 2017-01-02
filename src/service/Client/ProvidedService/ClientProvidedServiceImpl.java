@@ -3,6 +3,8 @@ package service.Client.ProvidedService;
 import data.dao.ClientDAO;
 import data.dao.impl.ClientDaoImpl;
 import po.ClientPO;
+import service.Client.help.CreateClientVO;
+import vo.ClientVO;
 
 public class ClientProvidedServiceImpl implements ClientProvidedService{
 
@@ -178,6 +180,22 @@ public class ClientProvidedServiceImpl implements ClientProvidedService{
 			return 0;
 		}
 		return po.getCredit_point();
+	}
+	@Override
+	public ClientVO getClientVO(String clientID) {
+		
+		ClientPO po = clientDao.getClientPO(clientID);
+		CreateClientVO vo =new CreateClientVO();
+		return vo.createClientVO(po);
+	}
+	@Override
+	public boolean checkID(String clientID) {
+	
+		ClientPO po =clientDao.getClientPO(clientID);
+		if(po.getId()==null){
+			return false;
+		}
+		return true;
 	}
 	
 }

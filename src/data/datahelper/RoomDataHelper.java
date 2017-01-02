@@ -23,9 +23,17 @@ public interface RoomDataHelper {
 	
 	public boolean changeRoomPrice(String type, double price, String hotelId);
 	
+	public boolean changeRoomPriceById(String hotelId,double price,String roomNumber);
+	
 	public boolean changeRoomState(String hotelId, String roomId, String state);
 	
+	public boolean changeRoomIntroByType(String hotelId,String roomType,String intro);
+	
+	public boolean changeRoomIntroById(String hotelId,String roomNumber,String intro);
+	
 	public boolean changeBookDate(String hotelId, String roomId, String bookDate);
+	
+	public boolean changeRoomType(String hotelId,String roomNumber,String type);
 
 	public List<String> getRoomType(String hotelId);
 

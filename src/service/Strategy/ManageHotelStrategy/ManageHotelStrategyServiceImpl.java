@@ -62,7 +62,7 @@ public class ManageHotelStrategyServiceImpl implements ManageHotelStrategyServic
 		po.setDiscount(strategyVO.getStrategy_discount());
 		return dao.changeStrategy(po);
 	}
-
+	
 	@Override
 	public boolean changeHotelStrategy(StrategyVO strategyVO) throws RemoteException{
 		

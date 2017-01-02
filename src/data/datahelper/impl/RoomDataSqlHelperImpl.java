@@ -18,7 +18,7 @@ import po.RoomPO;
 public class RoomDataSqlHelperImpl implements RoomDataHelper {
 
 	private static final String DRIVER="com.mysql.jdbc.Driver";// JDBC driver name 
-	private static final String URL="jdbc:mysql://localhost/bighomework"; //JDBC database URL
+	private static final String URL ="jdbc:mysql://localhost:3306/bighomework";//url
 	private static final String USER="root"; //Database credentials
 	private static final String PASSWORD="mysql";
 	private static Connection conn=null;
@@ -258,7 +258,7 @@ public class RoomDataSqlHelperImpl implements RoomDataHelper {
 		String sql="INSERT INTO t_room(hotelid,roomnumber,roomtype,roomstate,"+
 					"introduction,bookdate,price) VALUES "+ "('"+hotelId+"','"
 					+roomNumber+"','"+roomType+"','"+roomState+"','"+roomIntro+"','"
-					+bookDate+"',"+price+");";
+					+"Î´Ô¤¶©"+"',"+price+");";
 		int i=RoomDataSqlHelperImpl.executeUpdate(sql);
 		RoomDataSqlHelperImpl.close();
 		if(-1==i){
@@ -288,10 +288,11 @@ public class RoomDataSqlHelperImpl implements RoomDataHelper {
 	@Override
 	public boolean changeRoomPrice(String type, double price, String hotelId) {
 		
-		//create sql statement
 		if(getRoomByType(hotelId, type)==null){
 			return false;
 		}
+		
+		//create sql statement
 		String sql="UPDATE t_room SET price='"+price+"' WHERE hotelid='"+hotelId+"' AND roomtype='"+type+"';";
 		int i=RoomDataSqlHelperImpl.executeUpdate(sql);
 		RoomDataSqlHelperImpl.close();
@@ -347,13 +348,16 @@ public class RoomDataSqlHelperImpl implements RoomDataHelper {
 				String type=set.getString("roomtype");
 				result+=type+"/";
 			}
+			if(result.equals("")||result.equals(null)){
+				return roomType;
+			}
 			result=toString(result.substring(0,result.length()-1));
 			roomType=Arrays.asList(result.split("/"));
 			return roomType;
 		}catch(SQLException e){
 			e.printStackTrace();
 		}
-		return null;
+		return roomType;
 	}
 
 	@Override
@@ -369,13 +373,16 @@ public class RoomDataSqlHelperImpl implements RoomDataHelper {
 				String type=set.getString("roomstate");
 				result+=type+"/";
 			}
+			if(result.equals("")||result.equals(null)){
+				return roomState;
+			}
 			result=toString(result.substring(0,result.length()-1));
 			roomState=Arrays.asList(result.split("/"));
 			return roomState;
 		}catch(SQLException e){
 			e.printStackTrace();
 		}
-		return null;
+		return roomState;
 	}
 	
 	private String toString(String str){
@@ -390,10 +397,73 @@ public class RoomDataSqlHelperImpl implements RoomDataHelper {
 		return result.substring(0,result.length()-1);
 	}
 
-	public static void main(String args[]){
-		String hotelID = "00001";
-		String roomNumber = "101";
-		System.out.println(new RoomDataSqlHelperImpl().getRoomByNum(hotelID, roomNumber).getPrice());
-		System.out.println(new RoomDataSqlHelperImpl().changeRoomState(hotelID, roomNumber, "ÒÑÈë×¡"));
+	@Override
+	public boolean changeRoomIntroByType(String hotelId, String roomType, String intro) {
+		// TODO Auto-generated method stub
+		if(getRoomByType(hotelId, roomType)==null){
+			return false;
+		}
+		
+		//create sql statement
+		String sql="UPDATE t_room SET introduction='"+intro+"' WHERE hotelid='"+hotelId+"' AND roomtype='"+roomType+"';";
+		int i=RoomDataSqlHelperImpl.executeUpdate(sql);
+		RoomDataSqlHelperImpl.close();
+		if(-1==i){
+			return false;
+		}
+		return true;
 	}
+
+	@Override
+	public boolean changeRoomIntroById(String hotelId, String roomNumber, String intro) {
+		// TODO Auto-generated method stub
+		if(getRoomByNum(hotelId, roomNumber)==null){
+			return false;
+		}
+		
+		//create sql statement
+		String sql="UPDATE t_room SET introduction='"+intro+"' WHERE hotelid='"+hotelId+"' AND roomnumber='"+roomNumber+"';";
+		int i=RoomDataSqlHelperImpl.executeUpdate(sql);
+		RoomDataSqlHelperImpl.close();
+		if(-1==i){
+			return false;
+		}
+		return true;
+	}
+
+	@Override
+	public boolean changeRoomPriceById(String hotelId, double price, String roomNumber) {
+		// TODO Auto-generated method stub
+		if(getRoomByNum(hotelId, roomNumber)==null){
+			return false;
+		}
+		
+		//create sql statement
+		String sql="UPDATE t_room SET price='"+price+"' WHERE hotelid='"+hotelId+"' AND roomnumber='"+roomNumber+"';";
+		int i=RoomDataSqlHelperImpl.executeUpdate(sql);
+		RoomDataSqlHelperImpl.close();
+		if(-1==i){
+			return false;
+		}
+		return true;
+	}
+
+	@Override
+	public boolean changeRoomType(String hotelId, String roomNumber, String type) {
+		// TODO Auto-generated method stub
+		if(getRoomByNum(hotelId, roomNumber)==null){
+			return false;
+		}
+		
+		//create sql statement
+		String sql="UPDATE t_room SET roomtype='"+type+"' WHERE hotelid='"+hotelId+"' AND roomnumber='"+roomNumber+"';";
+		int i=RoomDataSqlHelperImpl.executeUpdate(sql);
+		RoomDataSqlHelperImpl.close();
+		if(-1==i){
+			return false;
+		}
+		return true;
+	}
+
+	
 }

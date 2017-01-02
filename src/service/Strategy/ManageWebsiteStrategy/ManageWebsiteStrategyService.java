@@ -31,5 +31,18 @@ public interface ManageWebsiteStrategyService extends Remote{
 	 * */
 	public boolean deleteStrategy(String strategyID)throws RemoteException;
 	
+	public List<String> getAllProvinces()throws RemoteException;
 	
+	/**
+	 * @param province 酒店省份
+	 * @return 返回省份对应的所有城市
+	 * */
+	public List<String> getCities(String province) throws RemoteException;
+	
+	/**
+	 * @param province 酒店省份
+	 * @param city 酒店市
+	 * @return 返回省份和市的所有商圈
+	 * */
+	public List<String> getCBDS(String province,String city) throws RemoteException;
 }

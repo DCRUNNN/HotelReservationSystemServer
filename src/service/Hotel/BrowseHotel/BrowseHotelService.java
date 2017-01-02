@@ -44,5 +44,9 @@ public interface BrowseHotelService extends Remote{
 	 * */
 	public List<OrderVO> getAllOrders(String clientID,String hotelID)throws RemoteException;
 	
-	
+	/**
+	 * @param hotelID 酒店编号
+	 * @return 得到酒店的图片，返回null如果没有酒店的图片
+	 * */
+	public byte[] getHotelPicture(String hotelID) throws RemoteException;
 }

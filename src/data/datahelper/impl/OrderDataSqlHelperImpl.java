@@ -453,11 +453,12 @@ public class OrderDataSqlHelperImpl implements OrderDataHelper{
 		//String clientID ="0000001";
 		//String hotelID ="00001";
 		//System.out.println(new OrderDataSqlHelperImpl().getClientOrdersInaHotel(clientID, hotelID).size());
-	    OrderDataSqlHelperImpl service = new OrderDataSqlHelperImpl();
-		String orderID = "201612160002";
-	    OrderPO po = service.getOrderPO(orderID);
-	    po.setOrderBeginDate("213");
-	    System.out.println(service.change(po));
-	    System.out.println(po.getCheckOutTotal());
+//	    OrderDataSqlHelperImpl service = new OrderDataSqlHelperImpl();
+//	    System.out.println(service.getClientOrdersInaHotel("0000003", "00001").size());
+//		String orderID = "201612160002";
+//	    OrderPO po = service.getOrderPO(orderID);
+//	    po.setOrderBeginDate("213");
+//	    System.out.println(service.change(po));
+//	    System.out.println(po.getCheckOutTotal());
 	}
 }

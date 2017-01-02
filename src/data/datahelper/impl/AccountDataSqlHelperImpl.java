@@ -83,7 +83,7 @@ public class AccountDataSqlHelperImpl implements AccountDataHelper{
 		if(isExist(ID)){
 			return changePassword(ID,pass);
 		}
-		String sql = "insert into account (id,password) values ('"+ID+"','"+pass+"')";
+		String sql = "insert into t_account (id,password) values ('"+ID+"','"+pass+"')";
 		
 		int i =AccountDataSqlHelperImpl.executeUpdate(sql);
 		AccountDataSqlHelperImpl.close();
@@ -95,7 +95,7 @@ public class AccountDataSqlHelperImpl implements AccountDataHelper{
 
 	private boolean changePassword(String ID, String pass) {
 		
-		String sql = "update account set password='"+pass+"' where id='"+ID+"';";
+		String sql = "update t_account set password='"+pass+"' where id='"+ID+"';";
 		int i = AccountDataSqlHelperImpl.executeUpdate(sql);
 		AccountDataSqlHelperImpl.close();
 		if(i==-1){
@@ -107,7 +107,7 @@ public class AccountDataSqlHelperImpl implements AccountDataHelper{
 	
 	private boolean isExist(String ID) {
 		
-		String sql = "select *from account where id='"+ID+"';";
+		String sql = "select *from t_account where id='"+ID+"';";
 		ResultSet set = AccountDataSqlHelperImpl.executeQuery(sql);
 		try {
 			if(set.next()){
@@ -124,7 +124,7 @@ public class AccountDataSqlHelperImpl implements AccountDataHelper{
 	@Override
 	public boolean check(String id, String password) {
 		
-		String sql = "select password from account where id="+id;
+		String sql = "select password from t_account where id="+id;
 		ResultSet set = AccountDataSqlHelperImpl.executeQuery(sql);
 		try{
 			while(set.next()){

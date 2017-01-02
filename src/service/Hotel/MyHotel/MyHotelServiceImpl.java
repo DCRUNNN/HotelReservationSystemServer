@@ -10,6 +10,7 @@ import po.HotelPO;
 import service.Hotel.help.CreateHotelVO;
 import service.Order.InteractWithHotel.OrderProvidedServiceForHotel;
 import service.Order.InteractWithHotel.OrderProvidedServiceForHotelImpl;
+import service.picture.Picture;
 import vo.HotelVO;
 
 /**
@@ -154,6 +155,12 @@ public class MyHotelServiceImpl implements MyHotelService{
 		}
 		
 		return new CreateHotelVO().create(clientID, po);
+	}
+
+	@Override
+	public byte[] getHotelPicture(String hotelID) throws RemoteException {
+		
+		return Picture.getHotelPicture(hotelID);
 	}
 
 }

@@ -20,4 +20,5 @@ public interface ShowCreditRecordService extends Remote{
 	 *@return 得到客户的剩余信用点
 	 * */
 	public double getCreditPoint(String clientID)throws RemoteException;
+	
 }

@@ -9,6 +9,7 @@ import data.dao.impl.CreditDaoImpl;
 import po.CreditPO;
 import service.Client.ProvidedService.ClientProvidedService;
 import service.Client.ProvidedService.ClientProvidedServiceImpl;
+import vo.ClientVO;
 
 public class AddClientCreditServiceImpl implements AddClientCreditService{
 
@@ -35,6 +36,17 @@ public class AddClientCreditServiceImpl implements AddClientCreditService{
 		po.setTime(time);
 		
 		return creditDao.insert(po);
+	}
+	
+	@Override
+	public ClientVO getClientVO(String clientID) throws RemoteException {
+		
+		return clientservice.getClientVO(clientID);
+	}
+	@Override
+	public boolean checkID(String clientID) throws RemoteException {
+		
+		return clientservice.checkID(clientID);
 	}
 
 }

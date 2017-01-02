@@ -122,8 +122,8 @@ public class ClientDataSqlHelperImpl implements ClientDataHelper{
 	
 	public static void main(String args[]){
 		
-		ClientPO po = new ClientDataSqlHelperImpl().getClientPO("0000001");
-		System.out.println(po.getName());
+		ClientPO po = new ClientDataSqlHelperImpl().getClientPO("0000021");
+		System.out.println(po.getId());
 	}
 
 	@Override
@@ -168,6 +168,7 @@ public class ClientDataSqlHelperImpl implements ClientDataHelper{
 
 	@Override
 	public boolean addClientCreditPoint(String client_id, double left) {
+		
 		String sql="update t_client set credit_point="+left+" where clientid="+client_id;
 		int i=ClientDataSqlHelperImpl.executeUpdate(sql);
 		ClientDataSqlHelperImpl.close();

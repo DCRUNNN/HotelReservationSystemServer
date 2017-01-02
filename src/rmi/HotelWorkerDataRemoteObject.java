@@ -269,4 +269,58 @@ public class HotelWorkerDataRemoteObject extends UnicastRemoteObject implements 
 		
 		return browseOrder.getAllOrders(hotelID);
 	}
+
+	@Override
+	public boolean addRoomTypeAndPrice(String hotelID, String roomType, double price) throws RemoteException {
+		
+		return maintainHotel.addRoomTypeAndPrice(hotelID, roomType, price);
+	}
+
+	@Override
+	public boolean changeRoomPrice(String hotelID, String roomType, double price) throws RemoteException {
+		
+		return maintainHotel.changeRoomPrice(hotelID, roomType, price);
+	}
+
+	@Override
+	public byte[] getHotelPicture(String hotelID) throws RemoteException {
+		
+		return maintainHotel.getHotelPicture(hotelID);
+	}
+
+	@Override
+	public boolean uploadHotelPicture(byte[] b, String hotelID) throws RemoteException {
+		
+		return maintainHotel.uploadHotelPicture(b, hotelID);
+	}
+
+	@Override
+	public boolean changeHotelPicture(byte[] b, String hotelID) throws RemoteException {
+		
+		return maintainHotel.changeHotelPicture(b, hotelID);
+	}
+
+	@Override
+	public boolean changeRoomPriceById(String hotelId, double price, String roomNumber) throws RemoteException {
+		// TODO Auto-generated method stub
+		return changeRoom.changeRoomPriceById(hotelId, price, roomNumber);
+	}
+
+	@Override
+	public boolean changeRoomType(String hotelId, String roomNumber, String type) throws RemoteException {
+		// TODO Auto-generated method stub
+		return changeRoom.changeRoomType(hotelId, roomNumber, type);
+	}
+
+	@Override
+	public boolean changeRoomIntroByType(String hotelId, String roomType, String intro) throws RemoteException {
+		// TODO Auto-generated method stub
+		return changeRoom.changeRoomIntroByType(hotelId, roomType, intro);
+	}
+
+	@Override
+	public boolean changeRoomIntroById(String hotelId, String roomNumber, String intro) throws RemoteException {
+		// TODO Auto-generated method stub
+		return changeRoom.changeRoomIntroById(hotelId, roomNumber, intro);
+	}
 }

@@ -39,6 +39,10 @@ public interface ChangeRoomInfoService extends Remote{
 	 * */
 	public boolean changeRoomPrice(String type,double price,String hotelId)throws RemoteException;
 	
+	public boolean changeRoomPriceById(String hotelId,double price,String roomNumber)throws RemoteException;
+	
+	public boolean changeRoomType(String hotelId,String roomNumber,String type)throws RemoteException;
+
 	/**
 	 * @param hotelId 酒店编号
 	 * @param roomId 房间编号
@@ -46,6 +50,10 @@ public interface ChangeRoomInfoService extends Remote{
 	 * @return 返回是否修改成功
 	 * */
 	public boolean changeRoomState(String hotelId,String roomId,String state)throws RemoteException;
+	
+	public boolean changeRoomIntroByType(String hotelId,String roomType,String intro)throws RemoteException;
+	
+	public boolean changeRoomIntroById(String hotelId,String roomNumber,String intro)throws RemoteException;
 	
 	/**
 	 * @param hotelId 酒店编号

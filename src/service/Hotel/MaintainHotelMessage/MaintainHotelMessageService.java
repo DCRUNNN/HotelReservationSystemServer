@@ -49,4 +49,40 @@ public interface MaintainHotelMessageService extends Remote{
 	 * */
 	public boolean deleteCompany(String hotelID,String companyAddress)throws RemoteException;
 	
+	/**
+	 * 新增酒店房间类型
+	 * @param hotelID 酒店编号
+	 * @param roomType 房间类型
+	 * @param price 价格
+	 * @return 返回是否添加成功
+	 * */
+	public boolean addRoomTypeAndPrice(String hotelID,String roomType,double price) throws RemoteException;
+
+	/**
+	 * 改变某一种房间类型的价格
+	 * @param hotelID 酒店编号
+	 * @param roomType 房间类型
+	 * @param price 新的价格
+	 * */
+    public boolean changeRoomPrice (String hotelID,String roomType,double price) throws RemoteException;
+    
+    /**
+     * @param hotelID 酒店编号
+     * @return 得到酒店的已有图片,返回null当不存在图片
+     * */
+    public byte[] getHotelPicture(String hotelID) throws RemoteException;
+    
+    /**
+     * @param b 酒店图片的byte数组
+     * @param hotelID 酒店编号
+     * @return 返回是否添加成功,成功返回true，失败返回false
+     * */
+    public boolean uploadHotelPicture(byte[] b,String hotelID)throws RemoteException;
+    
+    /**
+     * @param b 酒店图片的byte数组
+     * @param hotelID 酒店编号
+     * @return 返回是否添加成功，成功返回true，失败返回false
+     * */
+    public boolean changeHotelPicture(byte[] b,String hotelID)throws RemoteException;
 }

@@ -1,5 +1,7 @@
 package service.Client.ProvidedService;
 
+import vo.ClientVO;
+
 public interface ClientProvidedService {
 
 	/**
@@ -95,4 +97,16 @@ public interface ClientProvidedService {
 	 * @return 返回客户的信用点
 	 * */
 	public double getCredit(String clientID);
+
+	/**
+	 * @param clientID 客户编号
+	 * @return 返回客户信息
+	 * */
+	public ClientVO getClientVO(String clientID);
+
+	/**
+	 * @param clientID 客户编号
+	 * @return 判断id是否存在
+	 * */
+	public boolean checkID(String clientID);
 }

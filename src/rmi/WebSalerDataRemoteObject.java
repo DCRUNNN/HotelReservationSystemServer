@@ -8,6 +8,7 @@ import data.datahelper.xmlhelper.XMLHelper;
 import service.Credit.AddClientCredit.AddClientCreditService;
 import service.Order.BrowseOrder_webWorker.BrowseOrder_webWorkerService;
 import service.Strategy.ManageWebsiteStrategy.ManageWebsiteStrategyService;
+import vo.ClientVO;
 import vo.OrderVO;
 import vo.StrategyVO;
 
@@ -95,5 +96,35 @@ public class WebSalerDataRemoteObject extends UnicastRemoteObject implements Man
 	public boolean deleteStrategy(String strategyID) throws RemoteException {
 		
 		return websiteStrategy.deleteStrategy(strategyID);
+	}
+
+	@Override
+	public ClientVO getClientVO(String clientID) throws RemoteException {
+		
+		return addcredit.getClientVO(clientID);
+	}
+
+	@Override
+	public boolean checkID(String clientID) throws RemoteException {
+		
+		return addcredit.checkID(clientID);
+	}
+
+	@Override
+	public List<String> getAllProvinces() throws RemoteException {
+		// TODO Auto-generated method stub
+		return websiteStrategy.getAllProvinces();
+	}
+
+	@Override
+	public List<String> getCities(String province) throws RemoteException {
+		// TODO Auto-generated method stub
+		return websiteStrategy.getCities(province);
+	}
+
+	@Override
+	public List<String> getCBDS(String province, String city) throws RemoteException {
+		// TODO Auto-generated method stub
+		return websiteStrategy.getCBDS(province, city);
 	}
 }

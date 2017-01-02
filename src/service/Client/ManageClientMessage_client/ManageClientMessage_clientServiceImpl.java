@@ -6,6 +6,7 @@ import data.dao.ClientDAO;
 import data.dao.impl.ClientDaoImpl;
 import po.ClientPO;
 import service.Client.help.CreateClientVO;
+import service.picture.Picture;
 import vo.ClientVO;
 
 public class ManageClientMessage_clientServiceImpl implements ManageClientMessage_clientService{
@@ -49,4 +50,22 @@ public class ManageClientMessage_clientServiceImpl implements ManageClientMessag
 		return clientDao.change(po);
 	}
 
+	@Override
+	public boolean uploadPicture(byte[] picture,String clientID) throws RemoteException {
+		
+		return Picture.uploadPicture(picture, clientID);
+		
+	}
+
+	@Override
+	public byte[] getClientPicture(String clientID) throws RemoteException {
+		
+		return Picture.getClientPicture(clientID);
+	}
+
+	@Override
+	public boolean changeClientPicture(byte[] picture, String clientID) throws RemoteException {
+		
+		return Picture.changeClientPicture(picture, clientID);
+	}
 }

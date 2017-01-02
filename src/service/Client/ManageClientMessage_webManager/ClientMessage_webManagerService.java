@@ -17,4 +17,6 @@ public interface ClientMessage_webManagerService extends Remote{
 	public ClientVO getClientMessage(String clientID)throws RemoteException;
 	
 	public boolean modifyClientMessage(ClientVO vo)throws RemoteException;
+	
+	public byte[] getClientPicture(String clientID) throws RemoteException;
 }

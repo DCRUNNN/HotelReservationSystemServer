@@ -34,4 +34,10 @@ public interface MyHotelService extends Remote{
 	 * @return 根据hotelID 返回一个HotelVO
 	 * */
 	public HotelVO getHotelVO(String clientID,String hotelID) throws RemoteException;
+	
+	/**
+	 * @param hotelID 酒店编号
+	 * @return 返回酒店图片
+	 * */
+	public byte[] getHotelPicture(String hotelID)throws RemoteException;
 }

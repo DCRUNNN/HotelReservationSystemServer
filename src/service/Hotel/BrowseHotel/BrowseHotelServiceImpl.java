@@ -13,6 +13,7 @@ import service.Client.InteractWithHotel.ClientProvidedServiceForHotelImpl;
 import service.Hotel.help.CreateHotelVO;
 import service.Order.InteractWithHotel.OrderProvidedServiceForHotel;
 import service.Order.InteractWithHotel.OrderProvidedServiceForHotelImpl;
+import service.picture.Picture;
 import vo.HotelVO;
 import vo.OrderVO;
 
@@ -96,6 +97,12 @@ public class BrowseHotelServiceImpl implements BrowseHotelService{
 			volist.add(ordervo);
 		}
 		return volist;
+	}
+
+	@Override
+	public byte[] getHotelPicture(String hotelID) throws RemoteException {
+	
+		return Picture.getHotelPicture(hotelID);
 	}
 	
 }

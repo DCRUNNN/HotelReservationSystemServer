@@ -5,6 +5,10 @@ import java.rmi.RemoteException;
 import data.dao.HotelDao;
 import data.dao.impl.HotelDaoImpl;
 import po.HotelPO;
+import service.Hotel.ProvidedService.HotelProvidedServiceForRoomImpl;
+import service.Room.InteractWithHotel.RoomProvidedServiceForHotel;
+import service.Room.InteractWithHotel.RoomProvidedServiceForHotelImpl;
+import service.picture.Picture;
 import vo.HotelVO;
 
 /**
@@ -15,10 +19,12 @@ public class MaintainHotelMessageServiceImpl implements MaintainHotelMessageServ
 
 
 	private HotelDao hotelDao;
+	private RoomProvidedServiceForHotel roomservice;
 	
 	public MaintainHotelMessageServiceImpl(){
 
 		hotelDao = HotelDaoImpl.getInstance();
+		roomservice = new RoomProvidedServiceForHotelImpl();
 	}
 	
 	@Override
@@ -26,6 +32,7 @@ public class MaintainHotelMessageServiceImpl implements MaintainHotelMessageServ
 			int star, String roomTypeAndPrices,String telephone) throws RemoteException{
 		
 		HotelPO po = hotelDao.getHotelPO(hotelID);
+		po.setHotelID(hotelID);
 		po.setHotelProvince(hotelProvince);
 		po.setHotelCity(hotelCity);
 		po.setHotelCBD(hotelCBD);
@@ -122,6 +129,67 @@ public class MaintainHotelMessageServiceImpl implements MaintainHotelMessageServ
 				return hotelDao.change(po);
 			}
 		}
+	}
+
+	@Override
+	public boolean addRoomTypeAndPrice(String hotelID, String roomType, double price) throws RemoteException {
+		
+		HotelPO po = hotelDao.getHotelPO(hotelID);
+		if(po==null){
+			return false;
+		}
+		
+		String roomTypeAndPrice = po.getRoomTypeAndPrice();
+		if(roomTypeAndPrice.contains(roomType)){
+			//酒店之前就已经存在这样的房间，只是简单的修改房间的价格
+			if(!changeRoomPrice(hotelID,roomType,price)){
+				return false;
+			}else{
+				return true;
+			}
+			
+		}else{
+			String newRoomType = "";
+			if(roomTypeAndPrice.equals("")||roomTypeAndPrice.equals(null)){
+				//一开始没有房间时,roomTypeAndPrice为空,不应该有最前方的"/"
+				newRoomType = roomType+"|"+price;
+			}else{
+				newRoomType = roomTypeAndPrice+"/"+roomType+"|"+price;
+			}
+			po.setRoomTypeAndPrice(newRoomType);
+			if(!hotelDao.change(po)){
+				return false;
+			}
+			return true;
+		}
+	
+	}
+	
+	@Override
+	public boolean changeRoomPrice(String hotelID, String roomType, double price) throws RemoteException {
+		
+		if(!new HotelProvidedServiceForRoomImpl().changeRoomTypeAndPrice(roomType, price, hotelID)){
+			return false;
+		}
+		return roomservice.changeRoomPrice(hotelID, roomType, price);
+	}
+
+	@Override
+	public byte[] getHotelPicture(String hotelID) throws RemoteException {
+		
+		return Picture.getHotelPicture(hotelID);
+	}
+
+	@Override
+	public boolean uploadHotelPicture(byte[] b, String hotelID) throws RemoteException {
+		
+		return Picture.uploadHotelPicture(b, hotelID);
+	}
+
+	@Override
+	public boolean changeHotelPicture(byte[] b, String hotelID) throws RemoteException {
+		
+		return Picture.changeHotelPicture(b,hotelID);
 	}
 
 }

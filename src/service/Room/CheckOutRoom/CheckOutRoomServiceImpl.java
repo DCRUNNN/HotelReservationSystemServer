@@ -44,9 +44,20 @@ public class CheckOutRoomServiceImpl implements CheckOutRoomService{
 		for(String str:allrooms){
 			//遍历所有房间号码
 			RoomVO vo = new RoomVO(roomDao.getRoomByNum(hotelID, str));
-			rooms.add(vo);
+			if("已入住".equals(vo.getRoomState())){
+				rooms.add(vo);
+			}
 		}
 		return rooms;
 	}
-
+	
+	public static void main(String[] args) {
+		CheckOutRoomServiceImpl test=new CheckOutRoomServiceImpl();
+		try {
+			System.out.println(test.getAllRooms("0000003", "00001"));
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 }

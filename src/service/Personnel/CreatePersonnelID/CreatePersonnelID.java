@@ -12,7 +12,6 @@ public class CreatePersonnelID {
 	 * 工作人员的编号规则是:
 	 * 1(酒店工作人员)   + 酒店编号
 	 * 2(网站营销人员)   + 五位序列号（从00001开始）
-	 * 3(网站管理人员)   + 五位序列号（从00001开始）
 	 * */
 	private PersonnelDAO personnelDao;
 	

@@ -1,5 +1,6 @@
 package data.dao;
 
+import java.rmi.RemoteException;
 import java.util.List;
 
 import po.RoomPO;
@@ -38,8 +39,11 @@ public interface RoomDao {
 	 * @param hotelId 酒店编号
 	 * @return 返回是否修改房间价格成功
 	 * */
+	public boolean changeRoomType(String hotelId,String roomNumber,String type);
+	
 	public boolean changeRoomPrice(String type,double price,String hotelId);
 	
+	public boolean changeRoomPriceById(String hotelId,double price,String roomNumber);
 	/**
 	 * @param hotelId 酒店编号
 	 * @param roomId 房间号码
@@ -56,6 +60,9 @@ public interface RoomDao {
 	 * */
 	public boolean changeBookDate(String hotelID, String roomId, String bookDate);
 	
+	public boolean changeRoomIntroByType(String hotelId,String roomType,String intro);
+	
+	public boolean changeRoomIntroById(String hotelId,String roomNumber,String intro);
 
 	public List<String> getRoomType(String hotelId);
 	

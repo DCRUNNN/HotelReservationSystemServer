@@ -19,5 +19,5 @@ public class AccountProvidedServiceImpl implements AccountProvidedService{
 		String password = md5.getMD5(pass);//使用MD5算法加密密码
 		return accountDao.insert(clientID,password);
 	}
-
+	
 }

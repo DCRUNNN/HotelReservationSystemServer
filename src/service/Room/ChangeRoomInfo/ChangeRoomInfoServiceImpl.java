@@ -2,25 +2,28 @@ package service.Room.ChangeRoomInfo;
 
 import java.rmi.RemoteException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
+import data.dao.HotelDao;
 import data.dao.RoomDao;
+import data.dao.impl.HotelDaoImpl;
 import data.dao.impl.RoomDaoImpl;
+import po.HotelPO;
 import po.RoomPO;
-import service.Hotel.ProvidedService.HotelProvidedService;
-import service.Hotel.ProvidedService.HotelProvidedServiceImpl;
+import service.Hotel.ProvidedService.HotelProvidedServiceForRoomImpl;
+import service.Room.InteractWithHotel.HotelProvidedServiceForRoom;
 import vo.RoomVO;
 
 public class ChangeRoomInfoServiceImpl implements ChangeRoomInfoService {
 	
-	private HotelProvidedService hotelService;
+	private HotelProvidedServiceForRoom hotelService;
 	
 	private RoomDao roomDao;
-	
-	public ChangeRoomInfoServiceImpl() {
 		
+	public ChangeRoomInfoServiceImpl() {
 		roomDao=RoomDaoImpl.getInstance();
-		hotelService = new HotelProvidedServiceImpl();
+		hotelService = new HotelProvidedServiceForRoomImpl();
 	}
 	
 	@Override
@@ -105,6 +108,30 @@ public class ChangeRoomInfoServiceImpl implements ChangeRoomInfoService {
 	public List<String> getRoomState(String hotelId)throws RemoteException {
 		
 		return roomDao.getRoomState(hotelId);
+	}
+
+	@Override
+	public boolean changeRoomIntroByType(String hotelId, String roomType, String intro) throws RemoteException {
+		// TODO Auto-generated method stub
+		return roomDao.changeRoomIntroByType(hotelId,roomType,intro);
+	}
+
+	@Override
+	public boolean changeRoomIntroById(String hotelId, String roomNumber, String intro) throws RemoteException {
+		// TODO Auto-generated method stub
+		return roomDao.changeRoomIntroById(hotelId,roomNumber,intro);
+	}
+
+	@Override
+	public boolean changeRoomPriceById(String hotelId, double price, String roomNumber) throws RemoteException {
+		// TODO Auto-generated method stub
+		return roomDao.changeRoomPriceById(hotelId,price,roomNumber);
+	}
+
+	@Override
+	public boolean changeRoomType(String hotelId, String roomNumber, String type) throws RemoteException {
+		// TODO Auto-generated method stub
+		return roomDao.changeRoomType(hotelId, roomNumber, type);
 	}
 
 }

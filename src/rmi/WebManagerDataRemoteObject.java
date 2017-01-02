@@ -140,4 +140,10 @@ public class WebManagerDataRemoteObject extends UnicastRemoteObject implements C
 		return manageClient.modifyClientMessage(vo);
 	}
 
+	@Override
+	public byte[] getClientPicture(String clientID) throws RemoteException {
+		
+		return manageClient.getClientPicture(clientID);
+	}
+
 }

@@ -1,11 +1,14 @@
 package service.Hotel.ProvidedService;
 
-public interface HotelProvidedService{
-	
+import java.util.List;
+
+public interface HotelProvidedService {
+
 	public String getHotelName(String hotelID);
 
-	public String getRoomTypeAndPrice(String hotelID);
-
-	public boolean changeRoomTypeAndPrice(String type, double price, String hotelId);
-
+	public List<String> getAllProvinces();
+		
+	public List<String> getAllCities(String province);
+	
+	public List<String> getAllCBDS(String province,String city);
 }

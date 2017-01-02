@@ -8,6 +8,7 @@ import data.dao.ClientDAO;
 import data.dao.impl.ClientDaoImpl;
 import po.ClientPO;
 import service.Client.help.CreateClientVO;
+import service.picture.Picture;
 import vo.ClientVO;
 
 public class ClientMessage_webManagerServiceImpl implements ClientMessage_webManagerService{
@@ -108,6 +109,12 @@ public class ClientMessage_webManagerServiceImpl implements ClientMessage_webMan
 			}
 		}
 		return vo;
+	}
+
+	@Override
+	public byte[] getClientPicture(String clientID) throws RemoteException {
+		
+		return Picture.getClientPicture(clientID);
 	}
 
 }

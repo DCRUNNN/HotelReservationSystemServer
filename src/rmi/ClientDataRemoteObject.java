@@ -1,5 +1,6 @@
 package rmi;
 
+import java.io.File;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.List;
@@ -270,5 +271,30 @@ public class ClientDataRemoteObject extends UnicastRemoteObject
 	public boolean checkRoom(String hotelID, String roomNumber) throws RemoteException {
 		
 		return createOrder.checkRoom(hotelID, roomNumber);
+	}
+
+	@Override
+	public boolean uploadPicture(byte[] picture,String clientID) throws RemoteException {
+		
+		
+		return manageMessage.uploadPicture(picture, clientID);
+	}
+
+	@Override
+	public byte[] getHotelPicture(String hotelID) throws RemoteException {
+		
+		return searchHotel.getHotelPicture(hotelID);
+	}
+
+	@Override
+	public byte[] getClientPicture(String clientID) throws RemoteException {
+		
+		return manageMessage.getClientPicture(clientID);
+	}
+
+	@Override
+	public boolean changeClientPicture(byte[] picture, String clientID) throws RemoteException {
+		
+		return manageMessage.changeClientPicture(picture, clientID);
 	}
 }

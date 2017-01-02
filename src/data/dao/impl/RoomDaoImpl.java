@@ -97,6 +97,31 @@ public class RoomDaoImpl implements RoomDao {
 		return roomDataHelper.getRoomState(hotelId);
 	}
 
+	@Override
+	public boolean changeRoomIntroByType(String hotelId, String roomType, String intro) {
+		// TODO Auto-generated method stub
+		return roomDataHelper.changeRoomIntroByType(hotelId,roomType,intro);
+	}
+
+	@Override
+	public boolean changeRoomIntroById(String hotelId, String roomNumber, String intro) {
+		// TODO Auto-generated method stub
+		return roomDataHelper.changeRoomIntroById(hotelId,roomNumber,intro);
+	}
+
+	@Override
+	public boolean changeRoomPriceById(String hotelId, double price, String roomNumber) {
+		// TODO Auto-generated method stub
+		return roomDataHelper.changeRoomPriceById(hotelId,price,roomNumber);
+	}
+
+	@Override
+	public boolean changeRoomType(String hotelId, String roomNumber, String type) {
+		// TODO Auto-generated method stub
+		return roomDataHelper.changeRoomType(hotelId,roomNumber,type);
+	}
+
+	
 	
 
 }

@@ -5,19 +5,19 @@ import java.rmi.RemoteException;
 import data.dao.RoomDao;
 import data.dao.impl.RoomDaoImpl;
 import po.RoomPO;
-import service.Hotel.ProvidedService.HotelProvidedService;
-import service.Hotel.ProvidedService.HotelProvidedServiceImpl;
+import service.Hotel.ProvidedService.HotelProvidedServiceForRoomImpl;
+import service.Room.InteractWithHotel.HotelProvidedServiceForRoom;
 import vo.RoomVO;
 
 public class CreateRoomInfoServiceImpl implements CreateRoomInfoService {
 	
 	private RoomDao roomDao;
-	private HotelProvidedService hotelservice;
+	private HotelProvidedServiceForRoom hotelservice;
 	
 	public CreateRoomInfoServiceImpl() {
 		
 		roomDao=RoomDaoImpl.getInstance();
-	    hotelservice = new HotelProvidedServiceImpl();
+	    hotelservice = new HotelProvidedServiceForRoomImpl();
 	}
 	
 	@Override

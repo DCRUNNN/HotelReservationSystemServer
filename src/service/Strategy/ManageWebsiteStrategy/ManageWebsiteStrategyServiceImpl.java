@@ -4,9 +4,14 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.omg.CORBA.PRIVATE_MEMBER;
+
 import data.dao.StrategyDao;
 import data.dao.impl.StrategyDaoImpl;
 import po.StrategyPO;
+import service.Hotel.ProvidedService.HotelProvidedService;
+import service.Hotel.ProvidedService.HotelProvidedServiceForRoomImpl;
+import service.Hotel.ProvidedService.HotelProvidedServiceImpl;
 import service.Strategy.CreateStrategyID.CreateStrategyID;
 import vo.StrategyVO;
 
@@ -17,10 +22,12 @@ import vo.StrategyVO;
 public class ManageWebsiteStrategyServiceImpl implements ManageWebsiteStrategyService{
 
 	private StrategyDao strategyDao;
+	private HotelProvidedService hotelservice;
 	
 	public ManageWebsiteStrategyServiceImpl(){
 
 		strategyDao = StrategyDaoImpl.getInstance();
+		hotelservice=new HotelProvidedServiceImpl();
 	}
 	
 	@Override
@@ -92,4 +99,32 @@ public class ManageWebsiteStrategyServiceImpl implements ManageWebsiteStrategySe
 		return strategyDao.deleteStrategy(strategyID);
 	}
 
+	@Override
+	public List<String> getAllProvinces() throws RemoteException {
+		
+		return hotelservice.getAllProvinces();
+	}
+
+	@Override
+	public List<String> getCities(String province) throws RemoteException {
+		
+		return hotelservice.getAllCities(province);
+	}
+
+	@Override
+	public List<String> getCBDS(String province, String city) throws RemoteException {
+	
+		return hotelservice.getAllCBDS(province, city);
+	}
+
+	
+	public static void main(String[] args) {
+		ManageWebsiteStrategyServiceImpl test=new ManageWebsiteStrategyServiceImpl();
+		try {
+			System.out.println(test.getCities("¹ã¶«"));
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 }

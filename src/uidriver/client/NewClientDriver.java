@@ -1,5 +1,7 @@
 package uidriver.client;
 
+import java.rmi.RemoteException;
+
 import service.Client.NewClient.NewClientService;
 import service.Client.NewClient.NewClientServiceImpl;
 import vo.ClientVO;
@@ -9,7 +11,7 @@ public class NewClientDriver {
 	//用手机号码作为唯一标识，只能用一个手机号码来注册一个账户
 	static NewClientService service = new NewClientServiceImpl();
 	
-	public static void main(String args[]){
+	public static void main(String args[]) throws RemoteException{
 		
 		ClientVO c1 = new ClientVO(null, "曾", "男", "440982", "13927501605", 0, null, null, 0, null, null);
 		String id1 = service.insert(c1);//注册新用户

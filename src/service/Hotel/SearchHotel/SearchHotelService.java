@@ -56,4 +56,10 @@ public interface SearchHotelService extends Remote{
 	 * @return 对应的是客户选择好酒店商圈之后 给impl类提供hotelCBD来完成相应的初始化操作，点下确定按钮的事件
 	 * */
 	public void initAllHotel(String clientID,String hotelProvince,String hotelCities,String hotelCBD)throws RemoteException;
+
+	/**
+	 * @param hotelID 酒店编号
+	 * @return 返回酒店的图片，返回null当没有图片
+	 * */
+	public byte[] getHotelPicture(String hotelID)throws RemoteException;
 }
